@@ -1,53 +1,59 @@
-/**
- * Layout component that queries for data
- * with Gatsby's StaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/static-query/
- */
-
-import React from "react"
+import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { StaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
-import "./layout.css"
+// import { StaticQuery, graphql } from "gatsby"
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
+import { globalStyle, MediaQuery } from "./webhart-components"
+import { Global, css } from "@emotion/core"
+import styled from "@emotion/styled"
+
+import { breakpoints } from "../site/styles"
+
+import SEO from "./webhart-components/SEO"
+import Header from "./Header"
+// import GatsbyLink from "gatsby-link"
+// import Obfuscate from "react-obfuscate"
+
+const SiteWrapper = styled("div")`
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 30px 0px;
+  font-family: Montserrat, sans-serif;
+  margin: 0 auto;
+  ${MediaQuery[0]} {
+    margin: 1rem auto;
+  }
+  ${MediaQuery[1]} {
+    margin: 2rem auto;
+    max-width: calc(${breakpoints[1]} - 2rem);
+  }
+  ${MediaQuery[2]} {
+    max-width: calc(${breakpoints[2]} - 2rem);
+  }
+`
+
+class Layout extends Component {
+  render() {
+    const { children } = this.props
+    return (
       <>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
+        <Global styles={globalStyle} />
+        <SEO />
+        <SiteWrapper>
+          <Header />
+          <div
+            css={css`
+              background: grey;
+              height: 500px;
+            `}
+          />
           <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-        </div>
+        </SiteWrapper>
       </>
-    )}
-  />
-)
+    )
+  }
+}
+
+export default Layout
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
-
-export default Layout
