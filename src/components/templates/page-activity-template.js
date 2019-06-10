@@ -5,8 +5,9 @@ import GoogleMap from "../Map"
 import markerIcon from "../../images/gatsby-icon.png"
 import FormFields from "../FormFields"
 
-import { AspectRatioImage } from "../webhart-components"
+import { AspectRatioImage, AspectRatioBox } from "../webhart-components"
 import SEO from "../webhart-components/SEO"
+import css from "@emotion/css"
 
 const ActivityPageTemplate = ({
   data: { activity },
@@ -21,18 +22,31 @@ const ActivityPageTemplate = ({
         pathname={slug}
         title={activity.title}
         description={activity.content}
-        image={activity.featured_media.SEOImage.childImageSharp.SEO.src}
+        image={
+          activity.featured_media &&
+          activity.featured_media.SEOImage.childImageSharp.SEO.src
+        }
       />
       {console.log(activity.featured_media)}
-      <AspectRatioImage
-        ratio={1200 / 630}
-        image={{
-          maxWidth: activity.featured_media.localFile.childImageSharp.maxWidth,
-          maxHeight:
-            activity.featured_media.localFile.childImageSharp.maxHeight,
-        }}
-        cropfocus={activity.featured_media.smartcrop_image_focus[0]}
-      />
+      {activity.featured_media ? (
+        <AspectRatioImage
+          ratio={1200 / 630}
+          image={{
+            maxWidth:
+              activity.featured_media.localFile.childImageSharp.maxWidth,
+            maxHeight:
+              activity.featured_media.localFile.childImageSharp.maxHeight,
+          }}
+          cropfocus={activity.featured_media.smartcrop_image_focus[0]}
+        />
+      ) : (
+        <AspectRatioBox
+          ratio={1200 / 630}
+          css={css`
+            background: grey;
+          `}
+        />
+      )}
       <h1>{activity.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: activity.content }} />
       {activity.acf.has_location && (
