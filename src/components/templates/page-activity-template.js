@@ -4,7 +4,6 @@ import Layout from "../Layout"
 import GoogleMap from "../Map"
 import markerIcon from "../../images/gatsby-icon.png"
 import FormFields from "../FormFields"
-
 import { AspectRatioImage, AspectRatioBox } from "../webhart-components"
 import SEO from "../webhart-components/SEO"
 import css from "@emotion/css"
