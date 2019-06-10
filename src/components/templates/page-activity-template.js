@@ -26,16 +26,10 @@ const ActivityPageTemplate = ({
           activity.featured_media.SEOImage.childImageSharp.SEO.src
         }
       />
-      {console.log(activity.featured_media)}
       {activity.featured_media ? (
         <AspectRatioImage
           ratio={1200 / 630}
-          image={{
-            maxWidth:
-              activity.featured_media.localFile.childImageSharp.maxWidth,
-            maxHeight:
-              activity.featured_media.localFile.childImageSharp.maxHeight,
-          }}
+          image={activity.featured_media.localFile.image}
           cropfocus={activity.featured_media.smartcrop_image_focus[0]}
         />
       ) : (

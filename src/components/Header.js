@@ -153,8 +153,8 @@ const NavItem = ({ children, dropdown, to, alt }) => (
       <>
         <ArrowIcon />
         <NavDropdown>
-          {dropdown.map(({ node: item }) => (
-            <li>
+          {dropdown.map(({ node: item }, i) => (
+            <li key={i}>
               <GatsbyLink to={`${to}/${item.slug}`}>{item.name}</GatsbyLink>
             </li>
           ))}

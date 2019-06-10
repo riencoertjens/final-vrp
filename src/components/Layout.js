@@ -4,13 +4,14 @@ import PropTypes from "prop-types"
 // import { StaticQuery, graphql } from "gatsby"
 
 import { globalStyle, MediaQuery } from "./webhart-components"
-import { Global, css } from "@emotion/core"
+import { Global } from "@emotion/core"
 import styled from "@emotion/styled"
 
 import { breakpoints } from "../site/styles"
 
 import SEO from "./webhart-components/SEO"
 import Header from "./Header"
+import { graphql } from "gatsby"
 // import GatsbyLink from "gatsby-link"
 // import Obfuscate from "react-obfuscate"
 
@@ -34,14 +35,14 @@ class Layout extends Component {
   render() {
     const { children } = this.props
     return (
-      <>
+      <React.Fragment>
         <Global styles={globalStyle} />
         <SEO />
         <SiteWrapper>
           <Header />
           <main>{children}</main>
         </SiteWrapper>
-      </>
+      </React.Fragment>
     )
   }
 }
@@ -51,3 +52,22 @@ export default Layout
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
+
+export const HeroImageFragment = graphql`
+  fragment HeroImageFragment on wordpress__wp_media {
+    smartcrop_image_focus {
+      left
+      top
+    }
+    localFile {
+      image: childImageSharp {
+        maxWidth: fluid(maxWidth: 1200) {
+          ...GatsbyImageSharpFluid_tracedSVG
+        }
+        maxHeight: fluid(maxHeight: 630) {
+          ...GatsbyImageSharpFluid_tracedSVG
+        }
+      }
+    }
+  }
+`
