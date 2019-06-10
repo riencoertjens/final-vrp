@@ -80,6 +80,7 @@ const NavItemWrapper = styled.li`
     width: 1.75rem;
     transition: 0.2s;
     position: absolute;
+    /* color: ${colors.blue}; */
     color: white;
     top: 0.5rem;
     ${MqMin("700px")} {
@@ -100,7 +101,8 @@ const NavItemWrapper = styled.li`
       margin: 0;
       transform: rotate(-90deg);
     }
-    :hover {
+    :hover,
+    &:focus-within {
       ${props =>
         props.alt
           ? `
@@ -114,7 +116,9 @@ const NavItemWrapper = styled.li`
         transform: rotate(0);
       }
     }
-    &:hover ul {
+
+    &:hover ul,
+    &:focus-within ul {
       display: grid;
     }
   }
@@ -278,7 +282,7 @@ class Header extends React.Component {
               `}
             >
               <SearchIcon />
-            </button>
+            </button>{" "}
             <Hamburger
               width={30}
               lineHeight={3}
@@ -288,7 +292,10 @@ class Header extends React.Component {
               padding={"15px 15px 10px 0"}
               active={menuActive}
               onClick={() => this.setState({ menuActive: !menuActive })}
-              aria-label="menu toggle"
+              customProps={{
+                "aria-label": "menu toggle",
+                "aria-expanded": menuActive,
+              }}
               css={css`
                 ${MqMin("700px")} {
                   && {
@@ -307,7 +314,7 @@ class Header extends React.Component {
               `}
             />
             <Nav menuActive={menuActive}>
-              <NavGroup>
+              <NavGroup role="menu">
                 <NavItem to="/themas" dropdown={themas} alt>
                   Thema's
                 </NavItem>

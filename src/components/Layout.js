@@ -39,12 +39,6 @@ class Layout extends Component {
         <SEO />
         <SiteWrapper>
           <Header />
-          <div
-            css={css`
-              background: grey;
-              height: 500px;
-            `}
-          />
           <main>{children}</main>
         </SiteWrapper>
       </>

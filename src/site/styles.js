@@ -11,6 +11,8 @@ export const colors = {
   primary: config.base.primaryColor,
   background: config.base.primaryBgColor,
   orange: config.base.primaryColor,
+  blue: "#00809f",
+  chocolate: "#693201",
   grey: "#666666",
   lightGrey: "#dddddd",
 }

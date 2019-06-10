@@ -43,6 +43,7 @@ module.exports = {
     },
 
     // build & transform
+    `gatsby-plugin-catch-links`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
