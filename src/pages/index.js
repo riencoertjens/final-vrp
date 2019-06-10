@@ -7,13 +7,13 @@ const IndexPage = () => (
   <StaticQuery
     query={graphql`
       {
-        # posts: allWordpressPost(sort: { fields: date, order: DESC }) {
-        #   edges {
-        #     node {
-        #       ...BlockListFragment_post
-        #     }
-        #   }
-        # }
+        posts: allWordpressPost(sort: { fields: date, order: DESC }) {
+          edges {
+            node {
+              ...BlockListFragment_post
+            }
+          }
+        }
         activities: allWordpressWpActivities(
           sort: { fields: date, order: DESC }
         ) {
@@ -23,36 +23,26 @@ const IndexPage = () => (
             }
           }
         }
-        # ruimte: allWordpressWpRuimte(sort: { fields: date, order: DESC }) {
-        #   edges {
-        #     node {
-        #       ...BlockListFragment_ruimte
-        #     }
-        #   }
-        # }
-        # prices: allWordpressWpPrijs(sort: { fields: date, order: DESC }) {
-        #   edges {
-        #     node {
-        #       ...BlockListFragment_price
-        #     }
-        #   }
-        # }
+        ruimte: allWordpressWpRuimte(sort: { fields: date, order: DESC }) {
+          edges {
+            node {
+              ...BlockListFragment_ruimte
+            }
+          }
+        }
+        prices: allWordpressWpPrijs(sort: { fields: date, order: DESC }) {
+          edges {
+            node {
+              ...BlockListFragment_price
+            }
+          }
+        }
       }
     `}
-    render={({
-      // posts,
-      activities,
-      // prices,
-      // ruimte
-    }) => (
+    render={({ posts, activities, prices, ruimte }) => (
       <Layout>
         <PostList
-          posts={[
-            // posts.edges,
-            activities.edges,
-            // prices.edges,
-            // ruimte.edges
-          ]}
+          posts={[posts.edges, activities.edges, prices.edges, ruimte.edges]}
         />
         <p>hello world</p>
       </Layout>
