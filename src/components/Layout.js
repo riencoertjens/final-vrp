@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 // import { StaticQuery, graphql } from "gatsby"
 
 import { globalStyle, MediaQuery } from "./webhart-components"
-import { Global } from "@emotion/core"
+import { Global, css } from "@emotion/core"
 import styled from "@emotion/styled"
 
 import { breakpoints } from "../site/styles"

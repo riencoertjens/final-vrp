@@ -1,22 +1,22 @@
 const base = {
-  owner: `Nicolas Dougall`,
-  name: `Nicolas Dougall`,
-  shortName: `ndougall`,
-  tagline: `plant-powered triathlete`,
-  twitter: `nic_dougall`,
-  instagram: `ndougall`,
-  email: `ndougall92@gmail.com`,
-  phone: `+1(650) 454-6751`,
+  owner: `VRP vzw`,
+  name: `VRP`,
+  shortName: `VRP`,
+  tagline: `Vlaamse vereniging voor Ruimte en Planning`,
+  twitter: `VRPvzw`,
+  instagram: `VRPvzw`,
+  email: `info@vrp.be`,
+  phone: `(+32) 03/201 59 00`,
   facebookAppID: ``,
-  facebookPage: `155775668303609`,
+  facebookPage: `1382034548696817`,
   // url: `localhost:8000`, // no trailing slash!
   url: `https://vrp-final.netlify.com`, // no trailing slash!
   // url: `https://www.nicdougall.com`, // no trailing slash!
   titleTemplateSeperator: ` | `,
   icon: `src/images/seo/site-icon.png`, // 1500x1500 This path is relative to the root of the site.
   image: `src/images/seo/social-image.png`, // 1200x630 This path is relative to the root of the site.
-  language: `en`,
-  description: `Completing the 10 year challenge in style! U19 olympic distance world champion of 2009, plant powered triathlete, Nic Dougall returns to his triathlon roots after working on his cycling leg in world's highest level bike racing league`,
+  language: `nl`,
+  description: `De Vlaamse Vereniging voor Ruimte en Planning (VRP vzw) groepeert sinds 1997 ruimtelijk planners en stedenbouwkundigen uit Vlaanderen en Brussel en is de ontmoetingsplaats, het platform en het aanspreekpunt voor iedereen die (professioneel) betrokken is bij ruimtelijke planning in Vlaanderen.`,
   primaryColor: `#F28C00`,
   primaryBgColor: `white`,
 }

@@ -38,32 +38,35 @@ export const globalStyle = css`
 
 export const AspectRatioBox = props => {
   const { ratio, children, component } = props
-  const Component = component || "div"
+  const TheComponent = component || "div"
   return (
-    <Component
+    <TheComponent
       css={css`
         display: block;
         width: 100%;
         padding-top: ${(ratio ? 1 / ratio : 1) * 100}%;
-        overflow: scroll;
+        overflow: hidden;
         position: relative;
-        & > div {
+      `}
+      {...props}
+    >
+      <div
+        css={css`
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-        }
-      `}
-      {...props}
-    >
-      <div>{children}</div>
-    </Component>
+        `}
+      >
+        {children}
+      </div>
+    </TheComponent>
   )
 }
 
 export const AspectRatioImage = props => {
-  const { image, cropfocus: cropfocus, ratio } = props
+  const { image, cropfocus, ratio } = props
   const showImage =
     ratio > image.maxWidth.aspectRatio ? image.maxWidth : image.maxHeight
 

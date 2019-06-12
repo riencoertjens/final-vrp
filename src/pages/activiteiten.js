@@ -2,6 +2,7 @@ import React from "react"
 import { StaticQuery, graphql } from "gatsby"
 import Layout from "../components/Layout"
 import PostList from "../components/PostList"
+import SEO from "../components/webhart-components/SEO"
 
 const ActivitiesPage = () => (
   <StaticQuery
@@ -20,8 +21,10 @@ const ActivitiesPage = () => (
     `}
     render={({ activities }) => (
       <Layout>
-        <PostList posts={[activities.edges]} />
+        <SEO title="activiteiten" />
         <p>hello world</p>
+
+        <PostList posts={[activities.edges]} />
       </Layout>
     )}
   />
