@@ -6,7 +6,7 @@ import { AspectRatioBox } from "../components/webhart-components"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
 
 import css from "@emotion/css"
-import { colors } from "../site/styles"
+import { colors, Button, breakpoints } from "../site/styles"
 import { MqMin, MqMax } from "../components/webhart-components/style-functions"
 import GatsbyLink from "gatsby-link"
 
@@ -147,46 +147,64 @@ class IndexPage extends Component {
                       }
                     `}
                   >
-                    <AspectRatioBox
+                    <div
                       css={css`
-                        background: white;
+                        position: absolute;
                         z-index: 10;
-                        box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.25);
-                        > div {
-                          padding: 1.5rem;
-                        }
+                        padding: 1.5rem;
                         ${MqMax("899px")} {
-                          margin: 2rem;
-                          max-width: calc(100% - 4rem);
+                          display: inline-block;
                           width: 400px;
-                          max-height: calc(100% - 4rem);
+                          left: 2rem;
+                          bottom: 2rem;
+                          max-width: calc(100% - 4rem);
+                        }
+                        ${MqMin(breakpoints[0])} {
+                          background: white;
+                          box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.25);
                         }
                         ${MqMin("900px")} {
                           width: 300px;
-                          margin: ${300 / 4}px;
+                          left: ${300 / 4}px;
+                          bottom: ${300 / 4}px;
                         }
                       `}
                     >
-                      <h2>{post.post_title}</h2>
-                      <p>
-                        {console.log(post.content_raw.length)}
+                      <h2
+                        css={css`
+                          color: white;
+                          font-size: 3rem;
+                          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.333),
+                            -1px -1px 1px rgba(0, 0, 0, 0.333),
+                            -1px 1px 1px rgba(0, 0, 0, 0.333),
+                            1px -1px 1px rgba(0, 0, 0, 0.333);
+                          ${MqMin(breakpoints[0])} {
+                            font-size: 1.5rem;
+                            color: black;
+                            text-shadow: unset;
+                          }
+                        `}
+                      >
+                        {post.post_title}
+                      </h2>
+                      <p
+                        css={css`
+                          ${MqMax(breakpoints[0])} {
+                            display: none;
+                          }
+                        `}
+                      >
                         {post.content_raw.length > 200
                           ? post.content_raw.substr(0, 200) + "\u2026"
                           : post.content_raw}
                       </p>
-                      <GatsbyLink
+                      <Button
                         to={`/activiteiten/${post.post_name}`}
-                        css={css`
-                          color: white;
-                          background: ${colors.orange};
-                          border: none;
-                          padding: 0.25rem 1.5rem 0.25rem 0.5rem;
-                          border-radius: 50px;
-                        `}
+                        component={GatsbyLink}
                       >
                         lees meer
-                      </GatsbyLink>
-                    </AspectRatioBox>
+                      </Button>
+                    </div>
                     {showImage && (
                       <GatsbyImage
                         style={{ position: "absolute" }}
