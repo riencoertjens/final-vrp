@@ -17,6 +17,7 @@ import { graphql } from "gatsby"
 
 const SiteWrapper = styled("div")`
   box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 30px 0px;
+  position: relative;
   font-family: Montserrat, sans-serif;
   margin: 0 auto;
   ${MediaQuery[0]} {
@@ -40,7 +41,13 @@ class Layout extends Component {
         <SEO />
         <SiteWrapper>
           <Header />
-          <main>{children}</main>
+          <main
+            css={css`
+              z-index: 5;
+            `}
+          >
+            {children}
+          </main>
         </SiteWrapper>
       </React.Fragment>
     )

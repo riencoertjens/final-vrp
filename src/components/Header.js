@@ -36,6 +36,7 @@ const Nav = styled.nav`
   position: relative;
   width: 100%;
   font-size: 1rem;
+  z-index: 100;
   ul {
     list-style: none;
   }
@@ -254,6 +255,7 @@ class Header extends React.Component {
             css={css`
               display: flex;
               flex-wrap: wrap;
+              z-index: 10;
               justify-content: space-between;
               ${MqMin("700px")} {
                 flex-wrap: unset;

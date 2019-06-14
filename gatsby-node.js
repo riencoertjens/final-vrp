@@ -6,7 +6,7 @@
 
 const path = require("path")
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = ({ graphql, actions, getNodes, getNode }) => {
   const { createPage } = actions
   return graphql(`
     {
@@ -23,7 +23,7 @@ exports.createPages = ({ graphql, actions }) => {
       createPage({
         path: `/activiteiten/${node.slug}`,
         component: path.resolve(
-          `./src/components/templates/page-activity-template.js`
+          `./src/components/templates/pages/activity-template.js`
         ),
         context: {
           // Data passed to context is available

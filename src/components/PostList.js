@@ -1,10 +1,17 @@
 import React from "react"
 import { graphql } from "gatsby"
 import css from "@emotion/css"
-import { AspectRatioBox, AspectRatioImage } from "./webhart-components"
+import { AspectRatioBox } from "./webhart-components"
 import GatsbyLink from "gatsby-link"
 import { colors } from "../site/styles"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
+
+export const postTypes = {
+  ruimte: "Ruimte",
+  activity: "Activiteit",
+  prijs: "Prijsuitreking",
+  post: "Nieuws",
+}
 
 const PostList = ({ posts }) => {
   const sortedPosts = [].concat(...posts).sort((a, b) => {
@@ -107,14 +114,7 @@ const PostList = ({ posts }) => {
                   line-height: 100%;
                 `}
               >
-                {
-                  {
-                    ruimte: "Ruimte",
-                    activity: "Activiteit",
-                    prijs: "Prijsuitreking",
-                    post: "Nieuws",
-                  }[node.type]
-                }
+                {postTypes[node.type]}
               </span>
               <h3>
                 {node.title ||

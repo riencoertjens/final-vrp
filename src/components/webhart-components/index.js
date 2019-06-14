@@ -44,7 +44,11 @@ export const AspectRatioBox = props => {
       css={css`
         display: block;
         width: 100%;
-        padding-top: ${(ratio ? 1 / ratio : 1) * 100}%;
+        &:before {
+          padding-top: ${(ratio ? 1 / ratio : 1) * 100}%;
+          content: "";
+          display: block;
+        }
         overflow: hidden;
         position: relative;
       `}
@@ -55,8 +59,8 @@ export const AspectRatioBox = props => {
           position: absolute;
           top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
+          bottom: 0;
+          right: 0;
         `}
       >
         {children}
