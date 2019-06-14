@@ -172,7 +172,7 @@ class IndexPage extends Component {
                     >
                       <h2
                         css={css`
-                          color: white;
+                          color: ${colors.orange};
                           font-size: 3rem;
                           text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.333),
                             -1px -1px 1px rgba(0, 0, 0, 0.333),
