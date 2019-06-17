@@ -6,7 +6,7 @@
 
 const path = require("path")
 
-exports.createPages = ({ graphql, actions, getNodes, getNode }) => {
+exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return graphql(`
     {
