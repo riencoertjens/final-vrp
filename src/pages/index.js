@@ -66,11 +66,7 @@ class IndexPage extends Component {
                 post_type
                 content_raw
                 featured_media {
-                  post_title
-                  post_name
-                  guid {
-                    ...HeroImageFragment
-                  }
+                  ...HeroImageFragment
                 }
               }
             }
@@ -118,11 +114,11 @@ class IndexPage extends Component {
             >
               {pageInfo.featured_posts.map((post, i) => {
                 const showImage =
-                  post.featured_media.guid && post.featured_media.guid.localFile
-                    ? post.featured_media.guid.localFile.image.maxWidth
-                        .aspectRatio > 1
-                      ? post.featured_media.guid.localFile.image.maxWidth
-                      : post.featured_media.guid.localFile.image.maxHeight
+                  post.featured_media && post.featured_media.localFile
+                    ? post.featured_media.localFile.image.maxWidth.aspectRatio >
+                      1
+                      ? post.featured_media.localFile.image.maxWidth
+                      : post.featured_media.localFile.image.maxHeight
                     : false
 
                 return (
@@ -210,9 +206,9 @@ class IndexPage extends Component {
                         style={{ position: "absolute" }}
                         fluid={showImage}
                         objectPosition={`${
-                          post.featured_media.guid.smartcrop_image_focus[0].left
+                          post.featured_media.smartcrop_image_focus[0].left
                         }% ${
-                          post.featured_media.guid.smartcrop_image_focus[0].top
+                          post.featured_media.smartcrop_image_focus[0].top
                         }%`}
                       />
                     )}
