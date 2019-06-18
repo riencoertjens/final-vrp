@@ -12,11 +12,12 @@ import { breakpoints } from "../site/styles"
 import SEO from "./webhart-components/SEO"
 import Header from "./Header"
 import { graphql } from "gatsby"
+import Footer from "./Footer"
 // import GatsbyLink from "gatsby-link"
 // import Obfuscate from "react-obfuscate"
 
 const SiteWrapper = styled("div")`
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 30px 0px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
   position: relative;
   font-family: Montserrat, sans-serif;
   margin: 0 auto;
@@ -48,6 +49,7 @@ class Layout extends Component {
           >
             {children}
           </main>
+          <Footer />
         </SiteWrapper>
       </React.Fragment>
     )

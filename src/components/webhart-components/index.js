@@ -8,6 +8,7 @@ import { css } from "@emotion/core"
 import normalize from "./normalize"
 
 import { globalStyle as siteGlobalStyle, breakpoints } from "../../site/styles"
+import { getShowImage } from "./style-functions"
 
 export const OutboundLink = props => (
   <AnalyticsOutboundLink target="_blank" rel="noreferrer noopener" {...props} />
@@ -71,8 +72,8 @@ export const AspectRatioBox = props => {
 
 export const AspectRatioImage = props => {
   const { image, cropfocus, ratio } = props
-  const showImage =
-    ratio > image.maxWidth.aspectRatio ? image.maxWidth : image.maxHeight
+  const showImage = getShowImage(image, ratio)
+  // ratio > image.maxWidth.aspectRatio ? image.maxWidth : image.maxHeight
 
   return (
     <AspectRatioBox

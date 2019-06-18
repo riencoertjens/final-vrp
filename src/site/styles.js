@@ -18,6 +18,8 @@ export const colors = {
   lightGrey: "#dddddd",
 }
 
+export const boxShadow = "0 0 0.5rem 0 rgba(0, 0, 0, 0.25)"
+
 export const globalStyle = css`
   html {
     font-family: Montserrat, sans-serif;
@@ -31,7 +33,13 @@ export const globalStyle = css`
     background: ${colors.primary};
     color: ${colors.background};
   }
-
+  section {
+    padding: 1rem;
+  }
+  a {
+    color: ${colors.orange};
+  }
+  p,
   h1,
   h2,
   h3,
@@ -39,6 +47,7 @@ export const globalStyle = css`
   h5,
   h6 {
     margin-top: 0;
+    margin-bottom: 1rem;
   }
 `
 
@@ -50,6 +59,7 @@ export const Button = props => {
     <TheComponent
       css={css`
         color: white;
+        flex: 0 0 auto;
         background: ${colors.orange};
         border: none;
         position: relative;
@@ -57,6 +67,7 @@ export const Button = props => {
         padding-right: 1.5rem;
         border-radius: 50px;
         text-decoration: none;
+        display: inline-block;
         svg {
           transition: 0.2s;
           position: absolute;

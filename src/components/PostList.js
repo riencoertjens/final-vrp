@@ -3,14 +3,15 @@ import { graphql } from "gatsby"
 import css from "@emotion/css"
 import { AspectRatioBox } from "./webhart-components"
 import GatsbyLink from "gatsby-link"
-import { colors } from "../site/styles"
+import { colors, boxShadow } from "../site/styles"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
+import { getShowImage } from "./webhart-components/style-functions"
 
 export const postTypes = {
-  ruimte: "Ruimte",
-  activity: "Activiteit",
-  prijs: "Prijsuitreking",
-  post: "Nieuws",
+  ruimte: "ruimte",
+  activity: "activiteit",
+  prijs: "prijsuitreking",
+  post: "nieuws",
 }
 
 const PostList = ({ posts }) => {
@@ -28,26 +29,22 @@ const PostList = ({ posts }) => {
     <div
       css={css`
         display: grid;
-        padding: 1rem;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         grid-column-gap: 1rem;
         grid-row-gap: 1rem;
       `}
     >
       {sortedPosts.map(({ node }, i) => {
-        const showImage =
-          node.featured_media && node.featured_media.localFile
-            ? node.featured_media.localFile.image.maxWidth.aspectRatio > 1
-              ? node.featured_media.localFile.image.maxWidth
-              : node.featured_media.localFile.image.maxHeight
-            : false
+        const showImage = getShowImage(node.featured_media, 1)
+
+        const typeName = postTypes[node.type]
 
         return (
           <AspectRatioBox
             component={GatsbyLink}
             key={i}
             css={css`
-              box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.25);
+              box-shadow: ${boxShadow};
               transition: 0.2s;
 
               .gatsby-image-wrapper {
@@ -67,7 +64,7 @@ const PostList = ({ posts }) => {
                 }
               }
             `}
-            to={`/activiteiten/${node.slug}`}
+            to={`/${typeName}/${node.slug}`}
           >
             {showImage && (
               <GatsbyImage
@@ -77,18 +74,7 @@ const PostList = ({ posts }) => {
                 }% ${node.featured_media.smartcrop_image_focus[0].top}%`}
               />
             )}
-            {/* {node.featured_media && node.featured_media.localFile ? (
-              <AspectRatioImage
-                image={node.featured_media.localFile.image}
-                cropfocus={node.featured_media.smartcrop_image_focus[0]}
-              />
-            ) : (
-              <AspectRatioBox
-                css={css`
-                  background: grey;
-                `}
-              />
-            )} */}
+
             <div
               css={css`
                 position: absolute;
@@ -114,7 +100,7 @@ const PostList = ({ posts }) => {
                   line-height: 100%;
                 `}
               >
-                {postTypes[node.type]}
+                {typeName}
               </span>
               <h3>
                 {node.title ||

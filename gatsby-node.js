@@ -10,7 +10,14 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return graphql(`
     {
-      allWordpressWpActivities {
+      activities: allWordpressWpActivities {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+      themas: allWordpressWpThema {
         edges {
           node {
             slug
@@ -19,11 +26,25 @@ exports.createPages = ({ graphql, actions }) => {
       }
     }
   `).then(result => {
-    result.data.allWordpressWpActivities.edges.forEach(({ node }) => {
+    result.data.activities.edges.forEach(({ node }) => {
       createPage({
-        path: `/activiteiten/${node.slug}`,
+        path: `/activiteit/${node.slug}`,
         component: path.resolve(
           `./src/components/templates/pages/activity-template.js`
+        ),
+        context: {
+          // Data passed to context is available
+          // in page queries as GraphQL variables.
+          slug: node.slug,
+        },
+      })
+    })
+
+    result.data.themas.edges.forEach(({ node }) => {
+      createPage({
+        path: `/themas/${node.slug}`,
+        component: path.resolve(
+          `./src/components/templates/pages/thema-template.js`
         ),
         context: {
           // Data passed to context is available

@@ -18,7 +18,7 @@ const ActivityPageTemplate = ({
   return (
     <Layout>
       <SEO
-        pathname={slug}
+        pathname={`activiteit/${slug}`}
         title={activity.title}
         description={activity.content}
         image={
@@ -29,7 +29,7 @@ const ActivityPageTemplate = ({
       {activity.featured_media ? (
         <AspectRatioImage
           ratio={1200 / 630}
-          image={activity.featured_media.localFile.image}
+          image={activity.featured_media}
           cropfocus={activity.featured_media.smartcrop_image_focus[0]}
         />
       ) : (

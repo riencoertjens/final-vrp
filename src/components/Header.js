@@ -43,7 +43,7 @@ const Nav = styled.nav`
   ${props => (props.menuActive ? "display: block;" : "display:none;")}
   background: ${colors.orange};
   ${MqMin("700px")} {
-    background: white;
+    background: whitesmoke;
     display: flex;
     flex-wrap: wrap-reverse;
     justify-content: flex-end;
@@ -256,6 +256,7 @@ class Header extends React.Component {
               display: flex;
               flex-wrap: wrap;
               z-index: 10;
+              background: whitesmoke;
               justify-content: space-between;
               ${MqMin("700px")} {
                 flex-wrap: unset;

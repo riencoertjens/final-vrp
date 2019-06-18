@@ -22,9 +22,10 @@ const ActivitiesPage = () => (
     render={({ activities }) => (
       <Layout>
         <SEO title="activiteiten" />
-        <p>hello world</p>
-
-        <PostList posts={[activities.edges]} />
+        <section>
+          <h1>Activiteiten</h1>
+          <PostList posts={[activities.edges]} />
+        </section>
       </Layout>
     )}
   />

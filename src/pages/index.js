@@ -1,13 +1,16 @@
 import React, { Component } from "react"
 import { StaticQuery, graphql } from "gatsby"
 import Layout from "../components/Layout"
-import PostList from "../components/PostList"
+import PostList, { postTypes } from "../components/PostList"
 import { AspectRatioBox } from "../components/webhart-components"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
 
 import css from "@emotion/css"
-import { colors, Button, breakpoints } from "../site/styles"
-import { MqMin, MqMax } from "../components/webhart-components/style-functions"
+import { colors, Button, breakpoints, boxShadow } from "../site/styles"
+import {
+  MqMin,
+  getShowImage,
+} from "../components/webhart-components/style-functions"
 import GatsbyLink from "gatsby-link"
 
 const timeout = 5000
@@ -113,13 +116,7 @@ class IndexPage extends Component {
               `}
             >
               {pageInfo.featured_posts.map((post, i) => {
-                const showImage =
-                  post.featured_media && post.featured_media.localFile
-                    ? post.featured_media.localFile.image.maxWidth.aspectRatio >
-                      1
-                      ? post.featured_media.localFile.image.maxWidth
-                      : post.featured_media.localFile.image.maxHeight
-                    : false
+                const showImage = getShowImage(post.featured_media, 1)
 
                 return (
                   <div //slide
@@ -147,19 +144,26 @@ class IndexPage extends Component {
                       css={css`
                         position: absolute;
                         z-index: 10;
-                        padding: 1.5rem;
-                        ${MqMax("899px")} {
+                        padding: 1rem;
+                        padding-bottom: 1.5rem;
+                        background: rgba(255, 255, 255, 0.75);
+                        box-shadow: ${boxShadow};
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        ${MqMin(breakpoints[0])} {
+                          padding: 1.5rem;
+                          background: white;
                           display: inline-block;
                           width: 400px;
                           left: 2rem;
                           bottom: 2rem;
                           max-width: calc(100% - 4rem);
                         }
-                        ${MqMin(breakpoints[0])} {
-                          background: white;
-                          box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.25);
-                        }
-                        ${MqMin("900px")} {
+                        ${MqMin(breakpoints[1])} {
                           width: 300px;
                           left: ${300 / 4}px;
                           bottom: ${300 / 4}px;
@@ -168,12 +172,11 @@ class IndexPage extends Component {
                     >
                       <h2
                         css={css`
-                          color: ${colors.orange};
-                          font-size: 3rem;
-                          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.333),
-                            -1px -1px 1px rgba(0, 0, 0, 0.333),
-                            -1px 1px 1px rgba(0, 0, 0, 0.333),
-                            1px -1px 1px rgba(0, 0, 0, 0.333);
+                          margin: 0;
+                          flex: 0 1 auto;
+                          overflow: hidden;
+                          white-space: nowrap;
+                          text-overflow: ellipsis;
                           ${MqMin(breakpoints[0])} {
                             font-size: 1.5rem;
                             color: black;
@@ -185,8 +188,10 @@ class IndexPage extends Component {
                       </h2>
                       <p
                         css={css`
-                          ${MqMax(breakpoints[0])} {
-                            display: none;
+                          display: none;
+                          margin: 1rem 0;
+                          ${MqMin(breakpoints[0])} {
+                            display: inline-block;
                           }
                         `}
                       >
@@ -195,7 +200,7 @@ class IndexPage extends Component {
                           : post.content_raw}
                       </p>
                       <Button
-                        to={`/activiteiten/${post.post_name}`}
+                        to={`/${postTypes[post.post_type]}/${post.post_name}`}
                         component={GatsbyLink}
                       >
                         lees meer
@@ -247,15 +252,45 @@ class IndexPage extends Component {
                 ))}
               </div>
             </AspectRatioBox>
-
-            <PostList
-              posts={[
-                posts.edges,
-                activities.edges,
-                prices.edges,
-                ruimte.edges,
-              ]}
-            />
+            <div
+              css={css`
+                ${MqMin("700px")} {
+                  display: grid;
+                  grid-template-columns: 1fr minmax(200px, 300px);
+                }
+              `}
+            >
+              <section>
+                <PostList
+                  posts={[
+                    posts.edges,
+                    activities.edges,
+                    prices.edges,
+                    ruimte.edges,
+                  ]}
+                />
+              </section>
+              <aside
+                css={css`
+                  background: ${colors.orange};
+                  padding: 1rem;
+                  color: white;
+                `}
+              >
+                <h2>activteiten</h2>
+                <p>
+                  Enim commodo adipisicing dolore dolore aute veniam est aliqua
+                  amet cupidatat anim enim nostrud labore. Tempor do magna sint
+                  esse et adipisicing. Nostrud irure ut in esse elit ad ad. Ea
+                  sit exercitation tempor sint incididunt enim consequat ullamco
+                  id amet nisi velit. Enim adipisicing deserunt nisi occaecat
+                  cillum est anim laboris Lorem sit exercitation. Quis nulla
+                  tempor anim non esse cillum laborum consequat est mollit
+                  minim. Aliquip sint pariatur magna Lorem officia velit velit
+                  dolore id cupidatat fugiat qui ipsum.
+                </p>
+              </aside>
+            </div>
           </Layout>
         )}
       />
