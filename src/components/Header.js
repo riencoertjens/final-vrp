@@ -128,6 +128,7 @@ const NavItemWrapper = styled.li`
 const NavDropdown = styled.ul`
   padding-left: 1rem;
   li {
+    min-width: 10rem;
     a {
       padding: 0.75rem 1rem;
     }
@@ -139,7 +140,7 @@ const NavDropdown = styled.ul`
     font-size: 0.833rem;
     display: none;
     z-index: 10;
-    grid-template-columns: auto auto auto;
+    grid-auto-flow: column;
     background: ${colors.orange};
     padding: 0;
     position: absolute;
@@ -147,16 +148,31 @@ const NavDropdown = styled.ul`
   }
 `
 
-const NavItem = ({ children, dropdown, to, alt }) => (
+const NavItem = ({ children, dropdown, to, alt, linkPrefix }) => (
   <NavItemWrapper alt={alt} dropdown={dropdown}>
     <GatsbyLink to={to}>{children}</GatsbyLink>
     {dropdown && (
       <>
         <ArrowIcon />
-        <NavDropdown>
+        <NavDropdown
+          css={css`
+            grid-template-rows: repeat(
+              ${Math.round(dropdown.length / 3)},
+              auto
+            );
+          `}
+        >
           {dropdown.map(({ node: item }, i) => (
             <li key={i}>
-              <GatsbyLink to={`${to}/${item.slug}`}>{item.name}</GatsbyLink>
+              <GatsbyLink
+                to={`/${linkPrefix ? `${linkPrefix}/` : ""}${
+                  item.parent_element && item.parent_element.slug
+                    ? `${item.parent_element.slug}/`
+                    : ""
+                }${item.slug}`}
+              >
+                {item.name}
+              </GatsbyLink>
             </li>
           ))}
         </NavDropdown>
@@ -164,63 +180,6 @@ const NavItem = ({ children, dropdown, to, alt }) => (
     )}
   </NavItemWrapper>
 )
-
-const activiteitenCategories = [
-  {
-    node: {
-      name: "Werelddag van de Stedenbouw",
-      slug: "werelddag-van-de-stedenbouw",
-    },
-  },
-  {
-    node: {
-      name: "VRP Voorjaarscongres",
-      slug: "vrp-voorjaarscongres",
-    },
-  },
-  {
-    node: {
-      name: "Participatie Studio",
-      slug: "participatie-studio",
-    },
-  },
-  {
-    node: {
-      name: "VRP Lab",
-      slug: "vrp-lab",
-    },
-  },
-  {
-    node: {
-      name: "Vormingsreeksen",
-      slug: "vormingsreeksen",
-    },
-  },
-  {
-    node: {
-      name: "Start@vrp",
-      slug: "startvrp",
-    },
-  },
-  {
-    node: {
-      name: "Openruimtebeker",
-      slug: "openruimtebeker",
-    },
-  },
-  {
-    node: {
-      name: "VRP Afstudeerprijs",
-      slug: "vrp-afstudeerprijs",
-    },
-  },
-  {
-    node: {
-      name: "VRP Planningsprijs",
-      slug: "vrp-planningsprijs",
-    },
-  },
-]
 
 class Header extends React.Component {
   constructor(props) {
@@ -248,100 +207,131 @@ class Header extends React.Component {
                 }
               }
             }
+            activiteiten: allWordpressCategory(
+              filter: {
+                parent_element: { slug: { in: ["activiteiten", "prijzen"] } }
+              }
+              sort: { fields: [parent_element___name, name], order: DESC }
+            ) {
+              edges {
+                node {
+                  name
+                  slug
+                  parent_element {
+                    slug
+                  }
+                }
+              }
+            }
           }
         `}
-        render={({ themas: { edges: themas } }) => (
-          <header
-            css={css`
-              display: flex;
-              flex-wrap: wrap;
-              z-index: 10;
-              background: whitesmoke;
-              justify-content: space-between;
-              ${MqMin("700px")} {
-                flex-wrap: unset;
-                padding: 0;
-                align-items: center;
-              }
-            `}
-          >
-            <Logo />
-            <button
-              css={css`
-                border: none;
-                padding: 7px 10px 0;
-                margin-right: 1rem;
-                margin-left: auto;
-                background: none;
-                color: ${colors.grey};
+        render={({ themas: { edges: themas }, activiteiten }) => {
+          const activiteitenCategories = activiteiten.edges.slice(0)
+          activiteitenCategories.push({
+            node: {
+              name: "Start@vrp",
+              slug: "startvrp",
+            },
+          })
 
-                :hover {
-                  color: ${colors.orange};
-                }
+          return (
+            <header
+              css={css`
+                display: flex;
+                flex-wrap: wrap;
+                z-index: 10;
+                background: whitesmoke;
+                justify-content: space-between;
                 ${MqMin("700px")} {
-                  order: 3;
-                  position: relative;
+                  flex-wrap: unset;
+                  padding: 0;
+                  align-items: center;
                 }
               `}
             >
-              <SearchIcon />
-            </button>{" "}
-            <Hamburger
-              width={30}
-              lineHeight={3}
-              lineSpacing={5}
-              color={colors.grey}
-              borderRadius={2}
-              padding={"15px 15px 10px 0"}
-              active={menuActive}
-              onClick={() => this.setState({ menuActive: !menuActive })}
-              customProps={{
-                "aria-label": "menu toggle",
-                "aria-expanded": menuActive,
-              }}
-              css={css`
-                ${MqMin("700px")} {
-                  && {
-                    display: none;
+              <Logo />
+              <button
+                css={css`
+                  border: none;
+                  padding: 7px 10px 0;
+                  margin-right: 1rem;
+                  margin-left: auto;
+                  background: none;
+                  color: ${colors.grey};
+
+                  :hover {
+                    color: ${colors.orange};
                   }
-                }
-                &&:hover {
-                  div div {
-                    &,
-                    ::before,
-                    ::after {
-                      background: ${colors.orange};
+                  ${MqMin("700px")} {
+                    order: 3;
+                    position: relative;
+                  }
+                `}
+              >
+                <SearchIcon />
+              </button>{" "}
+              <Hamburger
+                width={30}
+                lineHeight={3}
+                lineSpacing={5}
+                color={colors.grey}
+                borderRadius={2}
+                padding={"15px 15px 10px 0"}
+                active={menuActive}
+                onClick={() => this.setState({ menuActive: !menuActive })}
+                customProps={{
+                  "aria-label": "menu toggle",
+                  "aria-expanded": menuActive,
+                }}
+                css={css`
+                  ${MqMin("700px")} {
+                    && {
+                      display: none;
                     }
                   }
-                }
-              `}
-            />
-            <Nav menuActive={menuActive}>
-              <NavGroup role="menu">
-                <NavItem to="/themas" dropdown={themas} alt>
-                  Thema's
-                </NavItem>
-                <NavItem
-                  to="/activiteiten"
-                  dropdown={activiteitenCategories}
-                  alt
-                >
-                  Activiteiten
-                </NavItem>
-                <NavItem to="/ruimte" alt>
-                  Ruimte
-                </NavItem>
-              </NavGroup>
-              <NavGroup>
-                <NavItem to="/over-vrp">Over VRP</NavItem>
-                <NavItem to="/lid-worden">Lid worden</NavItem>
-                <NavItem to="/nieuws">nieuws</NavItem>
-                <NavItem to="/blog">blog</NavItem>
-                <NavItem to="/nieuwsbrief">nieuwsbrief</NavItem>
-              </NavGroup>
-            </Nav>
-          </header>
-        )}
+                  &&:hover {
+                    div div {
+                      &,
+                      ::before,
+                      ::after {
+                        background: ${colors.orange};
+                      }
+                    }
+                  }
+                `}
+              />
+              <Nav menuActive={menuActive}>
+                <NavGroup role="menu">
+                  <NavItem
+                    to="/themas"
+                    dropdown={themas}
+                    alt
+                    linkPrefix="themas"
+                  >
+                    Thema's
+                  </NavItem>
+                  <NavItem
+                    to="/activiteiten"
+                    dropdown={activiteitenCategories}
+                    alt
+                  >
+                    Activiteiten
+                  </NavItem>
+                  <NavItem to="/ruimte" alt>
+                    Ruimte
+                  </NavItem>
+                </NavGroup>
+                <NavGroup>
+                  <NavItem to="/over-vrp">Over VRP</NavItem>
+                  <NavItem to="/lid-worden">Lid worden</NavItem>
+                  <NavItem to="/nieuws">nieuws</NavItem>
+                  <NavItem to="/blog">blog</NavItem>
+                  <NavItem to="/nieuwsbrief">nieuwsbrief</NavItem>
+                </NavGroup>
+              </Nav>
+            </header>
+          )
+        }}
       />
     )
   }

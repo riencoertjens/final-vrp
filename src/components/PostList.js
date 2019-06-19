@@ -124,10 +124,10 @@ export const BlockImageFragment = graphql`
     }
     localFile {
       image: childImageSharp {
-        maxWidth: fluid(maxWidth: 300) {
+        maxWidth: fluid(maxWidth: 500) {
           ...GatsbyImageSharpFluid_tracedSVG
         }
-        maxHeight: fluid(maxHeight: 300) {
+        maxHeight: fluid(maxHeight: 500) {
           ...GatsbyImageSharpFluid_tracedSVG
         }
       }

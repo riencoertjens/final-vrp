@@ -24,13 +24,29 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
+      categories: allWordpressCategory(
+        filter: {
+          parent_element: { slug: { in: ["activiteiten", "prijzen"] } }
+        }
+        sort: { fields: [parent_element___name, name], order: DESC }
+      ) {
+        edges {
+          node {
+            name
+            slug
+            parent_element {
+              slug
+            }
+          }
+        }
+      }
     }
   `).then(result => {
     result.data.activities.edges.forEach(({ node }) => {
       createPage({
         path: `/activiteit/${node.slug}`,
         component: path.resolve(
-          `./src/components/templates/pages/activity-template.js`
+          `./src/components/templates/pages/activiteit-template.js`
         ),
         context: {
           // Data passed to context is available
@@ -45,6 +61,22 @@ exports.createPages = ({ graphql, actions }) => {
         path: `/themas/${node.slug}`,
         component: path.resolve(
           `./src/components/templates/pages/thema-template.js`
+        ),
+        context: {
+          // Data passed to context is available
+          // in page queries as GraphQL variables.
+          slug: node.slug,
+        },
+      })
+    })
+
+    result.data.categories.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.parent_element.slug}/${node.slug}`,
+        component: path.resolve(
+          `./src/components/templates/pages/${
+            node.parent_element.slug
+          }-template.js`
         ),
         context: {
           // Data passed to context is available

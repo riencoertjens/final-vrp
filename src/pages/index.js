@@ -235,6 +235,7 @@ class IndexPage extends Component {
               >
                 {pageInfo.featured_posts.map((post, i) => (
                   <button
+                    key={i}
                     css={css`
                       height: 100%;
                       flex-grow: 1;
