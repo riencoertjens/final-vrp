@@ -263,7 +263,7 @@ class Header extends React.Component {
                 `}
               >
                 <SearchIcon />
-              </button>{" "}
+              </button>
               <Hamburger
                 width={30}
                 lineHeight={3}

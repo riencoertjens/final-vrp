@@ -1,7 +1,7 @@
 import React from "react"
 import { colors } from "../site/styles"
 import css from "@emotion/css"
-import { ReactComponent as Logo } from "../images/svg/logo_landscape.svg"
+import { ReactComponent as Logo } from "../images/svg/vrp-logo-white.svg"
 import {
   FaTwitter as Twitter,
   FaFacebookF as Facebook,
@@ -74,26 +74,42 @@ const Footer = () => (
             justify-content: space-between;
           `}
         >
-          <Logo />
+          <Logo
+            css={css`
+              height: 2rem;
+              width: auto;
+              fill: white;
+              :hover {
+                fill: ${colors.blue};
+              }
+            `}
+          />
           <span
             css={css`
               display: flex;
               align-self: center;
-
+              font-size: 1.5rem;
               svg {
                 margin: 0 0.25rem;
-                height: 40px;
-                width: auto;
               }
             `}
           >
-            <OutboundLink href="https://twitter.com/VRPvzw">
+            <OutboundLink
+              href="https://twitter.com/VRPvzw"
+              alt="vrp twitter profile"
+            >
               <Twitter />
             </OutboundLink>
-            <OutboundLink href="https://facebook.com/VRPvzw">
+            <OutboundLink
+              href="https://facebook.com/VRPvzw"
+              alt="vrp facebook profile"
+            >
               <Facebook />
             </OutboundLink>
-            <OutboundLink href="https://linkedin.com/company/vlaamse-vereniging-voor-ruimte-en-planning-vrp-/">
+            <OutboundLink
+              href="https://linkedin.com/company/vlaamse-vereniging-voor-ruimte-en-planning-vrp-/"
+              alt="vrp linkedin profile"
+            >
               <Linkedin />
             </OutboundLink>
           </span>
@@ -102,10 +118,10 @@ const Footer = () => (
           css={css`
             padding: 0 1rem;
             display: flex;
-            align-items: space-between;
             flex-wrap: wrap;
             div {
               ul {
+                margin: 0;
                 padding: 0;
                 margin-right: 2rem;
                 margin-bottom: 2rem;
@@ -164,6 +180,43 @@ const Footer = () => (
                   </GatsbyLink>
                 </li>
               ))}
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>
+                <GatsbyLink to={`/over`}>Over VRP</GatsbyLink>
+              </li>
+              <li>
+                <GatsbyLink to={`/lid-worden`}>Lid Worden</GatsbyLink>
+              </li>
+              <li>
+                <GatsbyLink to={`/contact`}>Contact</GatsbyLink>
+              </li>
+              <li>
+                <GatsbyLink to={`/sponsors`}>Sponsors</GatsbyLink>
+              </li>
+              <li>
+                <GatsbyLink to={`/partners`}>Partners</GatsbyLink>
+              </li>
+              <li>
+                <GatsbyLink to={`/nieuws`}>Nieuws</GatsbyLink>
+              </li>
+              <li>
+                <GatsbyLink to={`/privacyverklaring`}>
+                  Privacyverklaring
+                </GatsbyLink>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <GatsbyLink to={`/vacatures`}>Vacatures</GatsbyLink>
+              </li>
+              <li>
+                <GatsbyLink to={`/vacature-plaatsen`}>
+                  Vacature plaatsen
+                </GatsbyLink>
+              </li>
             </ul>
           </div>
         </div>

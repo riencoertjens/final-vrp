@@ -24,6 +24,15 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
+      pages: allWordpressPage(
+        filter: { parent_element: { slug: { eq: "home" } } }
+      ) {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
       categories: allWordpressCategory(
         filter: {
           parent_element: { slug: { in: ["activiteiten", "prijzen"] } }
@@ -61,6 +70,20 @@ exports.createPages = ({ graphql, actions }) => {
         path: `/themas/${node.slug}`,
         component: path.resolve(
           `./src/components/templates/pages/thema-template.js`
+        ),
+        context: {
+          // Data passed to context is available
+          // in page queries as GraphQL variables.
+          slug: node.slug,
+        },
+      })
+    })
+
+    result.data.pages.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.slug}`,
+        component: path.resolve(
+          `./src/components/templates/pages/wp-page-template.js`
         ),
         context: {
           // Data passed to context is available

@@ -278,7 +278,7 @@ class IndexPage extends Component {
                   color: white;
                 `}
               >
-                <h2>activteiten</h2>
+                <h2>activiteiten</h2>
                 <p>
                   Enim commodo adipisicing dolore dolore aute veniam est aliqua
                   amet cupidatat anim enim nostrud labore. Tempor do magna sint
