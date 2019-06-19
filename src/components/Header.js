@@ -200,13 +200,7 @@ class Header extends React.Component {
                 }
               }
             }
-            logo: file(base: { eq: "logo.png" }) {
-              childImageSharp {
-                fixed(width: 60) {
-                  ...GatsbyImageSharpFixed_tracedSVG
-                }
-              }
-            }
+
             activiteiten: allWordpressCategory(
               filter: {
                 parent_element: { slug: { in: ["activiteiten", "prijzen"] } }
