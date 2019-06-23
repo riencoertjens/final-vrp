@@ -39,6 +39,15 @@ module.exports = {
           htaccess_pass: `${process.env.WP_PASS}`,
           htaccess_sendImmediately: false,
         },
+        plugins: [
+          {
+            resolve: `gatsby-wordpress-inline-images`,
+            options: {
+              baseUrl: `${process.env.WP_URL}`,
+              protocol: `${process.env.WP_PROTOCOL}`,
+            },
+          },
+        ],
       },
     },
 

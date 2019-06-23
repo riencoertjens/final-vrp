@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../../Layout"
 import css from "@emotion/css"
 import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
-import "../../../css/wp-blocks.css"
+import "../../../css/wp-blocks-revised.css"
 
 const WpPageTemplate = ({ data: { page }, pageContext }) => (
   <Layout>
