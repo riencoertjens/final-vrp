@@ -49,6 +49,28 @@ export const globalStyle = css`
     margin-top: 0;
     margin-bottom: 1rem;
   }
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #444444;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-weight: 300;
+    margin-top: 1rem;
+    font-size: 1.33rem;
+    text-transform: uppercase;
+    color: #666666;
+    letter-spacing: 0.33rem;
+    line-height: 2rem;
+  }
+  h3,
+  p.lead {
+    font-size: 1.33rem;
+    color: #e76d03;
+    font-weight: 500;
+    color: #e76d03;
+  }
 `
 
 // site style components
