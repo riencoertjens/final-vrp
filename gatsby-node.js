@@ -21,6 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
         edges {
           node {
             slug
+            wordpress_id
           }
         }
       }
@@ -75,6 +76,7 @@ exports.createPages = ({ graphql, actions }) => {
           // Data passed to context is available
           // in page queries as GraphQL variables.
           slug: node.slug,
+          id: node.wordpress_id,
         },
       })
     })

@@ -18,6 +18,7 @@ import Footer from "./Footer"
 
 const SiteWrapper = styled("div")`
   box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
+  background: white;
   position: relative;
   font-family: Montserrat, sans-serif;
   margin: 0 auto;
@@ -41,7 +42,7 @@ class Layout extends Component {
         <Global styles={globalStyle} />
         <SEO />
         <SiteWrapper>
-          <Header />
+          <Header showSearch={this.props.showSearch} />
           <main
             css={css`
               z-index: 5;

@@ -130,7 +130,7 @@ const Footer = () => (
                 li {
                   line-height: 1.1rem;
 
-                  :first-child {
+                  :first-of-type {
                     text-transform: uppercase;
                     font-weight: 700;
                   }
@@ -148,7 +148,7 @@ const Footer = () => (
                 <GatsbyLink to={`/themas`}>themas</GatsbyLink>
               </li>
               {themas.map(({ node: thema }, i) => (
-                <li>
+                <li key={i}>
                   <GatsbyLink to={`/themas/${thema.slug}`}>
                     {thema.name}
                   </GatsbyLink>
@@ -162,7 +162,7 @@ const Footer = () => (
                 <GatsbyLink to={`/activiteiten`}>activiteiten</GatsbyLink>
               </li>
               {activiteiten.map(({ node: activiteit }, i) => (
-                <li>
+                <li key={i}>
                   <GatsbyLink to={`/activiteiten/${activiteit.slug}`}>
                     {activiteit.name}
                   </GatsbyLink>
@@ -174,7 +174,7 @@ const Footer = () => (
                 <GatsbyLink to={`/prijzen`}>prijzen</GatsbyLink>
               </li>
               {prijzen.map(({ node: prijs }, i) => (
-                <li>
+                <li key={i}>
                   <GatsbyLink to={`/prijzen/${prijs.slug}`}>
                     {prijs.name}
                   </GatsbyLink>

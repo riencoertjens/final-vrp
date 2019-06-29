@@ -5,7 +5,10 @@ import config from "./config"
 
 import "typeface-montserrat"
 import { MqMin } from "../components/webhart-components/style-functions"
-import { FaAngleRight as ArrowIcon } from "react-icons/fa"
+import {
+  FaAngleRight as ArrowRightIcon,
+  FaAngleLeft as ArrowLeftIcon,
+} from "react-icons/fa"
 export const breakpoints = ["600px", "900px", "1200px", "1600px"]
 
 export const colors = {
@@ -67,9 +70,8 @@ export const globalStyle = css`
   h3,
   p.lead {
     font-size: 1.33rem;
-    color: #e76d03;
+    color: ${colors.orange};
     font-weight: 500;
-    color: #e76d03;
   }
 `
 
@@ -85,8 +87,9 @@ export const Button = props => {
         background: ${colors.orange};
         border: none;
         position: relative;
-        padding: 0.25rem 0.5rem;
-        padding-right: 1.5rem;
+        padding: 0.2rem 0.5rem 0.3rem;
+        ${props.left && `padding-left: 1.5rem;`}
+        ${props.right && `padding-right: 1.5rem;`}
         border-radius: 50px;
         text-decoration: none;
         display: inline-block;
@@ -95,17 +98,21 @@ export const Button = props => {
           position: absolute;
           color: white;
           bottom: 0.35rem;
+          ${props.left ? `left: .5rem;` : `right: .5rem;`}
         }
         &:hover {
           svg {
-            transform: translateX(0.25rem);
+            transform: translateX(
+              ${props.left && `-0.25rem`} ${props.right && `0.25rem`}
+            );
           }
         }
       `}
       {...props}
     >
+      {props.left && <ArrowLeftIcon />}
       {props.children}
-      <ArrowIcon />
+      {props.right && <ArrowRightIcon />}
     </TheComponent>
   )
 }

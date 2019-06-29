@@ -97,7 +97,7 @@
 .wp-block-image .alignright,
 .wp-block-image .aligncenter,
 .wp-block-image.is-resized {
-  display: table;
+  /* display: table; */
   margin-left: 0;
   margin-right: 0;
 }
@@ -105,7 +105,7 @@
 .wp-block-image .alignright > figcaption,
 .wp-block-image .aligncenter > figcaption,
 .wp-block-image.is-resized > figcaption {
-  display: table-caption;
+  /* display: table-caption; */
   caption-side: bottom;
 }
 .wp-block-image .alignleft {

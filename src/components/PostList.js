@@ -15,15 +15,19 @@ export const postTypes = {
 }
 
 const PostList = ({ posts }) => {
-  const sortedPosts = [].concat(...posts).sort((a, b) => {
-    if (a.node.date > b.node.date) {
-      return -1
-    }
-    if (a.node.date < b.node.date) {
-      return 1
-    }
-    return 0
-  })
+  const sortedPosts = posts.length > 1
+    ?
+      [].concat(...posts).sort((a, b) => {
+        if (a.node.date > b.node.date) {
+          return -1
+        }
+        if (a.node.date < b.node.date) {
+          return 1
+        }
+        return 0
+      })
+    :
+      posts[0]
 
   return (
     <div
@@ -36,11 +40,18 @@ const PostList = ({ posts }) => {
     >
       {sortedPosts.map(({ node }, i) => {
         const showImage = getShowImage(node.featured_media, 1)
+        const cropFocus = 
+          showImage && node.featured_media.smartcrop_image_focus.length > 0 
+          ?
+            `${node.featured_media.smartcrop_image_focus[0].left}% ${node.featured_media.smartcrop_image_focus[0].top}%`
+          : 
+            "50% 50%"
 
         const typeName = postTypes[node.type]
 
         return (
           <AspectRatioBox
+            ratio={typeName === "ruimte" && posts.length === 1 ? (17/20) : 1}
             component={GatsbyLink}
             key={i}
             css={css`
@@ -69,9 +80,7 @@ const PostList = ({ posts }) => {
             {showImage && (
               <GatsbyImage
                 fluid={showImage}
-                objectPosition={`${
-                  node.featured_media.smartcrop_image_focus[0].left
-                }% ${node.featured_media.smartcrop_image_focus[0].top}%`}
+                objectPosition={cropFocus}
               />
             )}
 
@@ -81,30 +90,32 @@ const PostList = ({ posts }) => {
                 width: 100%;
                 bottom: 0;
                 background: white;
-                padding: 0.5rem;
+                padding: 0.25rem 0.5rem 0.5rem;
                 transition: 0.2s;
-
                 h3 {
-                  margin: 0;
+                  margin-bottom: 0;
                 }
-                color: black;
-              `}
-            >
-              <span
-                css={css`
+                span {
                   color: ${colors.grey};
                   font-weight: 300;
                   text-transform: uppercase;
                   letter-spacing: 0.16rem;
                   font-size: 0.666rem;
-                  line-height: 100%;
-                `}
-              >
-                {typeName}
-              </span>
+                  /* line-height: 100%; */
+                }
+                color: black;
+              `}
+            >
+              {posts.length > 1 && <span>{typeName}</span>}
+              {typeName === "activiteit" && (
+                <span>
+                  {posts.length > 1 && " | "}
+                  {node.dateFormatted}
+                </span>
+              )}
               <h3>
                 {node.title ||
-                  (node.type === "ruimte" && `Ruimte ${node.acf.nummer}`)}
+                  (node.type === "ruimte" && `${node.acf.nummer} | ${node.acf.date_year}/${Math.ceil(node.acf.date_month/12*4)}`)}
               </h3>
             </div>
           </AspectRatioBox>
@@ -149,7 +160,7 @@ export const BlockListFragment = graphql`
     title
     type
     slug
-    date
+    dateFormatted: date(formatString: "D-MM-YY")
     featured_media {
       ...BlockImageFragment
     }
@@ -169,6 +180,9 @@ export const BlockListFragment = graphql`
     date
     acf {
       nummer
+      datum_publicatie
+      date_year: datum_publicatie(formatString: "Y")
+      date_month: datum_publicatie(formatString: "M")
     }
     featured_media {
       ...BlockImageFragment

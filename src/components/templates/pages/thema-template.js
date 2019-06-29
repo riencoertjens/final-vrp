@@ -5,8 +5,12 @@ import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
 import { colors } from "../../../site/styles"
 import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
+import PostList from "../../PostList"
 
-const ThemaPageTemplate = ({ data: { thema }, pageContext: { slug } }) => {
+const ThemaPageTemplate = ({
+  data: { thema, pageInfo, posts, activities, prices, ruimte },
+  pageContext: { slug },
+}) => {
   return (
     <Layout>
       <SEO
@@ -50,6 +54,13 @@ const ThemaPageTemplate = ({ data: { thema }, pageContext: { slug } }) => {
           <div dangerouslySetInnerHTML={{ __html: thema.acf.content }} />
         )}
       </section>
+      <section>
+        <h2>in de kijker</h2>
+      </section>
+      <section>
+        <h2>en ook</h2>
+        <PostList posts={[posts.edges, activities.edges, prices.edges]} />
+      </section>
     </Layout>
   )
 }
@@ -57,7 +68,7 @@ const ThemaPageTemplate = ({ data: { thema }, pageContext: { slug } }) => {
 export default ThemaPageTemplate
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $id: Int!) {
     thema: wordpressWpThema(slug: { eq: $slug }) {
       title: name
       description
@@ -68,6 +79,46 @@ export const query = graphql`
           SEOImage: localFile {
             ...SEOImageFragment
           }
+        }
+      }
+    }
+    posts: allWordpressPost(
+      filter: { thema: { in: [$id] } }
+      sort: { fields: date, order: DESC }
+    ) {
+      edges {
+        node {
+          ...BlockListFragment_post
+        }
+      }
+    }
+    activities: allWordpressWpActivities(
+      filter: { thema: { in: [$id] } }
+      sort: { fields: date, order: DESC }
+    ) {
+      edges {
+        node {
+          ...BlockListFragment_activity
+        }
+      }
+    }
+    # ruimte: allWordpressWpRuimte(
+    #   filter: { thema: { in: [$id] } }
+    #   sort: { fields: date, order: DESC }
+    # ) {
+    #   edges {
+    #     node {
+    #       ...BlockListFragment_ruimte
+    #     }
+    #   }
+    # }
+    prices: allWordpressWpPrijs(
+      filter: { thema: { in: [$id] } }
+      sort: { fields: date, order: DESC }
+    ) {
+      edges {
+        node {
+          ...BlockListFragment_price
         }
       }
     }

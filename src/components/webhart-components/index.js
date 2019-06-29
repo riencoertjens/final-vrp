@@ -7,7 +7,11 @@ import { css } from "@emotion/core"
 
 import normalize from "./normalize"
 
-import { globalStyle as siteGlobalStyle, breakpoints } from "../../site/styles"
+import {
+  globalStyle as siteGlobalStyle,
+  breakpoints,
+  colors,
+} from "../../site/styles"
 import { getShowImage } from "./style-functions"
 
 export const OutboundLink = props => (
@@ -25,6 +29,9 @@ export const globalStyle = css`
     text-rendering: optimizeLegibility;
 
     box-sizing: border-box;
+  }
+  body {
+    background: ${colors.grey};
   }
   *,
   *:before,
