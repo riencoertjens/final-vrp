@@ -7,6 +7,7 @@ import FormFields from "../../FormFields"
 import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
 import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
+import { getCropFocus } from "../../webhart-components/style-functions"
 
 const ActivityPageTemplate = ({
   data: { activity },
@@ -30,7 +31,9 @@ const ActivityPageTemplate = ({
         <AspectRatioImage
           ratio={1200 / 630}
           image={activity.featured_media}
-          cropfocus={activity.featured_media.smartcrop_image_focus[0]}
+          cropfocus={getCropFocus(
+            activity.featured_media.smartcrop_image_focus
+          )}
         />
       ) : (
         <AspectRatioBox
@@ -49,7 +52,7 @@ const ActivityPageTemplate = ({
           <p>{activity.acf.location[0].acf.address.address}</p>
           <div style={{ height: "500px" }}>
             <GoogleMap
-              apiKey="AIzaSyDujkg0Ss-J1rQFNy-J1B2S7sgcpdbjXek"
+              apiKey={process.env.GATSBY_MAPS_API}
               location={{
                 lat: Number(activity.acf.location[0].acf.address.lat),
                 lng: Number(activity.acf.location[0].acf.address.lng),

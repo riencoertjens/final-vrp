@@ -15,19 +15,18 @@ export const postTypes = {
 }
 
 const PostList = ({ posts }) => {
-  const sortedPosts = posts.length > 1
-    ?
-      [].concat(...posts).sort((a, b) => {
-        if (a.node.date > b.node.date) {
-          return -1
-        }
-        if (a.node.date < b.node.date) {
-          return 1
-        }
-        return 0
-      })
-    :
-      posts[0]
+  const sortedPosts =
+    posts.length > 1
+      ? [].concat(...posts).sort((a, b) => {
+          if (a.node.date > b.node.date) {
+            return -1
+          }
+          if (a.node.date < b.node.date) {
+            return 1
+          }
+          return 0
+        })
+      : posts[0]
 
   return (
     <div
@@ -40,18 +39,18 @@ const PostList = ({ posts }) => {
     >
       {sortedPosts.map(({ node }, i) => {
         const showImage = getShowImage(node.featured_media, 1)
-        const cropFocus = 
-          showImage && node.featured_media.smartcrop_image_focus.length > 0 
-          ?
-            `${node.featured_media.smartcrop_image_focus[0].left}% ${node.featured_media.smartcrop_image_focus[0].top}%`
-          : 
-            "50% 50%"
+        const cropFocus =
+          showImage && node.featured_media.smartcrop_image_focus.length > 0
+            ? `${node.featured_media.smartcrop_image_focus[0].left}% ${
+                node.featured_media.smartcrop_image_focus[0].top
+              }%`
+            : "50% 50%"
 
         const typeName = postTypes[node.type]
 
         return (
           <AspectRatioBox
-            ratio={typeName === "ruimte" && posts.length === 1 ? (17/20) : 1}
+            ratio={typeName === "ruimte" && posts.length === 1 ? 17 / 20 : 1}
             component={GatsbyLink}
             key={i}
             css={css`
@@ -78,10 +77,7 @@ const PostList = ({ posts }) => {
             to={`/${typeName}/${node.slug}`}
           >
             {showImage && (
-              <GatsbyImage
-                fluid={showImage}
-                objectPosition={cropFocus}
-              />
+              <GatsbyImage fluid={showImage} objectPosition={cropFocus} />
             )}
 
             <div
@@ -115,7 +111,10 @@ const PostList = ({ posts }) => {
               )}
               <h3>
                 {node.title ||
-                  (node.type === "ruimte" && `${node.acf.nummer} | ${node.acf.date_year}/${Math.ceil(node.acf.date_month/12*4)}`)}
+                  (node.type === "ruimte" &&
+                    `${node.acf.nummer} | ${node.acf.date_year}/${Math.ceil(
+                      (node.acf.date_month / 12) * 4
+                    )}`)}
               </h3>
             </div>
           </AspectRatioBox>

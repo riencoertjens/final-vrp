@@ -25,6 +25,13 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
+      ruimte: allWordpressWpRuimte {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
       pages: allWordpressPage(
         filter: { parent_element: { slug: { eq: "home" } } }
       ) {
@@ -57,6 +64,19 @@ exports.createPages = ({ graphql, actions }) => {
         path: `/activiteit/${node.slug}`,
         component: path.resolve(
           `./src/components/templates/pages/activiteit-template.js`
+        ),
+        context: {
+          // Data passed to context is available
+          // in page queries as GraphQL variables.
+          slug: node.slug,
+        },
+      })
+    })
+    result.data.ruimte.edges.forEach(({ node }) => {
+      createPage({
+        path: `/ruimte/${node.slug}`,
+        component: path.resolve(
+          `./src/components/templates/pages/ruimte-template.js`
         ),
         context: {
           // Data passed to context is available

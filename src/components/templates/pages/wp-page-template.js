@@ -4,6 +4,7 @@ import Layout from "../../Layout"
 import css from "@emotion/css"
 import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
 import "../../../css/wp-blocks-revised.css"
+import { getCropFocus } from "../../webhart-components/style-functions"
 
 const WpPageTemplate = ({ data: { page }, pageContext }) => (
   <Layout>
@@ -11,7 +12,7 @@ const WpPageTemplate = ({ data: { page }, pageContext }) => (
       <AspectRatioImage
         ratio={1200 / 630}
         image={page.featured_media}
-        cropfocus={page.featured_media.smartcrop_image_focus[0]}
+        cropfocus={getCropFocus(page.featured_media.smartcrop_image_focus)}
       />
     ) : (
       <AspectRatioBox

@@ -4,14 +4,18 @@ import GatsbyLink from "gatsby-link"
 import css from "@emotion/css"
 import { Button } from "../site/styles"
 
-const url = `https://www.googleapis.com/customsearch/v1?key=${
-  process.env.GATSBY_GOOGLE_SEARCH_API
-}&cx=${process.env.GATSBY_GOOGLE_SEARCH_CSE}`
+// const urlBase = "https://www.googleapis.com/customsearch/v1/siterestrict"
+const urlBase = "https://www.googleapis.com/customsearch/v1"
+const url = `${urlBase}?key=${process.env.GATSBY_GOOGLE_SEARCH_API}&cx=${
+  process.env.GATSBY_GOOGLE_SEARCH_CSE
+}`
 
 class SearchPage extends Component {
   constructor(props) {
     super(props)
     this.state = { searchResult: false, searching: true, searchQuery: null }
+    this.getSearchQuery = this.getSearchQuery.bind(this)
+    this.getSearchResults = this.getSearchResults.bind(this)
   }
 
   getSearchQuery() {
@@ -48,27 +52,38 @@ class SearchPage extends Component {
     }
   }
 
+  getSearchResults(paramUrl) {
+    fetch(`${url}${paramUrl}`)
+      .then(response => response.json())
+      .then(searchResult => {
+        this.setState({
+          searchResult: searchResult,
+          searching: false,
+        })
+      })
+      .catch(console.error.bind(console))
+  }
+
+  componentDidMount() {
+    const searchQuery = this.getSearchQuery()
+    const { searching } = this.state
+
+    if (searching && searchQuery) {
+      this.getSearchResults(searchQuery.url)
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
+      const searchQuery = this.getSearchQuery()
       this.setState({ searching: true })
+      this.getSearchResults(searchQuery.url)
     }
   }
 
   render() {
     const searchQuery = this.getSearchQuery()
     const { searchResult, searching } = this.state
-
-    if (searching && searchQuery) {
-      fetch(`${url}${searchQuery.url}`)
-        .then(response => response.json())
-        .then(searchResult => {
-          this.setState({
-            searchResult: searchResult,
-            searching: false,
-          })
-        })
-        .catch(console.error.bind(console))
-    }
 
     const { queries, searchInformation } = searchResult
 
@@ -189,7 +204,10 @@ class SearchPage extends Component {
                       </div>
                     </>
                   ) : (
-                    <p>geen zoekresultaten</p>
+                    <p>
+                      geen zoekresultaten voor{" "}
+                      <strong>{searchQuery.params.q}</strong>
+                    </p>
                   )}
                 </>
               )}

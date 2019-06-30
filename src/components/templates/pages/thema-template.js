@@ -6,6 +6,7 @@ import css from "@emotion/css"
 import { colors } from "../../../site/styles"
 import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
 import PostList from "../../PostList"
+import { getCropFocus } from "../../webhart-components/style-functions"
 
 const ThemaPageTemplate = ({
   data: { thema, pageInfo, posts, activities, prices, ruimte },
@@ -27,7 +28,7 @@ const ThemaPageTemplate = ({
         <AspectRatioImage
           ratio={1200 / 630}
           image={thema.acf.afbeelding}
-          cropfocus={thema.acf.afbeelding.smartcrop_image_focus[0]}
+          cropfocus={getCropFocus(thema.acf.afbeelding.smartcrop_image_focus)}
         />
       ) : (
         <AspectRatioBox

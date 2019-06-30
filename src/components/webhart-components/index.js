@@ -80,7 +80,6 @@ export const AspectRatioBox = props => {
 export const AspectRatioImage = props => {
   const { image, cropfocus, ratio } = props
   const showImage = getShowImage(image, ratio)
-  // ratio > image.maxWidth.aspectRatio ? image.maxWidth : image.maxHeight
 
   return (
     <AspectRatioBox
@@ -92,10 +91,7 @@ export const AspectRatioImage = props => {
         }
       `}
     >
-      <GatsbyImage
-        fluid={showImage}
-        objectPosition={`${cropfocus.left}% ${cropfocus.top}%`}
-      />
+      <GatsbyImage fluid={showImage} objectPosition={cropfocus} />
     </AspectRatioBox>
   )
 }

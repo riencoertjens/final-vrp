@@ -8,3 +8,9 @@ export const getShowImage = (featured_media, ratio) => {
       : featured_media.localFile.image.maxHeight
     : false
 }
+
+export const getCropFocus = smartcrop_image_focus => {
+  return smartcrop_image_focus.length > 0
+    ? `${smartcrop_image_focus[0].left}% ${smartcrop_image_focus[0].top}%`
+    : "50% 50%"
+}
