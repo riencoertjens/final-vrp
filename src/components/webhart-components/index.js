@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { OutboundLink as AnalyticsOutboundLink } from "gatsby-plugin-google-analytics"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
 
@@ -45,7 +46,8 @@ export const globalStyle = css`
 `
 
 export const AspectRatioBox = props => {
-  const { ratio, children, component } = props
+  const { ratio, children, component, ...restProps } = props
+
   const TheComponent = component || "div"
   return (
     <TheComponent
@@ -60,7 +62,7 @@ export const AspectRatioBox = props => {
         overflow: hidden;
         position: relative;
       `}
-      {...props}
+      {...restProps}
     >
       <div
         css={css`
@@ -78,20 +80,26 @@ export const AspectRatioBox = props => {
 }
 
 export const AspectRatioImage = props => {
-  const { image, cropfocus, ratio } = props
+  const { image, cropfocus, ratio, ...restProps } = props
   const showImage = getShowImage(image, ratio)
-
   return (
     <AspectRatioBox
-      {...props}
+      ratio={ratio}
       css={css`
         .gatsby-image-wrapper {
           width: 100%;
           height: 100%;
         }
       `}
+      {...restProps}
     >
       <GatsbyImage fluid={showImage} objectPosition={cropfocus} />
     </AspectRatioBox>
   )
+}
+
+AspectRatioImage.propTypes = {
+  image: PropTypes.object,
+  cropfocus: PropTypes.string,
+  ratio: PropTypes.number,
 }

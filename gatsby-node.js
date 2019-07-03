@@ -32,6 +32,18 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
+      artikels: allWordpressWpRuimteArtikel {
+        edges {
+          node {
+            slug
+            acf {
+              ruimte {
+                slug: post_name
+              }
+            }
+          }
+        }
+      }
       pages: allWordpressPage(
         filter: { parent_element: { slug: { eq: "home" } } }
       ) {
@@ -82,6 +94,20 @@ exports.createPages = ({ graphql, actions }) => {
           // Data passed to context is available
           // in page queries as GraphQL variables.
           slug: node.slug,
+        },
+      })
+    })
+    result.data.artikels.edges.forEach(({ node }) => {
+      createPage({
+        path: `/ruimte/${node.acf.ruimte.slug}/${node.slug}`,
+        component: path.resolve(
+          `./src/components/templates/pages/artikel-template.js`
+        ),
+        context: {
+          // Data passed to context is available
+          // in page queries as GraphQL variables.
+          slug: node.slug,
+          ruimteSlug: node.acf.ruimte.slug,
         },
       })
     })

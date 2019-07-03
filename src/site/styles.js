@@ -60,7 +60,6 @@ export const globalStyle = css`
   }
   h2 {
     font-weight: 300;
-    margin-top: 1rem;
     font-size: 1.33rem;
     text-transform: uppercase;
     color: #666666;
@@ -77,42 +76,41 @@ export const globalStyle = css`
 
 // site style components
 export const Button = props => {
-  const TheComponent = props.component || "button"
+  const { light, component, children, left, right, ...restProps } = props
+  const TheComponent = component || "button"
 
   return (
     <TheComponent
       css={css`
-        color: white;
+        background: ${light ? "white" : colors.orange};
         flex: 0 0 auto;
-        background: ${colors.orange};
+        color: ${light ? colors.orange : "white"};
         border: none;
         position: relative;
         padding: 0.2rem 0.5rem 0.3rem;
-        ${props.left && `padding-left: 1.5rem;`}
-        ${props.right && `padding-right: 1.5rem;`}
+        ${left && `padding-left: 1.5rem;`}
+        ${right && `padding-right: 1.5rem;`}
         border-radius: 50px;
         text-decoration: none;
         display: inline-block;
         svg {
           transition: 0.2s;
           position: absolute;
-          color: white;
+          color: inherit;
           bottom: 0.35rem;
-          ${props.left ? `left: .5rem;` : `right: .5rem;`}
+          ${left ? `left: .5rem;` : `right: .5rem;`}
         }
         &:hover {
           svg {
-            transform: translateX(
-              ${props.left && `-0.25rem`} ${props.right && `0.25rem`}
-            );
+            transform: translateX(${left && `-0.25rem`} ${right && `0.25rem`});
           }
         }
       `}
-      {...props}
+      {...restProps}
     >
-      {props.left && <ArrowLeftIcon />}
-      {props.children}
-      {props.right && <ArrowRightIcon />}
+      {left && <ArrowLeftIcon />}
+      {children}
+      {right && <ArrowRightIcon />}
     </TheComponent>
   )
 }

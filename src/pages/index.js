@@ -84,6 +84,10 @@ const IndexPage = () => {
                 background: ${colors.orange};
                 padding: 1rem;
                 color: white;
+                h2 {
+                  color: inherit;
+                  margin-top: 0;
+                }
               `}
             >
               <h2>activiteiten</h2>

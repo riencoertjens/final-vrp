@@ -147,7 +147,7 @@ class HeroSlider extends Component {
                     : post.content_raw}
                 </p>
                 <Button
-                  right
+                  right={1}
                   to={`/${postTypes[post.post_type]}/${post.post_name}`}
                   component={GatsbyLink}
                 >

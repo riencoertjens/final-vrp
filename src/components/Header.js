@@ -317,7 +317,7 @@ class Header extends React.Component {
                     <NavItem
                       to="/themas"
                       dropdown={themas}
-                      alt="true"
+                      alt={1}
                       linkPrefix="themas"
                     >
                       Thema's
@@ -329,7 +329,7 @@ class Header extends React.Component {
                     >
                       Activiteiten
                     </NavItem>
-                    <NavItem to="/ruimte" alt="true">
+                    <NavItem to="/ruimte" alt={1}>
                       Ruimte
                     </NavItem>
                   </NavGroup>

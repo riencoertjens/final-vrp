@@ -192,7 +192,7 @@ class SearchPage extends Component {
                         </div>
                         {queries.nextPage && (
                           <Button
-                            right
+                            right={1}
                             component={GatsbyLink}
                             to={`/search?q=${searchQuery.params.q}&start=${
                               queries.nextPage[0].startIndex

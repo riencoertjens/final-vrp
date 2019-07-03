@@ -4,21 +4,28 @@ import Layout from "../../Layout"
 import SEO from "../../webhart-components/SEO"
 import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
 import css from "@emotion/css"
-import { getCropFocus } from "../../webhart-components/style-functions"
-// import SEO from "../../webhart-components/SEO"
-// import css from "@emotion/css"
-// import { colors } from "../../../site/styles"
-// import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
+import { getCropFocus, MqMin } from "../../webhart-components/style-functions"
+import GatsbyLink from "gatsby-link"
+import GatsbyImage from "gatsby-image"
+import { maanden } from "../../../site/functions"
+import { Button } from "../../../site/styles"
 
 const RuimtePageTemplate = ({
   data: {
     ruimte: {
-      acf: { nummer, datum_publicatie },
-      featured_media,
+      acf: { nummer, date_year, date_month },
+      f_media,
+      f_media: {
+        cover: {
+          childImageSharp: { fixed: cover },
+        },
+      },
       content_raw,
       content,
     },
+    artikels,
   },
+
   pageContext: { slug },
 }) => {
   return (
@@ -27,15 +34,13 @@ const RuimtePageTemplate = ({
         pathname={`ruimte/${slug}`}
         title={`Ruimte ${nummer}`}
         description={content_raw}
-        image={
-          featured_media && featured_media.SEOImage.childImageSharp.SEO.src
-        }
+        image={f_media && f_media.SEOImage.childImageSharp.SEO.src}
       />
-      {featured_media ? (
+      {f_media ? (
         <AspectRatioImage
           ratio={1200 / 630}
-          image={featured_media}
-          cropfocus={getCropFocus(featured_media.smartcrop_image_focus)}
+          image={f_media}
+          cropfocus={getCropFocus(f_media.smartcrop_image_focus)}
         />
       ) : (
         <AspectRatioBox
@@ -47,19 +52,63 @@ const RuimtePageTemplate = ({
       )}
       <section>
         <h1>Ruimte {nummer}</h1>
-        <span>{datum_publicatie}</span>
-        {/* {prijs.description && (
-          <p
-            css={css`
-              color: ${colors.orange};
-              font-weight: 500;
-              font-size: 1.25rem;
-            `}
-          >
-            {thema.description}
-          </p>
-        )} */}
-        {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
+        <span>
+          {maanden[date_month - 1]} {date_year}
+        </span>
+        <div
+          css={css`
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            .gatsby-image-wrapper {
+              ${MqMin("490px")} {
+                margin-left: 1rem;
+              }
+              flex: 0 0 auto;
+            }
+          `}
+        >
+          {content && (
+            <div
+              css={css`
+                flex: 1 0 200px;
+              `}
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+          )}
+          {cover && <GatsbyImage fixed={cover} />}
+        </div>
+      </section>
+      <section>
+        <h2>artikels</h2>
+        <ul
+          css={css`
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li {
+              margin: 0 0 1rem;
+              border-bottom: 1px solid;
+            }
+            li:last-child {
+              border-bottom: none;
+            }
+          `}
+        >
+          {artikels.edges.map(({ node: artikel }, i) => (
+            <li>
+              <h3 dangerouslySetInnerHTML={{ __html: artikel.title }} />
+              <p>{artikel.acf.beschrijving}</p>
+              <Button
+                right={1}
+                component={GatsbyLink}
+                to={`/ruimte/${slug}/${artikel.slug}`}
+              >
+                lees meer
+              </Button>
+            </li>
+          ))}
+        </ul>
       </section>
     </Layout>
   )
@@ -70,32 +119,35 @@ export default RuimtePageTemplate
 export const query = graphql`
   query($slug: String!) {
     ruimte: wordpressWpRuimte(slug: { eq: $slug }) {
-      slug
-      wordpress_id
+      ...BlockListFragment_ruimte
       content_raw
       content
-      acf {
-        nummer
-        datum_publicatie
-      }
-      featured_media {
+      f_media: featured_media {
         ...HeroImageFragment
         SEOImage: localFile {
           ...SEOImageFragment
         }
+        cover: localFile {
+          childImageSharp {
+            fixed(width: 250) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
       }
     }
     artikels: allWordpressWpRuimteArtikel(
-      filter: { acf: { ruimte: { post_name: { eq: "ruimte-39" } } } }
+      filter: { acf: { ruimte: { post_name: { eq: $slug } } } }
     ) {
       edges {
         node {
           title
+          slug
           acf {
             beschrijving
             featured_media {
               localFile {
-                url
+                publicURL
               }
             }
           }

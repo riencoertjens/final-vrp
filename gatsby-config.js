@@ -48,6 +48,10 @@ module.exports = {
             },
           },
         ],
+        // searchAndReplaceContentUrls: {
+        //   sourceUrl: "webhart.one",
+        //   replacementUrl: "vrp-final.netlify.com",
+        // },
       },
     },
 
