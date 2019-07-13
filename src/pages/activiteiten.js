@@ -17,14 +17,21 @@ const ActivitiesPage = () => (
             }
           }
         }
+        prijzen: allWordpressWpPrijs(sort: { fields: date, order: DESC }) {
+          edges {
+            node {
+              ...BlockListFragment_price
+            }
+          }
+        }
       }
     `}
-    render={({ activities }) => (
+    render={({ activities, prijzen }) => (
       <Layout>
         <SEO title="activiteiten" />
         <section>
           <h1>Activiteiten</h1>
-          <PostList posts={[activities.edges]} />
+          <PostList posts={[activities.edges, prijzen.edges]} />
         </section>
       </Layout>
     )}

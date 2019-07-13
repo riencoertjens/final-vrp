@@ -4,7 +4,7 @@ import Layout from "../components/Layout"
 import PostList from "../components/PostList"
 import SEO from "../components/webhart-components/SEO"
 import css from "@emotion/css"
-import { colors, Button } from "../site/styles"
+import { colors, Button, breakpoints } from "../site/styles"
 import GatsbyImage from "gatsby-image"
 import { maanden } from "../site/functions"
 import {
@@ -12,7 +12,10 @@ import {
   AspectRatioBox,
 } from "../components/webhart-components"
 import GatsbyLink from "gatsby-link"
-import { getCropFocus } from "../components/webhart-components/style-functions"
+import {
+  getCropFocus,
+  MqMin,
+} from "../components/webhart-components/style-functions"
 
 const AllRuimtePage = () => (
   <StaticQuery
@@ -96,13 +99,15 @@ const AllRuimtePage = () => (
           )}
           <div
             css={css`
-              display: flex;
+              display: grid;
               flex-wrap: wrap;
+              ${MqMin(breakpoints[2])} {
+                grid-template-columns: 1fr calc(250px + 2rem);
+              }
             `}
           >
             <section
               css={css`
-                flex: 1 0 350px;
                 padding-bottom: 0;
               `}
             >
@@ -146,43 +151,57 @@ const LastRuimte = ({ ruimte }) => {
       css={css`
         padding: 1rem;
         color: white;
-        flex: 0 0 calc(250px + 2rem);
         background: ${colors.orange};
         h2,
         h3 {
           margin: 0 0 0.5rem;
           color: inherit;
         }
+        display: grid;
+        ${MqMin(breakpoints[0])} {
+          grid-template-columns: auto auto;
+        }
+        ${MqMin(breakpoints[2])} {
+          grid-template-columns: auto;
+        }
+        grid-column-gap: 2rem;
       `}
     >
-      <h2>laatste editie</h2>
-      <h3
-        css={css`
-          span {
-            font-size: 1rem;
-            font-weight: normal;
-          }
-        `}
-      >
-        Ruimte {nummer}{" "}
-        <span>
-          {maanden[date_month - 1]} {date_year}
-        </span>
-      </h3>
-      {cover && <GatsbyImage fixed={cover} />}
-      <div
-        css={css`
-          margin-bottom: 1rem;
-          && * {
-            color: white;
-          }
-        `}
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-      <Button right={1} light={1} component={GatsbyLink} to={`/ruimte/${slug}`}>
-        lees meer
-      </Button>
-      {/* <GatsbyLink to={`/ruimte/${slug}`}>lees meer...</GatsbyLink> */}
+      <div>
+        <h2>laatste editie</h2>
+        <h3
+          css={css`
+            span {
+              font-size: 1rem;
+              font-weight: normal;
+            }
+          `}
+        >
+          Ruimte {nummer}{" "}
+          <span>
+            {maanden[date_month - 1]} {date_year}
+          </span>
+        </h3>
+        {cover && <GatsbyImage fixed={cover} />}
+      </div>
+      <div>
+        <div
+          css={css`
+            && * {
+              color: white;
+            }
+          `}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+        <Button
+          right={1}
+          light={1}
+          component={GatsbyLink}
+          to={`/ruimte/${slug}`}
+        >
+          lees meer
+        </Button>
+      </div>
     </aside>
   )
 }

@@ -32,10 +32,16 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
-      artikels: allWordpressWpRuimteArtikel {
+      artikels: allWordpressWpRuimteArtikel(
+        sort: {
+          fields: [acf___ruimte___acf___datum_publicatie, slug]
+          order: [ASC, ASC]
+        }
+      ) {
         edges {
           node {
             slug
+            title
             acf {
               ruimte {
                 slug: post_name
@@ -97,7 +103,9 @@ exports.createPages = ({ graphql, actions }) => {
         },
       })
     })
-    result.data.artikels.edges.forEach(({ node }) => {
+    const artikels = result.data.artikels.edges
+
+    artikels.forEach(({ node }, i) => {
       createPage({
         path: `/ruimte/${node.acf.ruimte.slug}/${node.slug}`,
         component: path.resolve(
@@ -108,6 +116,8 @@ exports.createPages = ({ graphql, actions }) => {
           // in page queries as GraphQL variables.
           slug: node.slug,
           ruimteSlug: node.acf.ruimte.slug,
+          prev: i === 0 ? null : artikels[i - 1],
+          next: i === artikels.length - 1 ? null : artikels[i + 1],
         },
       })
     })
@@ -145,9 +155,7 @@ exports.createPages = ({ graphql, actions }) => {
       createPage({
         path: `/${node.parent_element.slug}/${node.slug}`,
         component: path.resolve(
-          `./src/components/templates/pages/${
-            node.parent_element.slug
-          }-template.js`
+          `./src/components/templates/pages/category-template.js`
         ),
         context: {
           // Data passed to context is available

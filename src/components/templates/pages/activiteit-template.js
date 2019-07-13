@@ -8,6 +8,7 @@ import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
 import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
 import { getCropFocus } from "../../webhart-components/style-functions"
+import BreadCrumbs from "../../BreadCrumbs"
 
 const ActivityPageTemplate = ({
   data: { activity },
@@ -15,6 +16,34 @@ const ActivityPageTemplate = ({
 }) => {
   const close_date = new Date(activity.acf.close_date)
   const now = new Date()
+
+  let parentCategory = false
+  activity.categories.forEach(category => {
+    if (category.parent_element.slug === "activiteiten") {
+      console.log(category)
+      parentCategory = category
+    }
+  })
+
+  const crumbs = [
+    {
+      link: "/activiteiten",
+      label: "Activiteiten",
+    },
+  ]
+
+  if (parentCategory) {
+    crumbs.push({
+      link: `/activiteiten/${parentCategory.slug}`,
+      label: parentCategory.name,
+    })
+    console.log(crumbs)
+  }
+
+  crumbs.push({
+    label: activity.title,
+  })
+  console.log(crumbs)
 
   return (
     <Layout>
@@ -27,6 +56,7 @@ const ActivityPageTemplate = ({
           activity.featured_media.SEOImage.childImageSharp.SEO.src
         }
       />
+
       {activity.featured_media ? (
         <AspectRatioImage
           ratio={1200 / 630}
@@ -43,14 +73,23 @@ const ActivityPageTemplate = ({
           `}
         />
       )}
-      <h1>{activity.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: activity.content }} />
+      <BreadCrumbs crumbs={crumbs} />
+      <section>
+        <h1>{activity.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: activity.content }} />
+      </section>
+
       {activity.acf.has_location && (
-        <div>
+        <section>
           <h3>locatie:</h3>
           <h2>{activity.acf.location[0].title}</h2>
           <p>{activity.acf.location[0].acf.address.address}</p>
-          <div style={{ height: "500px" }}>
+          <div
+            css={css`
+              height: 500px;
+              margin: 0 -1rem;
+            `}
+          >
             <GoogleMap
               apiKey={process.env.GATSBY_MAPS_API}
               location={{
@@ -74,43 +113,42 @@ const ActivityPageTemplate = ({
               }}
             />
           </div>
-        </div>
+        </section>
       )}
-      {activity.acf.hasform &&
-        (close_date < now ? (
-          <p>inschrijvingen gesloten</p>
-        ) : (
-          <div>
-            <h3>inschrijven:</h3>
-            <form
-              name={activity.wordpress_id}
-              method="POST"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-              action="/thanks"
-            >
-              <input
-                type="hidden"
-                name="form-name"
-                value={activity.wordpress_id}
-              />
-              <input type="hidden" name="bot-field" />
-              <input
-                type="hidden"
-                name="activity_id"
-                value={activity.wordpress_id}
-              />
-              {activity.acf.register_form.map((form, i) => (
-                <FormFields
-                  postContent={form.post_content}
-                  key={i}
-                  formId={form.id}
+      {activity.acf.hasform && (
+        <section>
+          {close_date < now ? (
+            <p>inschrijvingen gesloten</p>
+          ) : (
+            <div>
+              <h3>inschrijven:</h3>
+              <form
+                name={activity.title}
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                action="/thanks"
+              >
+                <input type="hidden" name="form-name" value={activity.title} />
+                <input type="hidden" name="bot-field" />
+                <input
+                  type="hidden"
+                  name="activity_id"
+                  value={activity.wordpress_id}
                 />
-              ))}
-              <button>send</button>
-            </form>
-          </div>
-        ))}
+                {activity.acf.register_form.map((form, i) => (
+                  <FormFields
+                    postContent={form.post_content}
+                    key={i}
+                    formId={form.id}
+                  />
+                ))}
+                <button>send</button>
+              </form>
+            </div>
+          )}
+        </section>
+      )}
     </Layout>
   )
 }
@@ -123,6 +161,13 @@ export const query = graphql`
       title
       content
       wordpress_id
+      categories {
+        slug
+        name
+        parent_element {
+          slug
+        }
+      }
       featured_media {
         ...HeroImageFragment
         SEOImage: localFile {

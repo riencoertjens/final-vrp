@@ -8,7 +8,8 @@ import { getCropFocus, MqMin } from "../../webhart-components/style-functions"
 import GatsbyLink from "gatsby-link"
 import GatsbyImage from "gatsby-image"
 import { maanden } from "../../../site/functions"
-import { Button } from "../../../site/styles"
+import { Button, colors } from "../../../site/styles"
+import BreadCrumbs from "../../BreadCrumbs"
 
 const RuimtePageTemplate = ({
   data: {
@@ -50,9 +51,26 @@ const RuimtePageTemplate = ({
           `}
         />
       )}
+      <BreadCrumbs
+        crumbs={[
+          {
+            link: "/ruimte",
+            label: "Ruimte",
+          },
+          {
+            label: `Ruimte ${nummer}`,
+          },
+        ]}
+      />
       <section>
         <h1>Ruimte {nummer}</h1>
-        <span>
+        <span
+          css={css`
+            display: inline-block;
+            color: ${colors.blue};
+            margin-bottom: 1rem;
+          `}
+        >
           {maanden[date_month - 1]} {date_year}
         </span>
         <div
@@ -68,27 +86,45 @@ const RuimtePageTemplate = ({
             }
           `}
         >
-          {content && (
+          {content ? (
             <div
               css={css`
                 flex: 1 0 200px;
               `}
               dangerouslySetInnerHTML={{ __html: content }}
             />
+          ) : (
+            <div
+              css={css`
+                flex: 1 0 200px;
+              `}
+            >
+              content goes here
+            </div>
           )}
           {cover && <GatsbyImage fixed={cover} />}
         </div>
       </section>
-      <section>
-        <h2>artikels</h2>
+      <section
+        css={css`
+          background: ${colors.orange};
+          h1,
+          h2,
+          h3,
+          p {
+            color: white;
+          }
+        `}
+      >
+        <h1>artikels</h1>
         <ul
           css={css`
             list-style: none;
-            margin: 0;
+            margin: 0 -1rem;
             padding: 0;
             li {
-              margin: 0 0 1rem;
-              border-bottom: 1px solid;
+              padding: 1rem;
+              border-bottom: 1px solid ${colors.blue};
             }
             li:last-child {
               border-bottom: none;
@@ -103,6 +139,9 @@ const RuimtePageTemplate = ({
                 right={1}
                 component={GatsbyLink}
                 to={`/ruimte/${slug}/${artikel.slug}`}
+                css={css`
+                  background: ${colors.blue};
+                `}
               >
                 lees meer
               </Button>
@@ -145,7 +184,7 @@ export const query = graphql`
           slug
           acf {
             beschrijving
-            featured_media {
+            pdf_thumb {
               localFile {
                 publicURL
               }

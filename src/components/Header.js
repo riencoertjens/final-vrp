@@ -65,6 +65,11 @@ const NavGroup = styled.ul`
 
 const NavItemWrapper = styled.li`
   position: relative;
+  & > a {
+    font-size: 1.25rem;
+    padding: 0.5rem 0.5rem;
+    ${props => props.dropdown && `padding-right: 0rem;`}
+  }
   a {
     text-transform: capitalize;
     text-decoration: none;
@@ -90,11 +95,7 @@ const NavItemWrapper = styled.li`
       right: 0.25rem;
     }
   }
-  & > a {
-    font-size: 1.25rem;
-    padding: 0.5rem 0.75rem;
-    ${props => props.dropdown && `padding-right: 0rem;`}
-  }
+  
   ${MqMin("700px")} {
     color: ${props => (props.alt ? colors.orange : colors.grey)};
     position: relative;

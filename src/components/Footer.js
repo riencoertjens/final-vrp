@@ -55,12 +55,11 @@ const Footer = () => (
     }) => (
       <footer
         css={css`
-          background: ${colors.orange};
-          color: white;
+          background: ${colors.blue};
           a {
             color: white;
             :hover {
-              color: ${colors.blue};
+              color: ${colors.orange};
             }
           }
         `}
@@ -185,7 +184,7 @@ const Footer = () => (
           <div>
             <ul>
               <li>
-                <GatsbyLink to={`/over`}>Over VRP</GatsbyLink>
+                <GatsbyLink to={`/over-vrp`}>Over VRP</GatsbyLink>
               </li>
               <li>
                 <GatsbyLink to={`/lid-worden`}>Lid Worden</GatsbyLink>
@@ -202,11 +201,6 @@ const Footer = () => (
               <li>
                 <GatsbyLink to={`/nieuws`}>Nieuws</GatsbyLink>
               </li>
-              <li>
-                <GatsbyLink to={`/privacyverklaring`}>
-                  Privacyverklaring
-                </GatsbyLink>
-              </li>
             </ul>
             <ul>
               <li>
@@ -222,7 +216,8 @@ const Footer = () => (
         </div>
         <div
           css={css`
-            background: ${colors.blue};
+            background: ${colors.orange};
+            color: white;
           `}
         >
           <span
@@ -232,12 +227,17 @@ const Footer = () => (
               margin: 0 auto;
               text-align: center;
               && a {
-                color: ${colors.orange};
+                color: ${colors.blue};
+                :hover {
+                  color: white;
+                }
                 text-decoration: none;
               }
             `}
           >
-            &copy; {new Date().getFullYear()} VRP | site by{" "}
+            &copy; {new Date().getFullYear()} VRP -{" "}
+            <GatsbyLink to={`/privacyverklaring`}>Privacyverklaring</GatsbyLink>{" "}
+            | site by{" "}
             <OutboundLink href="https://www.web-hart.com">
               WEB-hart
             </OutboundLink>
