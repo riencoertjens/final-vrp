@@ -82,8 +82,8 @@ const ActivityPageTemplate = ({
       {activity.acf.has_location && (
         <section>
           <h3>locatie:</h3>
-          <h2>{activity.acf.location[0].title}</h2>
-          <p>{activity.acf.location[0].acf.address.address}</p>
+          <h2>{activity.acf.location.title}</h2>
+          <p>{activity.acf.location.acf.address.address}</p>
           <div
             css={css`
               height: 500px;
@@ -93,9 +93,9 @@ const ActivityPageTemplate = ({
             <GoogleMap
               apiKey={process.env.GATSBY_MAPS_API}
               location={{
-                lat: Number(activity.acf.location[0].acf.address.lat),
-                lng: Number(activity.acf.location[0].acf.address.lng),
-              }} //{activity.acf.location[0].acf.address}
+                lat: Number(activity.acf.location.acf.address.lat),
+                lng: Number(activity.acf.location.acf.address.lng),
+              }} //{activity.acf.location.acf.address}
               markerIcon={markerIcon}
               markerInfoComponent={
                 <a href="https://www.google.com/maps/dir//Stationsstraat+95,+9100+Sint-Niklaas,+Belgium">
@@ -104,9 +104,9 @@ const ActivityPageTemplate = ({
               }
               options={{
                 center: {
-                  lat: Number(activity.acf.location[0].acf.address.lat),
-                  lng: Number(activity.acf.location[0].acf.address.lng),
-                }, //activity.acf.location[0].acf.address,
+                  lat: Number(activity.acf.location.acf.address.lat),
+                  lng: Number(activity.acf.location.acf.address.lng),
+                }, //activity.acf.location.acf.address,
                 zoom: 15,
                 disableDefaultUI: true,
                 styles: [],

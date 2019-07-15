@@ -5,9 +5,7 @@ import css from "@emotion/css"
 import { colors } from "../../../site/styles"
 import PostList from "../../PostList"
 import BreadCrumbs from "../../BreadCrumbs"
-// import SEO from "../../webhart-components/SEO"
-// import css from "@emotion/css"
-// import { colors } from "../../../site/styles"
+import SEO from "../../webhart-components/SEO"
 // import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
 
 const ActivityCategoryPageTemplate = ({
@@ -34,17 +32,12 @@ const ActivityCategoryPageTemplate = ({
 
   return (
     <Layout>
-      {/* <SEO
-        pathname={`prijzen/${slug}`}
-        title={thema.title}
-        description={thema.description}
-        image={
-          thema.acf &&
-          thema.acf.afbeelding &&
-          thema.acf.afbeelding.SEOImage.childImageSharp.SEO.src
-        }
+      <SEO
+        pathname={`/${crumbs[0].link}/${slug}`}
+        title={activiteitenCategery.title}
+        description={activiteitenCategery.description}
       />
-      {thema.acf && thema.acf.afbeelding ? (
+      {/*  {thema.acf && thema.acf.afbeelding ? (
         <AspectRatioImage
           ratio={1200 / 630}
           image={thema.acf.afbeelding}
@@ -101,6 +94,7 @@ export const query = graphql`
     }
     activiteiten: allWordpressWpActivities(
       filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
+      sort: { fields: acf___date, order: DESC }
     ) {
       edges {
         node {

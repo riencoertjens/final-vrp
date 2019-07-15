@@ -18,10 +18,15 @@ const PostList = ({ posts }) => {
   const sortedPosts =
     posts.length > 1
       ? [].concat(...posts).sort((a, b) => {
-          if (a.node.date > b.node.date) {
+          const dateA =
+            a.node.acf && a.node.acf.date ? a.node.acf.date : a.node.date
+          const dateB =
+            b.node.acf && b.node.acf.date ? b.node.acf.date : b.node.date
+
+          if (dateA > dateB) {
             return -1
           }
-          if (a.node.date < b.node.date) {
+          if (dateA < dateB) {
             return 1
           }
           return 0
@@ -106,7 +111,7 @@ const PostList = ({ posts }) => {
               {typeName === "activiteit" && (
                 <span>
                   {posts.length > 1 && " | "}
-                  {node.dateFormatted}
+                  {node.acf.dateFormatted}
                 </span>
               )}
               <h3>
@@ -159,7 +164,10 @@ export const BlockListFragment = graphql`
     title
     type
     slug
-    dateFormatted: date(formatString: "D-MM-YY")
+    acf {
+      date
+      dateFormatted: date(formatString: "D-MM-Y")
+    }
     featured_media {
       ...BlockImageFragment
     }

@@ -9,7 +9,7 @@ const ActivitiesPage = () => (
     query={graphql`
       {
         activities: allWordpressWpActivities(
-          sort: { fields: date, order: DESC }
+          sort: { fields: acf___date, order: DESC }
         ) {
           edges {
             node {

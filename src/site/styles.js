@@ -42,6 +42,9 @@ export const globalStyle = css`
   a {
     color: ${colors.orange};
   }
+  p {
+    line-height: ${22 / 16};
+  }
   p,
   h1,
   h2,

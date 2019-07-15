@@ -159,6 +159,9 @@ export const query = graphql`
   query($slug: String!) {
     ruimte: wordpressWpRuimte(slug: { eq: $slug }) {
       ...BlockListFragment_ruimte
+      extraAcf: acf {
+        featured_artikel
+      }
       content_raw
       content
       f_media: featured_media {

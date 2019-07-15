@@ -25,6 +25,8 @@ module.exports = {
         // baseUrl: `www.vrp.be`,
         // The protocol. This can be http or https.
         protocol: `${process.env.WP_PROTOCOL}`,
+        // Set how many simultaneous requests are sent at once.
+        concurrentRequests: 10,
         // protocol: `https`,
         // Indicates whether the site is hosted on wordpress.com.
         // If false, then the asumption is made that the site is self hosted.
@@ -106,6 +108,7 @@ module.exports = {
     "gatsby-plugin-offline",
 
     // hosting
+    "gatsby-plugin-netlify-cache",
     {
       resolve: "gatsby-plugin-netlify", //keep last
       options: {
