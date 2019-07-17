@@ -1,1 +1,172 @@
-[{"name":"category","id":"category","label":"Categorie\u00ebn","pathname":"/category/","terms":[{"slug":"activiteiten","name":"Activiteiten","wordpress_id":18,"taxonomy":"category","pathname":"/category/activiteiten/"},{"slug":"openruimtebeker","name":"Openruimtebeker","wordpress_id":26,"taxonomy":"category","pathname":"/category/prijzen/openruimtebeker/"},{"slug":"prijzen","name":"Prijzen","wordpress_id":25,"taxonomy":"category","pathname":"/category/prijzen/"},{"slug":"startvrp","name":"Start@VRP","wordpress_id":22,"taxonomy":"category","pathname":"/category/startvrp/"},{"slug":"uncategorized","name":"Uncategorized","wordpress_id":1,"taxonomy":"category","pathname":"/category/uncategorized/"},{"slug":"vrp-afstudeerprijs","name":"VRP Afstudeerprijs","wordpress_id":28,"taxonomy":"category","pathname":"/category/prijzen/vrp-afstudeerprijs/"},{"slug":"vrp-lab","name":"VRP Lab","wordpress_id":19,"taxonomy":"category","pathname":"/category/activiteiten/vrp-lab/"},{"slug":"vrp-planningsprijs","name":"VRP Planningsprijs","wordpress_id":27,"taxonomy":"category","pathname":"/category/prijzen/vrp-planningsprijs/"},{"slug":"vrp-voorjaarscongres","name":"VRP Voorjaarscongres","wordpress_id":23,"taxonomy":"category","pathname":"/category/activiteiten/vrp-voorjaarscongres/"},{"slug":"werelddag-van-de-stedenbouw","name":"Werelddag van de Stedenbouw","wordpress_id":20,"taxonomy":"category","pathname":"/category/activiteiten/werelddag-van-de-stedenbouw/"}]},{"name":"post_tag","id":"post_tag","label":"Tags","pathname":"/tag/","terms":[]},{"name":"thema","id":"thema","label":"themas","pathname":"/thema/","terms":[{"slug":"beleid","name":"Beleid","wordpress_id":17,"taxonomy":"thema","pathname":"/thema/beleid/"},{"slug":"economie","name":"Economie","wordpress_id":13,"taxonomy":"thema","pathname":"/thema/economie/"},{"slug":"energie","name":"Energie","wordpress_id":12,"taxonomy":"thema","pathname":"/thema/energie/"},{"slug":"gebiedsontwikkeling","name":"Gebiedsontwikkeling","wordpress_id":14,"taxonomy":"thema","pathname":"/thema/gebiedsontwikkeling/"},{"slug":"governance","name":"Governance","wordpress_id":16,"taxonomy":"thema","pathname":"/thema/governance/"},{"slug":"kernversterking","name":"Kernversterking","wordpress_id":8,"taxonomy":"thema","pathname":"/thema/kernversterking/"},{"slug":"mobiliteit","name":"Mobiliteit","wordpress_id":11,"taxonomy":"thema","pathname":"/thema/mobiliteit/"},{"slug":"ontwerp","name":"Ontwerp","wordpress_id":15,"taxonomy":"thema","pathname":"/thema/ontwerp/"},{"slug":"open-ruimte","name":"Open ruimte","wordpress_id":7,"taxonomy":"thema","pathname":"/thema/open-ruimte/"},{"slug":"stadsontwikkeling","name":"Stadsontwikkeling","wordpress_id":10,"taxonomy":"thema","pathname":"/thema/stadsontwikkeling/"},{"slug":"wonen","name":"Wonen","wordpress_id":9,"taxonomy":"thema","pathname":"/thema/wonen/"}]}]
+[
+  {
+    "name": "category",
+    "id": "category",
+    "label": "Categorie\u00ebn",
+    "pathname": "/category/",
+    "terms": [
+      {
+        "slug": "activiteiten",
+        "name": "Activiteiten",
+        "wordpress_id": 18,
+        "taxonomy": "category",
+        "pathname": "/category/activiteiten/"
+      },
+      {
+        "slug": "openruimtebeker",
+        "name": "Openruimtebeker",
+        "wordpress_id": 26,
+        "taxonomy": "category",
+        "pathname": "/category/prijzen/openruimtebeker/"
+      },
+      {
+        "slug": "prijzen",
+        "name": "Prijzen",
+        "wordpress_id": 25,
+        "taxonomy": "category",
+        "pathname": "/category/prijzen/"
+      },
+      {
+        "slug": "startvrp",
+        "name": "Start@VRP",
+        "wordpress_id": 22,
+        "taxonomy": "category",
+        "pathname": "/category/startvrp/"
+      },
+      {
+        "slug": "uncategorized",
+        "name": "Uncategorized",
+        "wordpress_id": 1,
+        "taxonomy": "category",
+        "pathname": "/category/uncategorized/"
+      },
+      {
+        "slug": "vrp-afstudeerprijs",
+        "name": "VRP Afstudeerprijs",
+        "wordpress_id": 28,
+        "taxonomy": "category",
+        "pathname": "/category/prijzen/vrp-afstudeerprijs/"
+      },
+      {
+        "slug": "vrp-lab",
+        "name": "VRP Lab",
+        "wordpress_id": 19,
+        "taxonomy": "category",
+        "pathname": "/category/activiteiten/vrp-lab/"
+      },
+      {
+        "slug": "vrp-planningsprijs",
+        "name": "VRP Planningsprijs",
+        "wordpress_id": 27,
+        "taxonomy": "category",
+        "pathname": "/category/prijzen/vrp-planningsprijs/"
+      },
+      {
+        "slug": "vrp-voorjaarscongres",
+        "name": "VRP Voorjaarscongres",
+        "wordpress_id": 23,
+        "taxonomy": "category",
+        "pathname": "/category/activiteiten/vrp-voorjaarscongres/"
+      },
+      {
+        "slug": "werelddag-van-de-stedenbouw",
+        "name": "Werelddag van de Stedenbouw",
+        "wordpress_id": 20,
+        "taxonomy": "category",
+        "pathname": "/category/activiteiten/werelddag-van-de-stedenbouw/"
+      }
+    ]
+  },
+  {
+    "name": "post_tag",
+    "id": "post_tag",
+    "label": "Tags",
+    "pathname": "/tag/",
+    "terms": []
+  },
+  {
+    "name": "thema",
+    "id": "thema",
+    "label": "themas",
+    "pathname": "/thema/",
+    "terms": [
+      {
+        "slug": "beleid",
+        "name": "Beleid",
+        "wordpress_id": 17,
+        "taxonomy": "thema",
+        "pathname": "/thema/beleid/"
+      },
+      {
+        "slug": "economie",
+        "name": "Economie",
+        "wordpress_id": 13,
+        "taxonomy": "thema",
+        "pathname": "/thema/economie/"
+      },
+      {
+        "slug": "energie",
+        "name": "Energie",
+        "wordpress_id": 12,
+        "taxonomy": "thema",
+        "pathname": "/thema/energie/"
+      },
+      {
+        "slug": "gebiedsontwikkeling",
+        "name": "Gebiedsontwikkeling",
+        "wordpress_id": 14,
+        "taxonomy": "thema",
+        "pathname": "/thema/gebiedsontwikkeling/"
+      },
+      {
+        "slug": "governance",
+        "name": "Governance",
+        "wordpress_id": 16,
+        "taxonomy": "thema",
+        "pathname": "/thema/governance/"
+      },
+      {
+        "slug": "kernversterking",
+        "name": "Kernversterking",
+        "wordpress_id": 8,
+        "taxonomy": "thema",
+        "pathname": "/thema/kernversterking/"
+      },
+      {
+        "slug": "mobiliteit",
+        "name": "Mobiliteit",
+        "wordpress_id": 11,
+        "taxonomy": "thema",
+        "pathname": "/thema/mobiliteit/"
+      },
+      {
+        "slug": "ontwerp",
+        "name": "Ontwerp",
+        "wordpress_id": 15,
+        "taxonomy": "thema",
+        "pathname": "/thema/ontwerp/"
+      },
+      {
+        "slug": "open-ruimte",
+        "name": "Open ruimte",
+        "wordpress_id": 7,
+        "taxonomy": "thema",
+        "pathname": "/thema/open-ruimte/"
+      },
+      {
+        "slug": "stadsontwikkeling",
+        "name": "Stadsontwikkeling",
+        "wordpress_id": 10,
+        "taxonomy": "thema",
+        "pathname": "/thema/stadsontwikkeling/"
+      },
+      {
+        "slug": "wonen",
+        "name": "Wonen",
+        "wordpress_id": 9,
+        "taxonomy": "thema",
+        "pathname": "/thema/wonen/"
+      }
+    ]
+  }
+]

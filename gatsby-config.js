@@ -12,6 +12,20 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "wordsby-uploads",
+        path: `${__dirname}/wordsby/uploads/`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "wordsby-data",
+        path: `${__dirname}/wordsby/data/`,
+      },
+    },
 
     // https://public-api.wordpress.com/wp/v2/sites/gatsbyjsexamplewordpress.wordpress.com/pages/
     {
@@ -58,6 +72,13 @@ module.exports = {
     },
 
     // build & transform
+    `gatsby-transformer-json`,
+    {
+      resolve: "gatsby-plugin-nprogress",
+      options: {
+        color: "rebeccapurple",
+      },
+    },
     `gatsby-plugin-catch-links`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

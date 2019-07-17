@@ -89,7 +89,7 @@ export const query = graphql`
       description
       acf {
         inhoud
-        read_more
+        # read_more
       }
     }
     activiteiten: allWordpressWpActivities(
