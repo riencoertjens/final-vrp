@@ -13,54 +13,37 @@ const IndexPage = () => {
     <StaticQuery
       query={graphql`
         {
-          pageInfo: wordpressPage(slug: { eq: "home" }) {
-            title
-            featured_posts {
-              post_title
-              post_name
-              post_date
-              post_type
-              content_raw
-              featured_media {
-                ...HeroImageFragment
+          pageInfo: collectionsJson(
+            post_type: { eq: "page" }
+            post_name: { eq: "home" }
+          ) {
+            internal {
+              type
+            }
+            post_title
+            acf {
+              featured_posts: in_de_kijker {
+                ...HeroSliderFragment
               }
             }
           }
-          posts: allWordpressPost(sort: { fields: date, order: DESC }) {
-            edges {
-              node {
-                ...BlockListFragment_post
-              }
+          posts: allCollectionsJson(
+            filter: {
+              post_type: { in: ["ruimte", "activity", "prijs", "post"] }
             }
-          }
-          activities: allWordpressWpActivities(
-            sort: { fields: date, order: DESC }
+            sort: { fields: [acf___datum_publicatie, post_date], order: DESC }
           ) {
             edges {
               node {
-                ...BlockListFragment_activity
-              }
-            }
-          }
-          ruimte: allWordpressWpRuimte(sort: { fields: date, order: DESC }) {
-            edges {
-              node {
-                ...BlockListFragment_ruimte
-              }
-            }
-          }
-          prices: allWordpressWpPrijs(sort: { fields: date, order: DESC }) {
-            edges {
-              node {
-                ...BlockListFragment_price
+                ...PostListFragment
               }
             }
           }
         }
       `}
-      render={({ pageInfo, posts, activities, prices, ruimte }) => (
+      render={({ pageInfo, posts }) => (
         <Layout>
-          <HeroSlider posts={pageInfo.featured_posts} />
+          <HeroSlider posts={pageInfo.acf.featured_posts} />
           <div
             css={css`
               ${MqMin("700px")} {
@@ -70,14 +53,7 @@ const IndexPage = () => {
             `}
           >
             <section>
-              <PostList
-                posts={[
-                  posts.edges,
-                  activities.edges,
-                  prices.edges,
-                  ruimte.edges,
-                ]}
-              />
+              <PostList posts={posts} multiTypes />
             </section>
             <aside
               css={css`
