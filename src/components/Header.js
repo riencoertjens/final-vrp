@@ -168,8 +168,8 @@ const NavItem = ({ children, dropdown, to, alt, linkPrefix }) => (
             <li key={i}>
               <GatsbyLink
                 to={`/${linkPrefix ? `${linkPrefix}/` : ""}${
-                  item.parent_element && item.parent_element.slug
-                    ? `${item.parent_element.slug}/`
+                  item.parent_element && item.parent_term
+                    ? `${item.parent_term}/`
                     : ""
                 }${item.slug}`}
               >
@@ -195,7 +195,10 @@ class Header extends React.Component {
       <StaticQuery
         query={graphql`
           query {
-            themas: allWordpressWpThema {
+            themas: allTermsJson(
+              filter: { taxonomy: { eq: "thema" } }
+              sort: { fields: name, order: ASC }
+            ) {
               edges {
                 node {
                   name
@@ -204,19 +207,18 @@ class Header extends React.Component {
               }
             }
 
-            activiteiten: allWordpressCategory(
+            activiteiten: allTermsJson(
               filter: {
-                parent_element: { slug: { in: ["activiteiten", "prijzen"] } }
+                taxonomy: { eq: "category" }
+                parent_term: { in: ["activiteiten", "prijzen"] }
               }
-              sort: { fields: [parent_element___name, name], order: DESC }
+              sort: { fields: [parent_term, name], order: DESC }
             ) {
               edges {
                 node {
                   name
                   slug
-                  parent_element {
-                    slug
-                  }
+                  parent_term
                 }
               }
             }

@@ -16,16 +16,8 @@ const Footer = () => (
   <StaticQuery
     query={graphql`
       {
-        themas: allWordpressWpThema(sort: { fields: name, order: ASC }) {
-          edges {
-            node {
-              name
-              slug
-            }
-          }
-        }
-        activiteiten: allWordpressCategory(
-          filter: { parent_element: { slug: { eq: "activiteiten" } } }
+        themas: allTermsJson(
+          filter: { taxonomy: { eq: "thema" } }
           sort: { fields: name, order: ASC }
         ) {
           edges {
@@ -35,8 +27,25 @@ const Footer = () => (
             }
           }
         }
-        prijzen: allWordpressCategory(
-          filter: { parent_element: { slug: { eq: "prijzen" } } }
+        activiteiten: allTermsJson(
+          filter: {
+            taxonomy: { eq: "category" }
+            parent_term: { eq: "activiteiten" }
+          }
+          sort: { fields: name, order: ASC }
+        ) {
+          edges {
+            node {
+              name
+              slug
+            }
+          }
+        }
+        prijzen: allTermsJson(
+          filter: {
+            taxonomy: { eq: "category" }
+            parent_term: { eq: "prijzen" }
+          }
           sort: { fields: name, order: ASC }
         ) {
           edges {
