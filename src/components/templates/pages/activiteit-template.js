@@ -18,9 +18,9 @@ const ActivityPageTemplate = ({
   const now = new Date()
 
   let parentCategory = false
+
   activity.categories.forEach(category => {
     if (category.parent_element.slug === "activiteiten") {
-      console.log(category)
       parentCategory = category
     }
   })
