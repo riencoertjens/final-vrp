@@ -6,6 +6,7 @@ import { boxShadow, breakpoints, Button, colors } from "../site/styles"
 import { postTypes } from "./PostList"
 import GatsbyImage from "gatsby-image"
 import GatsbyLink from "gatsby-link"
+import { graphql } from "gatsby"
 
 const timeout = 5000
 
@@ -57,13 +58,8 @@ class HeroSlider extends Component {
         `}
       >
         {posts.map((post, i) => {
-          const showImage = getShowImage(post.featured_media, 1)
-          const cropFocus =
-            showImage && post.featured_media.smartcrop_image_focus.length > 0
-              ? `${post.featured_media.smartcrop_image_focus[0].left}% ${
-                  post.featured_media.smartcrop_image_focus[0].top
-                }%`
-              : "50% 50%"
+          const showImage = getShowImage(post.featured_img, 1200 / 630)
+          const cropFocus = showImage && post.featured_img.smartcrop_image_focus
 
           return (
             <div //slide
@@ -142,9 +138,7 @@ class HeroSlider extends Component {
                     }
                   `}
                 >
-                  {post.content_raw.length > 200
-                    ? post.content_raw.substr(0, 200) + "\u2026"
-                    : post.content_raw}
+                  {post.post_excerpt}
                 </p>
                 <Button
                   right={1}
@@ -202,3 +196,28 @@ class HeroSlider extends Component {
 }
 
 export default HeroSlider
+
+export const HeroSliderFragment = graphql`
+  fragment HeroSliderFragment on CollectionsJsonAcfIn_de_kijker {
+    post_title
+    post_name
+    post_type
+    post_excerpt
+    featured_img {
+      smartcrop_image_focus {
+        top
+        left
+      }
+      file {
+        image: childImageSharp {
+          maxWidth: fluid(maxWidth: 1200) {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+          maxHeight: fluid(maxHeight: 630) {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
+    }
+  }
+`
