@@ -64,12 +64,12 @@ Layout.propTypes = {
 }
 
 export const HeroImageFragment = graphql`
-  fragment HeroImageFragment on wordpress__wp_media {
+  fragment HeroImageFragment on CollectionsJsonFeatured_img {
     smartcrop_image_focus {
-      left
       top
+      left
     }
-    localFile {
+    file {
       image: childImageSharp {
         maxWidth: fluid(maxWidth: 1200) {
           ...GatsbyImageSharpFluid_tracedSVG
