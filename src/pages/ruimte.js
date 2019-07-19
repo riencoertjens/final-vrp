@@ -17,50 +17,58 @@ import {
   MqMin,
 } from "../components/webhart-components/style-functions"
 
+import "../css/wp-blocks-revised.css"
+
 const AllRuimtePage = () => (
   <StaticQuery
     query={graphql`
       {
-        pageInfo: wordpressPage(slug: { eq: "ruimte" }) {
-          title
-          content
-          content_raw
+        pageInfo: collectionsJson(
+          post_type: { eq: "page" }
+          post_name: { eq: "ruimte" }
+        ) {
+          title: post_title
+          content: post_content
+          excerpt: post_excerpt
         }
-        allRuimte: allWordpressWpRuimte(
+        allRuimte: allCollectionsJson(
+          filter: { post_type: { eq: "ruimte" } }
           sort: { fields: acf___datum_publicatie, order: DESC }
         ) {
           edges {
             node {
-              ...BlockListFragment_ruimte
+              ...PostListFragment
             }
           }
         }
-        lastRuimteEdges: allWordpressWpRuimte(
+        lastRuimteEdges: allCollectionsJson(
+          filter: { post_type: { eq: "ruimte" } }
           sort: { fields: acf___datum_publicatie, order: DESC }
           limit: 1
         ) {
           edges {
             node {
-              slug
-              content
-              slug
+              post_title
+              post_content
+              post_name
+              post_excerpt
               acf {
                 datum_publicatie
                 nummer
                 date_year: datum_publicatie(formatString: "Y")
                 date_month: datum_publicatie(formatString: "M")
               }
-              f_media: featured_media {
+              f_media: featured_img {
                 ...HeroImageFragment
-                SEOImage: localFile {
-                  ...SEOImageFragment
-                }
-                cover: localFile {
+                cover: file {
                   childImageSharp {
                     fixed(width: 250) {
                       ...GatsbyImageSharpFixed
                     }
                   }
+                }
+                SEOImage: file {
+                  ...SEOImageFragment
                 }
               }
             }
@@ -69,18 +77,19 @@ const AllRuimtePage = () => (
       }
     `}
     render={({
-      pageInfo: { title, content, content_raw },
+      pageInfo: { title, content, post_excerpt },
       allRuimte,
       lastRuimteEdges,
     }) => {
       const lastRuimte = lastRuimteEdges.edges[0].node
       const { f_media } = lastRuimte
+      console.log(f_media)
       return (
         <Layout>
           <SEO
             title="Ruimte magazine"
             pathname="/ruimte"
-            description={content_raw}
+            description={post_excerpt}
             image={f_media && f_media.SEOImage.childImageSharp.SEO.src}
           />
           {f_media ? (
@@ -126,7 +135,7 @@ const AllRuimtePage = () => (
             `}
           >
             <h2>voorbije edities</h2>
-            <PostList posts={[allRuimte.edges]} />
+            <PostList posts={allRuimte} type={"ruimte"} />
           </section>
         </Layout>
       )
@@ -137,9 +146,10 @@ export default AllRuimtePage
 
 const LastRuimte = ({ ruimte }) => {
   const {
-    content,
-    slug,
-    acf: { nummer, date_year, date_month },
+    post_title,
+    post_content,
+    post_name,
+    acf: { date_year, date_month },
     f_media: {
       cover: {
         childImageSharp: { fixed: cover },
@@ -177,7 +187,7 @@ const LastRuimte = ({ ruimte }) => {
             }
           `}
         >
-          Ruimte {nummer}{" "}
+          {post_title}{" "}
           <span>
             {maanden[date_month - 1]} {date_year}
           </span>
@@ -191,13 +201,13 @@ const LastRuimte = ({ ruimte }) => {
               color: white;
             }
           `}
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: post_content }}
         />
         <Button
           right={1}
           light={1}
           component={GatsbyLink}
-          to={`/ruimte/${slug}`}
+          to={`/ruimte/${post_name}`}
         >
           lees meer
         </Button>
