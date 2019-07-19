@@ -5,7 +5,10 @@ import { AspectRatioBox } from "./webhart-components"
 import GatsbyLink from "gatsby-link"
 import { colors, boxShadow } from "../site/styles"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
-import { getShowImage } from "./webhart-components/style-functions"
+import {
+  getShowImage,
+  getCropFocus,
+} from "./webhart-components/style-functions"
 
 export const postTypes = {
   ruimte: "ruimte",
@@ -14,25 +17,7 @@ export const postTypes = {
   post: "nieuws",
 }
 
-const PostList = ({ posts }) => {
-  const sortedPosts =
-    posts.length > 1
-      ? [].concat(...posts).sort((a, b) => {
-          const dateA =
-            a.node.acf && a.node.acf.date ? a.node.acf.date : a.node.date
-          const dateB =
-            b.node.acf && b.node.acf.date ? b.node.acf.date : b.node.date
-
-          if (dateA > dateB) {
-            return -1
-          }
-          if (dateA < dateB) {
-            return 1
-          }
-          return 0
-        })
-      : posts[0]
-
+const PostList = ({ posts, multiTypes, type }) => {
   return (
     <div
       css={css`
@@ -42,20 +27,15 @@ const PostList = ({ posts }) => {
         grid-row-gap: 1rem;
       `}
     >
-      {sortedPosts.map(({ node }, i) => {
-        const showImage = getShowImage(node.featured_media, 1)
-        const cropFocus =
-          showImage && node.featured_media.smartcrop_image_focus.length > 0
-            ? `${node.featured_media.smartcrop_image_focus[0].left}% ${
-                node.featured_media.smartcrop_image_focus[0].top
-              }%`
-            : "50% 50%"
+      {posts.edges.map(({ node }, i) => {
+        const showImage = getShowImage(node.featured_img, 1)
+        const cropFocus = getCropFocus(node.featured_img)
 
-        const typeName = postTypes[node.type]
+        const typeName = postTypes[node.post_type]
 
         return (
           <AspectRatioBox
-            ratio={typeName === "ruimte" && posts.length === 1 ? 17 / 20 : 1}
+            ratio={type === "ruimte" ? 17 / 20 : 1} // change ratio when postList type === ruimte
             component={GatsbyLink}
             key={i}
             css={css`
@@ -79,7 +59,7 @@ const PostList = ({ posts }) => {
                 }
               }
             `}
-            to={`/${typeName}/${node.slug}`}
+            to={`/${typeName}/${node.post_name}`}
           >
             {showImage && (
               <GatsbyImage fluid={showImage} objectPosition={cropFocus} />
@@ -102,25 +82,17 @@ const PostList = ({ posts }) => {
                   text-transform: uppercase;
                   letter-spacing: 0.16rem;
                   font-size: 0.666rem;
-                  /* line-height: 100%; */
                 }
                 color: black;
               `}
             >
-              {posts.length > 1 && <span>{typeName}</span>}
-              {typeName === "activiteit" && (
-                <span>
-                  {posts.length > 1 && " | "}
-                  {node.acf.dateFormatted}
-                </span>
-              )}
-              <h3>
-                {node.title ||
-                  (node.type === "ruimte" &&
-                    `${node.acf.nummer} | ${node.acf.date_year}/${Math.ceil(
-                      (node.acf.date_month / 12) * 4
-                    )}`)}
-              </h3>
+              <span>
+                {multiTypes && typeName}
+                {typeName === "activiteit" &&
+                  node.acf.date &&
+                  `${multiTypes && " | "}${node.acf.dateFormatted}`}
+              </span>
+              <h3>{node.post_title}</h3>
             </div>
           </AspectRatioBox>
         )
@@ -131,13 +103,29 @@ const PostList = ({ posts }) => {
 
 export default PostList
 
+export const PostListFragment = graphql`
+  fragment PostListFragment on CollectionsJson {
+    post_title
+    post_type
+    post_name
+    post_date
+    acf {
+      datum_publicatie
+      date
+      dateFormatted: date(formatString: "D-MM-Y")
+    }
+    featured_img {
+      ...BlockImageFragment
+    }
+  }
+`
 export const BlockImageFragment = graphql`
-  fragment BlockImageFragment on wordpress__wp_media {
+  fragment BlockImageFragment on CollectionsJsonFeatured_img {
     smartcrop_image_focus {
       left
       top
     }
-    localFile {
+    file {
       image: childImageSharp {
         maxWidth: fluid(maxWidth: 500) {
           ...GatsbyImageSharpFluid_tracedSVG
@@ -150,49 +138,49 @@ export const BlockImageFragment = graphql`
   }
 `
 
-export const BlockListFragment = graphql`
-  fragment BlockListFragment_post on wordpress__POST {
-    title
-    type
-    slug
-    date
-    featured_media {
-      ...BlockImageFragment
-    }
-  }
-  fragment BlockListFragment_activity on wordpress__wp_activities {
-    title
-    type
-    slug
-    acf {
-      date
-      dateFormatted: date(formatString: "D-MM-Y")
-    }
-    featured_media {
-      ...BlockImageFragment
-    }
-  }
-  fragment BlockListFragment_price on wordpress__wp_prijs {
-    title
-    type
-    slug
-    date
-    featured_media {
-      ...BlockImageFragment
-    }
-  }
-  fragment BlockListFragment_ruimte on wordpress__wp_ruimte {
-    slug
-    type
-    date
-    acf {
-      nummer
-      datum_publicatie
-      date_year: datum_publicatie(formatString: "Y")
-      date_month: datum_publicatie(formatString: "M")
-    }
-    featured_media {
-      ...BlockImageFragment
-    }
-  }
-`
+// export const BlockListFragment = graphql`
+//   fragment BlockListFragment_post on wordpress__POST {
+//     title
+//     type
+//     slug
+//     date
+//     featured_media {
+//       ...BlockImageFragment
+//     }
+//   }
+//   fragment BlockListFragment_activity on wordpress__wp_activities {
+//     title
+//     type
+//     slug
+//     acf {
+//       date
+//       dateFormatted: date(formatString: "D-MM-Y")
+//     }
+//     featured_media {
+//       ...BlockImageFragment
+//     }
+//   }
+//   fragment BlockListFragment_price on wordpress__wp_prijs {
+//     title
+//     type
+//     slug
+//     date
+//     featured_media {
+//       ...BlockImageFragment
+//     }
+//   }
+//   fragment BlockListFragment_ruimte on wordpress__wp_ruimte {
+//     slug
+//     type
+//     date
+//     acf {
+//       nummer
+//       datum_publicatie
+//       date_year: datum_publicatie(formatString: "Y")
+//       date_month: datum_publicatie(formatString: "M")
+//     }
+//     featured_media {
+//       ...BlockImageFragment
+//     }
+//   }
+// `
