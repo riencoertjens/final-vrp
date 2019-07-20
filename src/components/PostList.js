@@ -136,6 +136,22 @@ export const BlockImageFragment = graphql`
       }
     }
   }
+  fragment BlockImageFragmentThemas on TermsJsonFeatured_img {
+    smartcrop_image_focus {
+      left
+      top
+    }
+    file {
+      image: childImageSharp {
+        maxWidth: fluid(maxWidth: 500) {
+          ...GatsbyImageSharpFluid_tracedSVG
+        }
+        maxHeight: fluid(maxHeight: 500) {
+          ...GatsbyImageSharpFluid_tracedSVG
+        }
+      }
+    }
+  }
 `
 
 // export const BlockListFragment = graphql`
