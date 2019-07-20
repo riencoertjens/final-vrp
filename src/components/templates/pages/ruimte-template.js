@@ -15,7 +15,8 @@ import WpBlocksContent from "../../WpBlocksContent"
 const RuimtePageTemplate = ({
   data: {
     ruimte: {
-      acf: { nummer, date_year, date_month },
+      post_title,
+      acf: { date_year, date_month },
       f_media,
       f_media: {
         cover: {
@@ -34,7 +35,7 @@ const RuimtePageTemplate = ({
     <Layout>
       <SEO
         pathname={`ruimte/${slug}`}
-        title={`Ruimte ${nummer}`}
+        title={post_title}
         description={post_excerpt}
         image={f_media && f_media.SEOImage.childImageSharp.SEO.src}
       />
@@ -59,12 +60,12 @@ const RuimtePageTemplate = ({
             label: "Ruimte",
           },
           {
-            label: `Ruimte ${nummer}`,
+            label: post_title,
           },
         ]}
       />
       <section>
-        <h1>Ruimte {nummer}</h1>
+        <h1>{post_title}</h1>
         <span
           css={css`
             display: inline-block;
@@ -162,6 +163,7 @@ export const query = graphql`
       post_type: { eq: "ruimte" }
       post_name: { eq: $slug }
     ) {
+      post_title
       acf {
         featured_artikel
       }
