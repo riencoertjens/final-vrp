@@ -1,224 +1,224 @@
-import React, { Component } from "react"
-import Layout from "../components/Layout"
-import GatsbyLink from "gatsby-link"
-import css from "@emotion/css"
-import { Button } from "../site/styles"
+// import React, { Component } from "react"
+// import Layout from "../components/Layout"
+// import GatsbyLink from "gatsby-link"
+// import css from "@emotion/css"
+// import { Button } from "../site/styles"
 
-// const urlBase = "https://www.googleapis.com/customsearch/v1/siterestrict"
-const urlBase = "https://www.googleapis.com/customsearch/v1"
-const url = `${urlBase}?key=${process.env.GATSBY_GOOGLE_SEARCH_API}&cx=${
-  process.env.GATSBY_GOOGLE_SEARCH_CSE
-}`
+// // const urlBase = "https://www.googleapis.com/customsearch/v1/siterestrict"
+// const urlBase = "https://www.googleapis.com/customsearch/v1"
+// const url = `${urlBase}?key=${process.env.GATSBY_GOOGLE_SEARCH_API}&cx=${
+//   process.env.GATSBY_GOOGLE_SEARCH_CSE
+// }`
 
-class SearchPage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { searchResult: false, searching: true, searchQuery: null }
-    this.getSearchQuery = this.getSearchQuery.bind(this)
-    this.getSearchResults = this.getSearchResults.bind(this)
-  }
+// class SearchPage extends Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = { searchResult: false, searching: true, searchQuery: null }
+//     this.getSearchQuery = this.getSearchQuery.bind(this)
+//     this.getSearchResults = this.getSearchResults.bind(this)
+//   }
 
-  getSearchQuery() {
-    const urlParams = this.props.location.search
-    let url = ""
-    const urlObj =
-      (urlParams &&
-        JSON.parse(
-          '{"' +
-            urlParams
-              .substring(1)
-              .replace(/&/g, '","')
-              .replace(/=/g, '":"') +
-            '"}',
-          function(key, value) {
-            return key === "" ? value : decodeURIComponent(value)
-          }
-        )) ||
-      null
+//   getSearchQuery() {
+//     const urlParams = this.props.location.search
+//     let url = ""
+//     const urlObj =
+//       (urlParams &&
+//         JSON.parse(
+//           '{"' +
+//             urlParams
+//               .substring(1)
+//               .replace(/&/g, '","')
+//               .replace(/=/g, '":"') +
+//             '"}',
+//           function(key, value) {
+//             return key === "" ? value : decodeURIComponent(value)
+//           }
+//         )) ||
+//       null
 
-    if (urlObj) {
-      if (urlObj.q) {
-        url = `${url}&q=${urlObj.q}`
-        if (urlObj.start) {
-          url = `${url}&start=${urlObj.start}`
-        }
-      }
-      return {
-        url: url,
-        params: urlObj,
-      }
-    } else {
-      return false
-    }
-  }
+//     if (urlObj) {
+//       if (urlObj.q) {
+//         url = `${url}&q=${urlObj.q}`
+//         if (urlObj.start) {
+//           url = `${url}&start=${urlObj.start}`
+//         }
+//       }
+//       return {
+//         url: url,
+//         params: urlObj,
+//       }
+//     } else {
+//       return false
+//     }
+//   }
 
-  getSearchResults(paramUrl) {
-    fetch(`${url}${paramUrl}`)
-      .then(response => response.json())
-      .then(searchResult => {
-        this.setState({
-          searchResult: searchResult,
-          searching: false,
-        })
-      })
-      .catch(console.error.bind(console))
-  }
+//   getSearchResults(paramUrl) {
+//     fetch(`${url}${paramUrl}`)
+//       .then(response => response.json())
+//       .then(searchResult => {
+//         this.setState({
+//           searchResult: searchResult,
+//           searching: false,
+//         })
+//       })
+//       .catch(console.error.bind(console))
+//   }
 
-  componentDidMount() {
-    const searchQuery = this.getSearchQuery()
-    const { searching } = this.state
+//   componentDidMount() {
+//     const searchQuery = this.getSearchQuery()
+//     const { searching } = this.state
 
-    if (searching && searchQuery) {
-      this.getSearchResults(searchQuery.url)
-    }
-  }
+//     if (searching && searchQuery) {
+//       this.getSearchResults(searchQuery.url)
+//     }
+//   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.location.search !== prevProps.location.search) {
-      const searchQuery = this.getSearchQuery()
-      this.setState({ searching: true })
-      this.getSearchResults(searchQuery.url)
-    }
-  }
+//   componentDidUpdate(prevProps) {
+//     if (this.props.location.search !== prevProps.location.search) {
+//       const searchQuery = this.getSearchQuery()
+//       this.setState({ searching: true })
+//       this.getSearchResults(searchQuery.url)
+//     }
+//   }
 
-  render() {
-    const searchQuery = this.getSearchQuery()
-    const { searchResult, searching } = this.state
+//   render() {
+//     const searchQuery = this.getSearchQuery()
+//     const { searchResult, searching } = this.state
 
-    const { queries, searchInformation } = searchResult
+//     const { queries, searchInformation } = searchResult
 
-    const currentPage =
-      searchResult &&
-      searchInformation &&
-      searchInformation.totalResults > 0 &&
-      Math.ceil(queries.request[0].startIndex / 10)
-    const totalPages =
-      searchResult &&
-      searchInformation &&
-      searchInformation.totalResults > 0 &&
-      Math.ceil(searchInformation.totalResults / 10)
+//     const currentPage =
+//       searchResult &&
+//       searchInformation &&
+//       searchInformation.totalResults > 0 &&
+//       Math.ceil(queries.request[0].startIndex / 10)
+//     const totalPages =
+//       searchResult &&
+//       searchInformation &&
+//       searchInformation.totalResults > 0 &&
+//       Math.ceil(searchInformation.totalResults / 10)
 
-    return (
-      <Layout showSearch={true}>
-        <section>
-          <h1>Zoeken</h1>
-          {searchQuery ? (
-            <>
-              {searching ? (
-                <p>zoeken...</p>
-              ) : (
-                <>
-                  {searchResult &&
-                  searchInformation &&
-                  searchInformation.totalResults > 0 ? (
-                    <>
-                      <p>
-                        {searchInformation.totalResults} zoekresultaten voor:{" "}
-                        <strong>{searchQuery.params.q}</strong>
-                        <br />
-                        pagina {currentPage}/{totalPages}
-                      </p>
-                      <ul
-                        css={css`
-                          list-style: none;
-                          padding: 0;
-                          a {
-                            text-decoration: none;
-                          }
-                          li {
-                            border-bottom: 1px solid;
-                            margin: 1rem 0;
-                          }
-                          h3 {
-                            margin: 0;
-                          }
-                          p {
-                            margin: 0;
-                            margin-bottom: 1rem;
-                            color: black;
-                          }
-                        `}
-                      >
-                        {searchResult.items.map((result, i) => (
-                          <li key={i}>
-                            <GatsbyLink to="/">
-                              <h3>{result.title}</h3>
-                              <p>{result.snippet}</p>
-                            </GatsbyLink>
-                          </li>
-                        ))}
-                      </ul>
+//     return (
+//       <Layout showSearch={true}>
+//         <section>
+//           <h1>Zoeken</h1>
+//           {searchQuery ? (
+//             <>
+//               {searching ? (
+//                 <p>zoeken...</p>
+//               ) : (
+//                 <>
+//                   {searchResult &&
+//                   searchInformation &&
+//                   searchInformation.totalResults > 0 ? (
+//                     <>
+//                       <p>
+//                         {searchInformation.totalResults} zoekresultaten voor:{" "}
+//                         <strong>{searchQuery.params.q}</strong>
+//                         <br />
+//                         pagina {currentPage}/{totalPages}
+//                       </p>
+//                       <ul
+//                         css={css`
+//                           list-style: none;
+//                           padding: 0;
+//                           a {
+//                             text-decoration: none;
+//                           }
+//                           li {
+//                             border-bottom: 1px solid;
+//                             margin: 1rem 0;
+//                           }
+//                           h3 {
+//                             margin: 0;
+//                           }
+//                           p {
+//                             margin: 0;
+//                             margin-bottom: 1rem;
+//                             color: black;
+//                           }
+//                         `}
+//                       >
+//                         {searchResult.items.map((result, i) => (
+//                           <li key={i}>
+//                             <GatsbyLink to="/">
+//                               <h3>{result.title}</h3>
+//                               <p>{result.snippet}</p>
+//                             </GatsbyLink>
+//                           </li>
+//                         ))}
+//                       </ul>
 
-                      <div
-                        css={css`
-                          display: flex;
-                          justify-content: center;
-                          & > div {
-                            padding: 0.2rem 1rem 0.3rem;
-                            a,
-                            span {
-                              margin: 0 0.5rem;
-                            }
-                          }
-                        `}
-                      >
-                        {queries.previousPage && (
-                          <Button
-                            left
-                            component={GatsbyLink}
-                            to={`/search?q=${searchQuery.params.q}&start=${
-                              queries.previousPage[0].startIndex
-                            }`}
-                          >
-                            vorige
-                          </Button>
-                        )}
-                        <div>
-                          {Array(Math.ceil(searchInformation.totalResults / 10))
-                            .fill()
-                            .map((a, i) =>
-                              i + 1 === currentPage ? (
-                                <span>{i + 1}</span>
-                              ) : (
-                                <GatsbyLink
-                                  to={`/search?q=${
-                                    searchQuery.params.q
-                                  }&start=${i * 10 + 1}`}
-                                >
-                                  {i + 1}
-                                </GatsbyLink>
-                              )
-                            )}
-                        </div>
-                        {queries.nextPage && (
-                          <Button
-                            right={1}
-                            component={GatsbyLink}
-                            to={`/search?q=${searchQuery.params.q}&start=${
-                              queries.nextPage[0].startIndex
-                            }`}
-                          >
-                            volgende
-                          </Button>
-                        )}
-                      </div>
-                    </>
-                  ) : (
-                    <p>
-                      geen zoekresultaten voor{" "}
-                      <strong>{searchQuery.params.q}</strong>
-                    </p>
-                  )}
-                </>
-              )}
-            </>
-          ) : (
-            <p>voer zoekterm in</p>
-          )}
-        </section>
-      </Layout>
-    )
-  }
-}
+//                       <div
+//                         css={css`
+//                           display: flex;
+//                           justify-content: center;
+//                           & > div {
+//                             padding: 0.2rem 1rem 0.3rem;
+//                             a,
+//                             span {
+//                               margin: 0 0.5rem;
+//                             }
+//                           }
+//                         `}
+//                       >
+//                         {queries.previousPage && (
+//                           <Button
+//                             left
+//                             component={GatsbyLink}
+//                             to={`/search?q=${searchQuery.params.q}&start=${
+//                               queries.previousPage[0].startIndex
+//                             }`}
+//                           >
+//                             vorige
+//                           </Button>
+//                         )}
+//                         <div>
+//                           {Array(Math.ceil(searchInformation.totalResults / 10))
+//                             .fill()
+//                             .map((a, i) =>
+//                               i + 1 === currentPage ? (
+//                                 <span>{i + 1}</span>
+//                               ) : (
+//                                 <GatsbyLink
+//                                   to={`/search?q=${
+//                                     searchQuery.params.q
+//                                   }&start=${i * 10 + 1}`}
+//                                 >
+//                                   {i + 1}
+//                                 </GatsbyLink>
+//                               )
+//                             )}
+//                         </div>
+//                         {queries.nextPage && (
+//                           <Button
+//                             right={1}
+//                             component={GatsbyLink}
+//                             to={`/search?q=${searchQuery.params.q}&start=${
+//                               queries.nextPage[0].startIndex
+//                             }`}
+//                           >
+//                             volgende
+//                           </Button>
+//                         )}
+//                       </div>
+//                     </>
+//                   ) : (
+//                     <p>
+//                       geen zoekresultaten voor{" "}
+//                       <strong>{searchQuery.params.q}</strong>
+//                     </p>
+//                   )}
+//                 </>
+//               )}
+//             </>
+//           ) : (
+//             <p>voer zoekterm in</p>
+//           )}
+//         </section>
+//       </Layout>
+//     )
+//   }
+// }
 
-export default SearchPage
+// export default SearchPage
