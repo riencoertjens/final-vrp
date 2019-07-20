@@ -17,8 +17,6 @@ import {
   MqMin,
 } from "../components/webhart-components/style-functions"
 
-import "../css/wp-blocks-revised.css"
-
 const AllRuimtePage = () => (
   <StaticQuery
     query={graphql`

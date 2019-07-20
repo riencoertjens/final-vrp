@@ -88,9 +88,12 @@ const PostList = ({ posts, multiTypes, type }) => {
             >
               <span>
                 {multiTypes && typeName}
-                {typeName === "activiteit" &&
-                  node.acf.date &&
-                  `${multiTypes && " | "}${node.acf.dateFormatted}`}
+                {typeName === "activiteit" && node.acf.date && (
+                  <>
+                    {multiTypes && " | "}
+                    {node.acf.dateFormatted}
+                  </>
+                )}
               </span>
               <h3>{node.post_title}</h3>
             </div>

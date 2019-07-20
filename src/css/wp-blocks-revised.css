@@ -212,3 +212,23 @@ p.has-text-color a {
 .wp-block-table.is-style-stripes td {
   border-color: transparent;
 }
+
+a.logo_block {
+  filter: grayscale(1) opacity(0.75);
+  transition: 0.2s;
+
+  margin: 1rem;
+  /* display: block; */
+  max-width: 195px;
+  overflow: hidden;
+  flex: 0 1 195px;
+}
+/* a.logo_block span {
+  display: none;
+} */
+a.logo_block img {
+  max-width: 100%;
+}
+a.logo_block:hover {
+  filter: unset;
+}
