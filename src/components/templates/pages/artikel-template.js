@@ -23,12 +23,11 @@ const ArtikelPageTemplate = ({
         beschrijving,
         pdf_thumb: {
           localFile: {
+            pdf_thumb_original,
             childImageSharp: { fixed: pdf_thumb },
           },
         },
-        pdf: {
-          url: { publicURL: pdf_url },
-        },
+        pdf,
         ruimte,
       },
     },
@@ -36,6 +35,7 @@ const ArtikelPageTemplate = ({
   pageContext: { next, prev },
 }) => {
   const title = `${ruimte.post_title}: ${artikelTitle}`
+  const pdf_url = pdf ? pdf.url.publicURL.pdf_url : pdf_thumb_original
   return (
     <Layout>
       <SEO
@@ -161,6 +161,7 @@ export const query = graphql`
         }
         pdf_thumb {
           localFile: url {
+            publicURL
             childImageSharp {
               fixed(width: 300) {
                 ...GatsbyImageSharpFixed
