@@ -93,32 +93,32 @@ exports.createPages = ({ graphql, actions }) => {
         },
       })
     })
-    // result.data.ruimte.edges.forEach(({ node }) => {
-    //   createPage({
-    //     path: `/ruimte/${node.slug}`,
-    //     component: path.resolve(
-    //       `./src/components/templates/pages/ruimte-template.js`
-    //     ),
-    //     context: {
-    //       slug: node.slug,
-    //     },
-    //   })
-    // })
-    // const artikels = result.data.artikels.edges
-    // artikels.forEach(({ node }, i) => {
-    //   createPage({
-    //     path: `/ruimte/${node.acf.ruimte.slug}/${node.slug}`,
-    //     component: path.resolve(
-    //       `./src/components/templates/pages/artikel-template.js`
-    //     ),
-    //     context: {
-    //       slug: node.slug,
-    //       ruimteSlug: node.acf.ruimte.slug,
-    //       prev: i === 0 ? null : artikels[i - 1],
-    //       next: i === artikels.length - 1 ? null : artikels[i + 1],
-    //     },
-    //   })
-    // })
+    result.data.ruimte.edges.forEach(({ node }) => {
+      createPage({
+        path: `/ruimte/${node.slug}`,
+        component: path.resolve(
+          `./src/components/templates/pages/ruimte-template.js`
+        ),
+        context: {
+          slug: node.slug,
+        },
+      })
+    })
+    const artikels = result.data.artikels.edges
+    artikels.forEach(({ node }, i) => {
+      createPage({
+        path: `/ruimte/${node.acf.ruimte.slug}/${node.slug}`,
+        component: path.resolve(
+          `./src/components/templates/pages/artikel-template.js`
+        ),
+        context: {
+          slug: node.slug,
+          ruimteSlug: node.acf.ruimte.post_name,
+          prev: i === 0 ? null : artikels[i - 1],
+          next: i === artikels.length - 1 ? null : artikels[i + 1],
+        },
+      })
+    })
     // result.data.themas.terms.forEach(({ node: { slug } }) => {
     //   createPage({
     //     path: `/themas/${slug}`,
@@ -130,17 +130,17 @@ exports.createPages = ({ graphql, actions }) => {
     //     },
     //   })
     // })
-    // result.data.pages.edges.forEach(({ node }) => {
-    //   createPage({
-    //     path: `/${node.slug}`,
-    //     component: path.resolve(
-    //       `./src/components/templates/pages/wp-page-template.js`
-    //     ),
-    //     context: {
-    //       slug: node.slug,
-    //     },
-    //   })
-    // })
+    result.data.pages.edges.forEach(({ node }) => {
+      createPage({
+        path: `/${node.slug}`,
+        component: path.resolve(
+          `./src/components/templates/pages/wp-page-template.js`
+        ),
+        context: {
+          slug: node.slug,
+        },
+      })
+    })
     // result.data.categories.edges.forEach(({ node }) => {
     //   createPage({
     //     path: `/${node.parent_term}/${node.slug}`,

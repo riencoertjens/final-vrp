@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 
-import "../css/wp-blocks-revised.css"
-
 import { globalStyle, MediaQuery } from "./webhart-components"
 import { Global, css } from "@emotion/core"
 import styled from "@emotion/styled"

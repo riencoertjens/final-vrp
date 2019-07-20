@@ -9,6 +9,7 @@ import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
 import { getCropFocus } from "../../webhart-components/style-functions"
 import BreadCrumbs from "../../BreadCrumbs"
+import WpBlocksContent from "../../WpBlocksContent"
 
 const ActivityPageTemplate = ({
   data: { activity },
@@ -31,7 +32,7 @@ const ActivityPageTemplate = ({
       label: "Activiteiten",
     },
   ]
-  console.log(parentCategory)
+
   if (parentCategory) {
     crumbs.push({
       link: `/activiteiten/${parentCategory.slug}`,
@@ -72,7 +73,7 @@ const ActivityPageTemplate = ({
       <BreadCrumbs crumbs={crumbs} />
       <section>
         <h1>{activity.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: activity.content }} />
+        <WpBlocksContent content={activity.content} />
       </section>
 
       {activity.acf.has_location && (
@@ -192,43 +193,5 @@ export const query = graphql`
         }
       }
     }
-
-    # activity: wordpressWpActivities(slug: { eq: $slug }) {
-    #   title
-    #   content
-    #   wordpress_id
-    #   categories {
-    #     slug
-    #     name
-    #     parent_element {
-    #       slug
-    #     }
-    #   }
-    #   featured_img {
-    #     ...HeroImageFragment
-    #     SEOImage: localFile {
-    #       ...SEOImageFragment
-    #     }
-    #   }
-    #   acf {
-    #     has_location
-    #     location {
-    #       title: post_title
-    #       slug: post_name
-    #       acf {
-    #         address {
-    #           address
-    #           lat
-    #           lng
-    #         }
-    #       }
-    #     }
-    #     hasform
-    #     close_date
-    #     register_form {
-    #       post_content
-    #     }
-    #   }
-    # }
   }
 `

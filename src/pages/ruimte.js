@@ -16,6 +16,7 @@ import {
   getCropFocus,
   MqMin,
 } from "../components/webhart-components/style-functions"
+import WpBlocksContent from "../components/WpBlocksContent"
 
 const AllRuimtePage = () => (
   <StaticQuery
@@ -81,7 +82,7 @@ const AllRuimtePage = () => (
     }) => {
       const lastRuimte = lastRuimteEdges.edges[0].node
       const { f_media } = lastRuimte
-      console.log(f_media)
+
       return (
         <Layout>
           <SEO
@@ -119,7 +120,7 @@ const AllRuimtePage = () => (
               `}
             >
               <h1>{title}</h1>
-              <div dangerouslySetInnerHTML={{ __html: content }} />
+              <WpBlocksContent content={content} />
             </section>
             <LastRuimte ruimte={lastRuimte} />
           </div>

@@ -223,9 +223,9 @@ a.logo_block {
   overflow: hidden;
   flex: 0 1 195px;
 }
-/* a.logo_block span {
+a.logo_block span {
   display: none;
-} */
+}
 a.logo_block img {
   max-width: 100%;
 }
