@@ -5,7 +5,10 @@ import SEO from "../components/webhart-components/SEO"
 import GatsbyLink from "gatsby-link"
 import css from "@emotion/css"
 import { colors, boxShadow } from "../site/styles"
-import { getShowImage } from "../components/webhart-components/style-functions"
+import {
+  getShowImage,
+  getCropFocus,
+} from "../components/webhart-components/style-functions"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
 import { AspectRatioBox } from "../components/webhart-components"
 
@@ -13,19 +16,18 @@ const ThemasPage = () => (
   <StaticQuery
     query={graphql`
       {
-        pageInfo: wordpressPage(slug: { eq: "home" }) {
-          title
-        }
-        themas: allWordpressWpThema {
+        themas: allTermsJson(filter: { taxonomy: { eq: "thema" } }) {
           edges {
             node {
               title: name
-              description
               slug
+              description
+              featured_img {
+                ...BlockImageFragmentThemas
+              }
               acf {
-                afbeelding {
-                  ...BlockImageFragment
-                }
+                afbeelding
+                inhoud
               }
             }
           }
@@ -62,10 +64,11 @@ const ThemasPage = () => (
             `}
           >
             {themas.edges.map(({ node: thema }, i) => {
-              const showImage =
-                thema.acf &&
-                thema.acf.afbeelding &&
-                getShowImage(thema.acf.afbeelding, 1)
+              const showImage = getShowImage(thema.featured_img)
+              const cropFocus = getCropFocus(
+                thema.featured_img.smartcrop_image_focus
+              )
+
               return (
                 <AspectRatioBox
                   component={GatsbyLink}
@@ -91,12 +94,7 @@ const ThemasPage = () => (
                   `}
                 >
                   {showImage && (
-                    <GatsbyImage
-                      fluid={showImage}
-                      objectPosition={`${
-                        thema.acf.afbeelding.smartcrop_image_focus[0].left
-                      }% ${thema.acf.afbeelding.smartcrop_image_focus[0].top}%`}
-                    />
+                    <GatsbyImage fluid={showImage} objectPosition={cropFocus} />
                   )}
                   <div
                     css={css`
@@ -110,7 +108,6 @@ const ThemasPage = () => (
                       padding: 0.5rem;
                       z-index: 100;
                       overflow: hidden;
-                      /* background: red; */
                     `}
                   >
                     <h3>{thema.title}</h3>
@@ -118,7 +115,7 @@ const ThemasPage = () => (
                       css={css`
                         overflow: hidden;
                         ::after {
-                          content: ""
+                          content: "";
                           display: block;
                           position: absolute;
                           bottom: 0;
