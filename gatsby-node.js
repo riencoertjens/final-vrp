@@ -107,13 +107,12 @@ exports.createPages = ({ graphql, actions }) => {
     const artikels = result.data.artikels.edges
     artikels.forEach(({ node }, i) => {
       createPage({
-        path: `/ruimte/${node.acf.ruimte.slug}/${node.slug}`,
+        path: `/ruimte/${node.acf.ruimte.ruimteSlug}/${node.slug}`,
         component: path.resolve(
           `./src/components/templates/pages/artikel-template.js`
         ),
         context: {
           slug: node.slug,
-          ruimteSlug: node.acf.ruimte.post_name,
           prev: i === 0 ? null : artikels[i - 1],
           next: i === artikels.length - 1 ? null : artikels[i + 1],
         },

@@ -184,7 +184,7 @@ export const query = graphql`
     artikels: allCollectionsJson(
       filter: {
         post_type: { eq: "ruimte_artikel" }
-        acf: { ruimte: { post_name: { eq: "ruimte-40" } } }
+        acf: { ruimte: { post_name: { eq: $slug } } }
       }
       sort: { fields: post_name }
     ) {
@@ -194,11 +194,6 @@ export const query = graphql`
           slug: post_name
           acf {
             beschrijving
-            # pdf_thumb {
-            #   localFile:url {
-            #     publicURL
-            #   }
-            # }
           }
         }
       }

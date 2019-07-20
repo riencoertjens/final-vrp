@@ -35,8 +35,7 @@ const ArtikelPageTemplate = ({
   },
   pageContext: { next, prev },
 }) => {
-  console.log(ruimte)
-  const title = `${ruimte.acf.post_title}: ${artikelTitle}`
+  const title = `${ruimte.post_title}: ${artikelTitle}`
   return (
     <Layout>
       <SEO
@@ -69,7 +68,7 @@ const ArtikelPageTemplate = ({
           },
           {
             link: `/ruimte/${ruimte.post_name}`,
-            label: `Ruimte ${ruimte.acf.nummer}`,
+            label: ruimte.post_title,
           },
           {
             label: artikelTitle,
@@ -107,7 +106,7 @@ const ArtikelPageTemplate = ({
               css={css`
                 margin-right: auto;
               `}
-              to={`/ruimte/${prev.node.acf.ruimte.slug}/${prev.node.slug}/`}
+              to={`/ruimte/${prev.node.acf.ruimte.ruimteSlug}/${prev.node.slug}/`}
             >
               <ArrowLeftIcon />
               {prev.node.title}
@@ -118,7 +117,7 @@ const ArtikelPageTemplate = ({
               css={css`
                 margin-left: auto;
               `}
-              to={`/ruimte/${next.node.acf.ruimte.slug}/${next.node.slug}/`}
+              to={`/ruimte/${next.node.acf.ruimte.ruimteSlug}/${next.node.slug}/`}
             >
               {next.node.title}
               <ArrowRightIcon />
