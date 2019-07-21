@@ -35,7 +35,8 @@ const ArtikelPageTemplate = ({
   pageContext: { next, prev },
 }) => {
   const title = `${ruimte.post_title}: ${artikelTitle}`
-  const pdf_url = pdf ? pdf.url.publicURL.pdf_url : pdf_thumb_original
+
+  const pdf_url = pdf ? pdf.url.publicURL : pdf_thumb_original
   return (
     <Layout>
       <SEO
