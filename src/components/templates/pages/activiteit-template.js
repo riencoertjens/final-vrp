@@ -167,12 +167,12 @@ export const query = graphql`
           }
         }
       }
-      featured_img {
-        ...HeroImageFragment
-        SEOImage: file {
-          ...SEOImageFragment
-        }
-      }
+      # featured_img {
+      #   ...HeroImageFragment
+      #   SEOImage: file {
+      #     ...SEOImageFragment
+      #   }
+      # }
       acf {
         has_location
         location {

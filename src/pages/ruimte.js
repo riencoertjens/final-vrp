@@ -57,19 +57,19 @@ const AllRuimtePage = () => (
                 date_year: datum_publicatie(formatString: "Y")
                 date_month: datum_publicatie(formatString: "M")
               }
-              f_media: featured_img {
-                ...HeroImageFragment
-                cover: file {
-                  childImageSharp {
-                    fixed(width: 250) {
-                      ...GatsbyImageSharpFixed
-                    }
-                  }
-                }
-                SEOImage: file {
-                  ...SEOImageFragment
-                }
-              }
+              # f_media: featured_img {
+              #   ...HeroImageFragment
+              #   cover: file {
+              #     childImageSharp {
+              #       fixed(width: 250) {
+              #         ...GatsbyImageSharpFixed
+              #       }
+              #     }
+              #   }
+              #   SEOImage: file {
+              #     ...SEOImageFragment
+              #   }
+              # }
             }
           }
         }
@@ -149,11 +149,7 @@ const LastRuimte = ({ ruimte }) => {
     post_content,
     post_name,
     acf: { date_year, date_month },
-    f_media: {
-      cover: {
-        childImageSharp: { fixed: cover },
-      },
-    },
+    f_media,
   } = ruimte
   return (
     <aside
@@ -191,7 +187,7 @@ const LastRuimte = ({ ruimte }) => {
             {maanden[date_month - 1]} {date_year}
           </span>
         </h3>
-        {cover && <GatsbyImage fixed={cover} />}
+        {f_media && <GatsbyImage fixed={f_media.childImageSharp.cover.fixed} />}
       </div>
       <div>
         <div

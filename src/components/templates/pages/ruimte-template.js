@@ -18,11 +18,6 @@ const RuimtePageTemplate = ({
       post_title,
       acf: { date_year, date_month },
       f_media,
-      f_media: {
-        cover: {
-          childImageSharp: { fixed: cover },
-        },
-      },
       post_excerpt,
       content,
     },
@@ -104,7 +99,9 @@ const RuimtePageTemplate = ({
               content goes here
             </div>
           )}
-          {cover && <GatsbyImage fixed={cover} />}
+          {f_media && (
+            <GatsbyImage fixed={f_media.childImageSharp.cover.fixed} />
+          )}
         </div>
       </section>
       <section
@@ -169,19 +166,19 @@ export const query = graphql`
       }
       post_excerpt
       content: post_content
-      f_media: featured_img {
-        ...HeroImageFragment
-        SEOImage: file {
-          ...SEOImageFragment
-        }
-        cover: file {
-          childImageSharp {
-            fixed(width: 250) {
-              ...GatsbyImageSharpFixed
-            }
-          }
-        }
-      }
+      # f_media: featured_img {
+      #   ...HeroImageFragment
+      #   SEOImage: file {
+      #     ...SEOImageFragment
+      #   }
+      #   cover: file {
+      #     childImageSharp {
+      #       fixed(width: 250) {
+      #         ...GatsbyImageSharpFixed
+      #       }
+      #     }
+      #   }
+      # }
     }
     artikels: allCollectionsJson(
       filter: {

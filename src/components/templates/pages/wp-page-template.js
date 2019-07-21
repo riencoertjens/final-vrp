@@ -29,12 +29,12 @@ export const query = graphql`
     page: collectionsJson(post_type: { eq: "page" }, post_name: { eq: $slug }) {
       title: post_title
       content: post_content
-      featured_img {
-        ...HeroImageFragment
-        SEOImage: file {
-          ...SEOImageFragment
-        }
-      }
+      # featured_img {
+      #   ...HeroImageFragment
+      #   SEOImage: file {
+      #     ...SEOImageFragment
+      #   }
+      # }
     }
   }
 `

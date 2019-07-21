@@ -200,24 +200,24 @@ export default HeroSlider
 export const HeroSliderFragment = graphql`
   fragment HeroSliderFragment on CollectionsJsonAcfIn_de_kijker {
     post_title
-    post_name
-    post_type
-    post_excerpt
-    featured_img {
-      smartcrop_image_focus {
-        top
-        left
-      }
-      file {
-        image: childImageSharp {
-          maxWidth: fluid(maxWidth: 1200) {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
-          maxHeight: fluid(maxHeight: 630) {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
-        }
-      }
-    }
+    # post_name
+    # post_type
+    # post_excerpt
+    # featured_img {
+    #   smartcrop_image_focus {
+    #     top
+    #     left
+    #   }
+    #   file {
+    #     image: childImageSharp {
+    #       maxWidth: fluid(maxWidth: 1200) {
+    #         ...GatsbyImageSharpFluid_tracedSVG
+    #       }
+    #       maxHeight: fluid(maxHeight: 630) {
+    #         ...GatsbyImageSharpFluid_tracedSVG
+    #       }
+    #     }
+    #   }
+    # }
   }
 `

@@ -22,9 +22,9 @@ const ThemasPage = () => (
               title: name
               slug
               description
-              featured_img {
-                ...BlockImageFragmentThemas
-              }
+              # featured_img {
+              #   ...BlockImageFragmentThemas
+              # }
               acf {
                 afbeelding
                 inhoud
@@ -65,9 +65,7 @@ const ThemasPage = () => (
           >
             {themas.edges.map(({ node: thema }, i) => {
               const showImage = getShowImage(thema.featured_img)
-              const cropFocus = getCropFocus(
-                thema.featured_img.smartcrop_image_focus
-              )
+              const cropFocus = "50% 50%" // getCropFocus( thema.featured_img.smartcrop_image_focus )
 
               return (
                 <AspectRatioBox

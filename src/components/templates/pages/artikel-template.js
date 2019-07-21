@@ -21,10 +21,11 @@ const ArtikelPageTemplate = ({
       slug,
       acf: {
         beschrijving,
+        pdf_thumb,
         pdf_thumb: {
           localFile: {
             pdf_thumb_original,
-            childImageSharp: { fixed: pdf_thumb },
+            // childImageSharp: { fixed: pdf_thumb },
           },
         },
         pdf,
@@ -140,12 +141,12 @@ export const query = graphql`
     ) {
       title: post_title
       slug: post_name
-      featured_media: featured_img {
-        ...HeroImageFragment
-        SEOImage: file {
-          ...SEOImageFragment
-        }
-      }
+      # featured_media: featured_img {
+      #   ...HeroImageFragment
+      #   SEOImage: file {
+      #     ...SEOImageFragment
+      #   }
+      # }
       acf {
         beschrijving
         ruimte {
@@ -163,11 +164,11 @@ export const query = graphql`
         pdf_thumb {
           localFile: url {
             publicURL
-            childImageSharp {
-              fixed(width: 300) {
-                ...GatsbyImageSharpFixed
-              }
-            }
+            # childImageSharp {
+            #   fixed(width: 300) {
+            #     ...GatsbyImageSharpFixed
+            #   }
+            # }
           }
         }
       }

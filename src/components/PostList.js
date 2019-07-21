@@ -117,9 +117,9 @@ export const PostListFragment = graphql`
       date
       dateFormatted: date(formatString: "D-MM-Y")
     }
-    featured_img {
-      ...BlockImageFragment
-    }
+    # featured_img {
+    #   ...BlockImageFragment
+    # }
   }
 `
 export const BlockImageFragment = graphql`
