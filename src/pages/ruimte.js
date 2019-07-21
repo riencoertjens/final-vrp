@@ -7,15 +7,9 @@ import css from "@emotion/css"
 import { colors, Button, breakpoints } from "../site/styles"
 import GatsbyImage from "gatsby-image"
 import { maanden } from "../site/functions"
-import {
-  AspectRatioImage,
-  AspectRatioBox,
-} from "../components/webhart-components"
+import { AspectRatioImage } from "../components/webhart-components"
 import GatsbyLink from "gatsby-link"
-import {
-  getCropFocus,
-  MqMin,
-} from "../components/webhart-components/style-functions"
+import { MqMin } from "../components/webhart-components/style-functions"
 import WpBlocksContent from "../components/WpBlocksContent"
 
 const AllRuimtePage = () => (
@@ -57,19 +51,19 @@ const AllRuimtePage = () => (
                 date_year: datum_publicatie(formatString: "Y")
                 date_month: datum_publicatie(formatString: "M")
               }
-              # f_media: featured_img {
-              #   ...HeroImageFragment
-              #   cover: file {
-              #     childImageSharp {
-              #       fixed(width: 250) {
-              #         ...GatsbyImageSharpFixed
-              #       }
-              #     }
-              #   }
-              #   SEOImage: file {
-              #     ...SEOImageFragment
-              #   }
-              # }
+              f_media: featured_img {
+                ...HeroImageFragment
+                cover: file {
+                  childImageSharp {
+                    fixed(width: 250) {
+                      ...GatsbyImageSharpFixed
+                    }
+                  }
+                }
+                SEOImage: file {
+                  ...SEOImageFragment
+                }
+              }
             }
           }
         }
@@ -91,20 +85,7 @@ const AllRuimtePage = () => (
             description={post_excerpt}
             image={f_media && f_media.SEOImage.childImageSharp.SEO.src}
           />
-          {f_media ? (
-            <AspectRatioImage
-              ratio={1200 / 630}
-              image={f_media}
-              cropfocus={getCropFocus(f_media.smartcrop_image_focus)}
-            />
-          ) : (
-            <AspectRatioBox
-              ratio={1200 / 630}
-              css={css`
-                background: grey;
-              `}
-            />
-          )}
+          {f_media && <AspectRatioImage ratio={1200 / 630} image={f_media} />}
           <div
             css={css`
               display: grid;
@@ -187,7 +168,7 @@ const LastRuimte = ({ ruimte }) => {
             {maanden[date_month - 1]} {date_year}
           </span>
         </h3>
-        {f_media && <GatsbyImage fixed={f_media.childImageSharp.cover.fixed} />}
+        {f_media && <GatsbyImage fixed={f_media.cover.childImageSharp.fixed} />}
       </div>
       <div>
         <div

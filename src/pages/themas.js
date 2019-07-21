@@ -5,10 +5,7 @@ import SEO from "../components/webhart-components/SEO"
 import GatsbyLink from "gatsby-link"
 import css from "@emotion/css"
 import { colors, boxShadow } from "../site/styles"
-import {
-  getShowImage,
-  getCropFocus,
-} from "../components/webhart-components/style-functions"
+import { getShowImage } from "../components/webhart-components/style-functions"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
 import { AspectRatioBox } from "../components/webhart-components"
 

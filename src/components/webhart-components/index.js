@@ -13,7 +13,7 @@ import {
   breakpoints,
   colors,
 } from "../../site/styles"
-import { getShowImage } from "./style-functions"
+import { getShowImage, getAspectRatioImage } from "./style-functions"
 
 export const OutboundLink = props => (
   <AnalyticsOutboundLink target="_blank" rel="noreferrer noopener" {...props} />
@@ -80,8 +80,9 @@ export const AspectRatioBox = props => {
 }
 
 export const AspectRatioImage = props => {
-  const { image, cropfocus, ratio, ...restProps } = props
-  const showImage = getShowImage(image, ratio)
+  const { image, ratio, ...restProps } = props
+  const showImage = getAspectRatioImage(image, ratio)
+
   return (
     <AspectRatioBox
       ratio={ratio}
@@ -93,7 +94,12 @@ export const AspectRatioImage = props => {
       `}
       {...restProps}
     >
-      <GatsbyImage fluid={showImage} objectPosition={cropfocus} />
+      {showImage && (
+        <GatsbyImage
+          fluid={showImage.image}
+          objectPosition={showImage.cropFocus}
+        />
+      )}
     </AspectRatioBox>
   )
 }

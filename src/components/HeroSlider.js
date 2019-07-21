@@ -67,7 +67,7 @@ class HeroSlider extends Component {
           }
 
           const showImage = getAspectRatioImage(post.featured_img, 1200 / 630)
-          console.log(showImage)
+
           return (
             <div //slide
               key={i}

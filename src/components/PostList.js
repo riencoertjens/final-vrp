@@ -5,10 +5,7 @@ import { AspectRatioBox } from "./webhart-components"
 import GatsbyLink from "gatsby-link"
 import { colors, boxShadow } from "../site/styles"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
-import {
-  getShowImage,
-  getCropFocus,
-} from "./webhart-components/style-functions"
+import { getAspectRatioImage } from "./webhart-components/style-functions"
 
 export const postTypes = {
   ruimte: "ruimte",
@@ -28,8 +25,7 @@ const PostList = ({ posts, multiTypes, type }) => {
       `}
     >
       {posts.edges.map(({ node }, i) => {
-        const showImage = getShowImage(node.featured_img, 1)
-        const cropFocus = getCropFocus(node.featured_img)
+        const showImage = getAspectRatioImage(node.featured_img, 1)
 
         const typeName = postTypes[node.post_type]
 
@@ -62,7 +58,10 @@ const PostList = ({ posts, multiTypes, type }) => {
             to={`/${typeName}/${node.post_name}`}
           >
             {showImage && (
-              <GatsbyImage fluid={showImage} objectPosition={cropFocus} />
+              <GatsbyImage
+                fluid={showImage.image}
+                objectPosition={showImage.cropFocus}
+              />
             )}
 
             <div
@@ -117,9 +116,9 @@ export const PostListFragment = graphql`
       date
       dateFormatted: date(formatString: "D-MM-Y")
     }
-    # featured_img {
-    #   ...BlockImageFragment
-    # }
+    featured_img {
+      ...BlockImageFragment
+    }
   }
 `
 export const BlockImageFragment = graphql`
