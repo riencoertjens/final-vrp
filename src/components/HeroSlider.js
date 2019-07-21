@@ -61,11 +61,6 @@ class HeroSlider extends Component {
         `}
       >
         {posts.map((post, i) => {
-          {
-            /* const showImage = getShowImage(post.featured_img, 1200 / 630)
-          const cropFocus = showImage && post.featured_img.smartcrop_image_focus */
-          }
-
           const showImage = getAspectRatioImage(post.featured_img, 1200 / 630)
 
           return (

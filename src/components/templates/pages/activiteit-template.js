@@ -7,7 +7,6 @@ import FormFields from "../../FormFields"
 import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
 import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
-import { getCropFocus } from "../../webhart-components/style-functions"
 import BreadCrumbs from "../../BreadCrumbs"
 import WpBlocksContent from "../../WpBlocksContent"
 
@@ -57,11 +56,7 @@ const ActivityPageTemplate = ({
       />
 
       {activity.featured_img ? (
-        <AspectRatioImage
-          ratio={1200 / 630}
-          image={activity.featured_img}
-          cropfocus={getCropFocus(activity.featured_img.smartcrop_image_focus)}
-        />
+        <AspectRatioImage ratio={1200 / 630} image={activity.featured_img} />
       ) : (
         <AspectRatioBox
           ratio={1200 / 630}
@@ -167,12 +162,12 @@ export const query = graphql`
           }
         }
       }
-      # featured_img {
-      #   ...HeroImageFragment
-      #   SEOImage: file {
-      #     ...SEOImageFragment
-      #   }
-      # }
+      featured_img {
+        ...HeroImageFragment
+        SEOImage: file {
+          ...SEOImageFragment
+        }
+      }
       acf {
         has_location
         location {

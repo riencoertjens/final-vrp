@@ -4,7 +4,7 @@ import Layout from "../../Layout"
 import SEO from "../../webhart-components/SEO"
 import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
 import css from "@emotion/css"
-import { getCropFocus, MqMin } from "../../webhart-components/style-functions"
+import { MqMin } from "../../webhart-components/style-functions"
 import GatsbyLink from "gatsby-link"
 import GatsbyImage from "gatsby-image"
 import { maanden } from "../../../site/functions"
@@ -35,11 +35,7 @@ const RuimtePageTemplate = ({
         image={f_media && f_media.SEOImage.childImageSharp.SEO.src}
       />
       {f_media ? (
-        <AspectRatioImage
-          ratio={1200 / 630}
-          image={f_media}
-          cropfocus={getCropFocus(f_media.smartcrop_image_focus)}
-        />
+        <AspectRatioImage ratio={1200 / 630} image={f_media} />
       ) : (
         <AspectRatioBox
           ratio={1200 / 630}
@@ -100,7 +96,7 @@ const RuimtePageTemplate = ({
             </div>
           )}
           {f_media && (
-            <GatsbyImage fixed={f_media.childImageSharp.cover.fixed} />
+            <GatsbyImage fixed={f_media.cover.childImageSharp.fixed} />
           )}
         </div>
       </section>
@@ -131,7 +127,7 @@ const RuimtePageTemplate = ({
           `}
         >
           {artikels.edges.map(({ node: artikel }, i) => (
-            <li>
+            <li key={isFinite}>
               <h3 dangerouslySetInnerHTML={{ __html: artikel.title }} />
               <p>{artikel.acf.beschrijving}</p>
               <Button
@@ -166,19 +162,19 @@ export const query = graphql`
       }
       post_excerpt
       content: post_content
-      # f_media: featured_img {
-      #   ...HeroImageFragment
-      #   SEOImage: file {
-      #     ...SEOImageFragment
-      #   }
-      #   cover: file {
-      #     childImageSharp {
-      #       fixed(width: 250) {
-      #         ...GatsbyImageSharpFixed
-      #       }
-      #     }
-      #   }
-      # }
+      f_media: featured_img {
+        ...HeroImageFragment
+        SEOImage: file {
+          ...SEOImageFragment
+        }
+        cover: file {
+          childImageSharp {
+            fixed(width: 250) {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
     }
     artikels: allCollectionsJson(
       filter: {

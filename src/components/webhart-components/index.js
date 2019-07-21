@@ -13,7 +13,7 @@ import {
   breakpoints,
   colors,
 } from "../../site/styles"
-import { getShowImage, getAspectRatioImage } from "./style-functions"
+import { getAspectRatioImage } from "./style-functions"
 
 export const OutboundLink = props => (
   <AnalyticsOutboundLink target="_blank" rel="noreferrer noopener" {...props} />
