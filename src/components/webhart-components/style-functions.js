@@ -14,3 +14,16 @@ export const getCropFocus = smartcrop_image_focus => {
     ? `${smartcrop_image_focus.left}% ${smartcrop_image_focus.top}%`
     : "50% 50%"
 }
+
+export const getAspectRatioImage = (image, ratio) => {
+  const showImage = getShowImage(image, ratio)
+  if (showImage) {
+    const cropFocus = showImage && getCropFocus(image, ratio)
+    return {
+      image: showImage,
+      cropFocus: cropFocus,
+    }
+  } else {
+    return false
+  }
+}

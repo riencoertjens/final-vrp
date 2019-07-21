@@ -1,7 +1,10 @@
 import React, { Component } from "react"
 import { AspectRatioBox } from "./webhart-components"
 import css from "@emotion/css"
-import { getShowImage, MqMin } from "./webhart-components/style-functions"
+import {
+  MqMin,
+  getAspectRatioImage,
+} from "./webhart-components/style-functions"
 import { boxShadow, breakpoints, Button, colors } from "../site/styles"
 import { postTypes } from "./PostList"
 import GatsbyImage from "gatsby-image"
@@ -58,9 +61,13 @@ class HeroSlider extends Component {
         `}
       >
         {posts.map((post, i) => {
-          const showImage = getShowImage(post.featured_img, 1200 / 630)
-          const cropFocus = showImage && post.featured_img.smartcrop_image_focus
+          {
+            /* const showImage = getShowImage(post.featured_img, 1200 / 630)
+          const cropFocus = showImage && post.featured_img.smartcrop_image_focus */
+          }
 
+          const showImage = getAspectRatioImage(post.featured_img, 1200 / 630)
+          console.log(showImage)
           return (
             <div //slide
               key={i}
@@ -151,8 +158,8 @@ class HeroSlider extends Component {
               {showImage && (
                 <GatsbyImage
                   style={{ position: "absolute" }}
-                  fluid={showImage}
-                  objectPosition={cropFocus}
+                  fluid={showImage.image}
+                  objectPosition={showImage.cropFocus}
                 />
               )}
             </div>
@@ -200,24 +207,24 @@ export default HeroSlider
 export const HeroSliderFragment = graphql`
   fragment HeroSliderFragment on CollectionsJsonAcfIn_de_kijker {
     post_title
-    # post_name
-    # post_type
-    # post_excerpt
-    # featured_img {
-    #   smartcrop_image_focus {
-    #     top
-    #     left
-    #   }
-    #   file {
-    #     image: childImageSharp {
-    #       maxWidth: fluid(maxWidth: 1200) {
-    #         ...GatsbyImageSharpFluid_tracedSVG
-    #       }
-    #       maxHeight: fluid(maxHeight: 630) {
-    #         ...GatsbyImageSharpFluid_tracedSVG
-    #       }
-    #     }
-    #   }
-    # }
+    post_name
+    post_type
+    post_excerpt
+    featured_img {
+      smartcrop_image_focus {
+        top
+        left
+      }
+      file {
+        image: childImageSharp {
+          maxWidth: fluid(maxWidth: 1200) {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+          maxHeight: fluid(maxHeight: 630) {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
+    }
   }
 `
