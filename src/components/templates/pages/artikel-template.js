@@ -14,6 +14,7 @@ import SEO from "../../webhart-components/SEO"
 import BreadCrumbs from "../../BreadCrumbs"
 
 const ArtikelPageTemplate = ({
+  data,
   data: {
     artikel: {
       featured_media,
@@ -21,11 +22,10 @@ const ArtikelPageTemplate = ({
       slug,
       acf: {
         beschrijving,
-        pdf_thumb,
         pdf_thumb: {
           localFile: {
-            pdf_thumb_original,
-            // childImageSharp: { fixed: pdf_thumb },
+            publicURL: pdf_thumb_original,
+            childImageSharp: { fixed: pdf_thumb },
           },
         },
         pdf,
@@ -37,7 +37,10 @@ const ArtikelPageTemplate = ({
 }) => {
   const title = `${ruimte.post_title}: ${artikelTitle}`
 
-  const pdf_url = pdf ? pdf.url.publicURL : pdf_thumb_original
+  console.log(pdf_thumb_original)
+
+  const pdf_url = pdf ? pdf.url && pdf.url.publicURL : pdf_thumb_original
+
   return (
     <Layout>
       <SEO
@@ -49,11 +52,7 @@ const ArtikelPageTemplate = ({
         }
       />
       {featured_media ? (
-        <AspectRatioImage
-          ratio={1200 / 630}
-          image={featured_media}
-          cropfocus={getCropFocus(featured_media.smartcrop_image_focus)}
-        />
+        <AspectRatioImage ratio={1200 / 630} image={featured_media} />
       ) : (
         <AspectRatioBox
           ratio={1200 / 630}
@@ -141,12 +140,12 @@ export const query = graphql`
     ) {
       title: post_title
       slug: post_name
-      # featured_media: featured_img {
-      #   ...HeroImageFragment
-      #   SEOImage: file {
-      #     ...SEOImageFragment
-      #   }
-      # }
+      featured_media: featured_img {
+        ...HeroImageFragment
+        SEOImage: file {
+          ...SEOImageFragment
+        }
+      }
       acf {
         beschrijving
         ruimte {
@@ -164,11 +163,11 @@ export const query = graphql`
         pdf_thumb {
           localFile: url {
             publicURL
-            # childImageSharp {
-            #   fixed(width: 300) {
-            #     ...GatsbyImageSharpFixed
-            #   }
-            # }
+            childImageSharp {
+              fixed(width: 300) {
+                ...GatsbyImageSharpFixed
+              }
+            }
           }
         }
       }
