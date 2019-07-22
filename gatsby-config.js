@@ -48,40 +48,40 @@ module.exports = {
     `gatsby-plugin-sharp`,
 
     // seo trickery and analytics
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `${process.env.GA_CODE}`,
-    //     head: true, // Puts tracking script in the head instead of the body
-    //     anonymize: true, // Setting this parameter is optional
-    //     respectDNT: true, // Setting this parameter is also optional
-    //     exclude: [], // Avoids sending pageview hits from custom paths
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-plugin-advanced-sitemap`,
-    //   options: {
-    //     exclude: ["/404"],
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-plugin-robots-txt`,
-    //   options: {
-    //     host: `${config.siteMetadata.siteUrl}`,
-    //     sitemap: `${config.siteMetadata.siteUrl}/sitemap.xml`,
-    //     policy: [
-    //       {
-    //         userAgent: "*",
-    //         disallow: ["/404"],
-    //       },
-    //     ],
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-plugin-manifest`,
-    //   options: config.manifest,
-    // },
-    // "gatsby-plugin-offline",
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: `${process.env.GA_CODE}`,
+        head: true, // Puts tracking script in the head instead of the body
+        anonymize: true, // Setting this parameter is optional
+        respectDNT: true, // Setting this parameter is also optional
+        exclude: [], // Avoids sending pageview hits from custom paths
+      },
+    },
+    {
+      resolve: `gatsby-plugin-advanced-sitemap`,
+      options: {
+        exclude: ["/404"],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: `${config.siteMetadata.siteUrl}`,
+        sitemap: `${config.siteMetadata.siteUrl}/sitemap.xml`,
+        policy: [
+          {
+            userAgent: "*",
+            disallow: ["/404"],
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: config.manifest,
+    },
+    "gatsby-plugin-offline",
 
     // hosting
     "gatsby-plugin-netlify-cache",
