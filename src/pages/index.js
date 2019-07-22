@@ -32,7 +32,7 @@ const IndexPage = () => {
               post_type: { in: ["ruimte", "activity", "prijs", "post"] }
             }
             limit: 9
-            sort: { fields: [acf___datum_publicatie, post_date], order: DESC }
+            sort: { fields: [post_date], order: DESC }
           ) {
             edges {
               node {

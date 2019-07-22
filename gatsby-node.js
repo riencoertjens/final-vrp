@@ -96,17 +96,17 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        // result.data.activities.edges.forEach(({ node }) => {
-        //   createPage({
-        //     path: `/activiteit/${node.slug}`,
-        //     component: path.resolve(
-        //       `./src/components/templates/pages/activiteit-template.js`
-        //     ),
-        //     context: {
-        //       slug: node.slug,
-        //     },
-        //   })
-        // })
+        result.data.activities.edges.forEach(({ node }) => {
+          createPage({
+            path: `/activiteit/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/activiteit-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
         // result.data.ruimte.edges.forEach(({ node }) => {
         //   createPage({
         //     path: `/ruimte/${node.slug}`,
