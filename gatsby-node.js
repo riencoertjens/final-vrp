@@ -6,6 +6,13 @@
 
 const path = require("path")
 
+const ChildProcess = require("child_process")
+exports.onPostBuild = () => {
+  ChildProcess.execSync(
+    "ps aux | grep jest | grep -v grep | awk '{print $2}' | xargs kill"
+  )
+}
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return new Promise((resolve, reject) => {
