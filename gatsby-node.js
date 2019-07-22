@@ -107,17 +107,17 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
-        // result.data.ruimte.edges.forEach(({ node }) => {
-        //   createPage({
-        //     path: `/ruimte/${node.slug}`,
-        //     component: path.resolve(
-        //       `./src/components/templates/pages/ruimte-template.js`
-        //     ),
-        //     context: {
-        //       slug: node.slug,
-        //     },
-        //   })
-        // })
+        result.data.ruimte.edges.forEach(({ node }) => {
+          createPage({
+            path: `/ruimte/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/ruimte-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
         const artikels = result.data.artikels.edges
         artikels.forEach(({ node }, i) => {
           createPage({

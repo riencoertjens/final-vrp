@@ -149,9 +149,6 @@ export const query = graphql`
         ruimte {
           post_title
           post_name
-          acf {
-            nummer
-          }
         }
         pdf {
           url {
