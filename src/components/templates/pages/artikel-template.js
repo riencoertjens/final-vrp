@@ -36,8 +36,6 @@ const ArtikelPageTemplate = ({
 }) => {
   const title = `${ruimte.post_title}: ${artikelTitle}`
 
-  console.log(pdf_thumb_original)
-
   const pdf_url = pdf ? pdf.url && pdf.url.publicURL : pdf_thumb_original
 
   return (
