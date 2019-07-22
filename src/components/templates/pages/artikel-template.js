@@ -13,7 +13,6 @@ import SEO from "../../webhart-components/SEO"
 import BreadCrumbs from "../../BreadCrumbs"
 
 const ArtikelPageTemplate = ({
-  data,
   data: {
     artikel: {
       featured_media,
@@ -35,8 +34,6 @@ const ArtikelPageTemplate = ({
   pageContext: { next, prev },
 }) => {
   const title = `${ruimte.post_title}: ${artikelTitle}`
-
-  const pdf_url = pdf ? pdf.url && pdf.url.publicURL : pdf_thumb_original
 
   return (
     <Layout>
@@ -83,7 +80,11 @@ const ArtikelPageTemplate = ({
             margin-bottom: 1rem;
           `}
         >
-          <a href={pdf_url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={pdf && pdf.url ? pdf.url.publicURL : pdf_thumb_original}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <GatsbyImage fixed={pdf_thumb} />
             <br />
             <span>open pdf</span>
