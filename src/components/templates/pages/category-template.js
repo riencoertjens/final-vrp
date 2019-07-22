@@ -82,7 +82,12 @@ export const query = graphql`
       parent_term
       acf {
         content: inhoud
-        # read_more
+        # afbeelding {
+        #   ...HeroImageFragment
+        #   SEOImage: localFile {
+        #     ...SEOImageFragment
+        #   }
+        # }
       }
     }
   }

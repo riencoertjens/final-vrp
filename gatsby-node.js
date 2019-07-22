@@ -6,12 +6,12 @@
 
 const path = require("path")
 
-const ChildProcess = require("child_process")
-exports.onPostBuild = () => {
-  ChildProcess.execSync(
-    "ps aux | grep jest | grep -v grep | awk '{print $2}' | xargs kill"
-  )
-}
+// const ChildProcess = require("child_process")
+// exports.onPostBuild = () => {
+//   ChildProcess.execSync(
+//     "ps aux | grep jest | grep -v grep | awk '{print $2}' | xargs kill"
+//   )
+// }
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -132,17 +132,17 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
-        // result.data.themas.terms.forEach(({ node: { slug } }) => {
-        //   createPage({
-        //     path: `/themas/${slug}`,
-        //     component: path.resolve(
-        //       `./src/components/templates/pages/thema-template.js`
-        //     ),
-        //     context: {
-        //       slug: slug,
-        //     },
-        //   })
-        // })
+        result.data.themas.edges.forEach(({ node }) => {
+          createPage({
+            path: `/themas/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/thema-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
         result.data.pages.edges.forEach(({ node }) => {
           createPage({
             path: `/${node.slug}`,
