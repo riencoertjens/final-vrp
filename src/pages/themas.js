@@ -19,9 +19,9 @@ const ThemasPage = () => (
               title: name
               slug
               description
-              # featured_img {
-              #   ...BlockImageFragmentThemas
-              # }
+              featured_img {
+                ...BlockImageFragmentThemas
+              }
               acf {
                 afbeelding
                 inhoud

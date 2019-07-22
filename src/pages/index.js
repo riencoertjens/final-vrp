@@ -6,7 +6,7 @@ import PostList from "../components/PostList"
 import css from "@emotion/css"
 import { colors } from "../site/styles"
 import { MqMin } from "../components/webhart-components/style-functions"
-import HeroSlider from "../components/HeroSlider"
+// import HeroSlider from "../components/HeroSlider"
 
 const IndexPage = () => {
   return (
