@@ -147,17 +147,17 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
-        // result.data.categories.edges.forEach(({ node }) => {
-        //   createPage({
-        //     path: `/${node.parent_term}/${node.slug}`,
-        //     component: path.resolve(
-        //       `./src/components/templates/pages/category-template.js`
-        //     ),
-        //     context: {
-        //       slug: node.slug,
-        //     },
-        //   })
-        // })
+        result.data.categories.edges.forEach(({ node }) => {
+          createPage({
+            path: `/${node.parent_term}/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/category-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
         // // create extra page for the start@vrp category
         // createPage({
         //   path: `/startvrp`,

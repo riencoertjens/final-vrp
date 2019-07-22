@@ -159,7 +159,7 @@ const NavItem = ({ children, dropdown, to, alt, linkPrefix }) => (
         <NavDropdown
           css={css`
             grid-template-rows: repeat(
-              ${Math.round(dropdown.length / 3)},
+              ${Math.round(dropdown.length / 3 + 0.5)},
               auto
             );
           `}
@@ -167,11 +167,8 @@ const NavItem = ({ children, dropdown, to, alt, linkPrefix }) => (
           {dropdown.map(({ node: item }, i) => (
             <li key={i}>
               <GatsbyLink
-                to={`/${linkPrefix ? `${linkPrefix}/` : ""}${
-                  item.parent_element && item.parent_term
-                    ? `${item.parent_term}/`
-                    : ""
-                }${item.slug}`}
+                to={`/${linkPrefix && `${linkPrefix}/`}${item.parent_term &&
+                  `${item.parent_term}/`}${item.slug}`}
               >
                 {item.name}
               </GatsbyLink>
