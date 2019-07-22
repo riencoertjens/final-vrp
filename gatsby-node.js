@@ -165,16 +165,16 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
-        // // create extra page for the start@vrp category
-        // createPage({
-        //   path: `/startvrp`,
-        //   component: path.resolve(
-        //     `./src/components/templates/pages/category-template.js`
-        //   ),
-        //   context: {
-        //     slug: `/startvrp`,
-        //   },
-        // })
+        // create extra page for the start@vrp category
+        createPage({
+          path: `/startvrp`,
+          component: path.resolve(
+            `./src/components/templates/pages/category-template.js`
+          ),
+          context: {
+            slug: `startvrp`,
+          },
+        })
       })
     )
   })

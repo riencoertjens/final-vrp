@@ -51,15 +51,15 @@ class SearchPage extends Component {
   }
 
   getSearchResults(paramUrl) {
-    // fetch(`${url}${paramUrl}`)
-    //   .then(response => response.json())
-    //   .then(searchResult => {
-    //     this.setState({
-    //       searchResult: searchResult,
-    //       searching: false,
-    //     })
-    //   })
-    //   .catch(console.error.bind(console))
+    fetch(`${url}${paramUrl}`)
+      .then(response => response.json())
+      .then(searchResult => {
+        this.setState({
+          searchResult: searchResult,
+          searching: false,
+        })
+      })
+      .catch(console.error.bind(console))
   }
 
   componentDidMount() {

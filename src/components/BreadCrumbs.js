@@ -12,8 +12,10 @@ const BreadCrumbs = ({ crumbs, ...restProps }) => {
         background: ${colors.blue};
         color: white;
         padding: 0.5rem 1rem;
-        a {
+        a,
+        span {
           color: white;
+          text-transform: capitalize;
         }
       `}
     >

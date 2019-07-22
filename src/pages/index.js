@@ -44,7 +44,7 @@ const IndexPage = () => {
       `}
       render={({ pageInfo, posts }) => (
         <Layout>
-          <HeroSlider posts={pageInfo.acf.featured_posts} />
+          {/* <HeroSlider posts={pageInfo.acf.featured_posts} /> */}
           <div
             css={css`
               ${MqMin("700px")} {

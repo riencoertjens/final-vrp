@@ -167,8 +167,9 @@ const NavItem = ({ children, dropdown, to, alt, linkPrefix }) => (
           {dropdown.map(({ node: item }, i) => (
             <li key={i}>
               <GatsbyLink
-                to={`/${linkPrefix && `${linkPrefix}/`}${item.parent_term &&
-                  `${item.parent_term}/`}${item.slug}`}
+                to={`/${linkPrefix ? `${linkPrefix}/` : ""}${
+                  item.parent_term ? `${item.parent_term}/` : ""
+                }${item.slug}`}
               >
                 {item.name}
               </GatsbyLink>

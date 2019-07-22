@@ -18,6 +18,7 @@ class HeroSlider extends Component {
     super(props)
 
     this.state = { currentSlide: 0 }
+    this.slideNext = this.slideNext.bind(this)
   }
 
   slideNext(key) {
