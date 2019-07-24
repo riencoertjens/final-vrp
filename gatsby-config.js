@@ -84,14 +84,12 @@ module.exports = {
     "gatsby-plugin-offline",
 
     // hosting
-    "gatsby-plugin-netlify-cache",
     {
       resolve: "gatsby-plugin-netlify", //keep last
       options: {
         headers: {
           "/sw.js": ["Cache-Control: no-cache"], //dont cache the service worker!
         },
-        // mergeSecurityHeaders: false,
       },
     },
   ],
