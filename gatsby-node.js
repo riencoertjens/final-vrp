@@ -6,13 +6,6 @@
 
 const path = require("path")
 
-// const ChildProcess = require("child_process")
-// exports.onPostBuild = () => {
-//   ChildProcess.execSync(
-//     "ps aux | grep jest | grep -v grep | awk '{print $2}' | xargs kill"
-//   )
-// }
-
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return new Promise((resolve, reject) => {
@@ -132,49 +125,49 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
-        // result.data.themas.edges.forEach(({ node }) => {
-        //   createPage({
-        //     path: `/themas/${node.slug}`,
-        //     component: path.resolve(
-        //       `./src/components/templates/pages/thema-template.js`
-        //     ),
-        //     context: {
-        //       slug: node.slug,
-        //     },
-        //   })
-        // })
-        // result.data.pages.edges.forEach(({ node }) => {
-        //   createPage({
-        //     path: `/${node.slug}`,
-        //     component: path.resolve(
-        //       `./src/components/templates/pages/wp-page-template.js`
-        //     ),
-        //     context: {
-        //       slug: node.slug,
-        //     },
-        //   })
-        // })
-        // result.data.categories.edges.forEach(({ node }) => {
-        //   createPage({
-        //     path: `/${node.parent_term}/${node.slug}`,
-        //     component: path.resolve(
-        //       `./src/components/templates/pages/category-template.js`
-        //     ),
-        //     context: {
-        //       slug: node.slug,
-        //     },
-        //   })
-        // })
-        // // create extra page for the start@vrp category
-        // createPage({
-        //   path: `/startvrp`,
-        //   component: path.resolve(
-        //     `./src/components/templates/pages/category-template.js`
-        //   ),
-        //   context: {
-        //     slug: `startvrp`,
-        //   },
-        // })
+        result.data.themas.edges.forEach(({ node }) => {
+          createPage({
+            path: `/themas/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/thema-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
+        result.data.pages.edges.forEach(({ node }) => {
+          createPage({
+            path: `/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/wp-page-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
+        result.data.categories.edges.forEach(({ node }) => {
+          createPage({
+            path: `/${node.parent_term}/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/category-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
+        // create extra page for the start@vrp category
+        createPage({
+          path: `/startvrp`,
+          component: path.resolve(
+            `./src/components/templates/pages/category-template.js`
+          ),
+          context: {
+            slug: `startvrp`,
+          },
+        })
       })
     )
   })
