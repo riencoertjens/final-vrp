@@ -63,7 +63,7 @@ export const query = graphql`
       description
       featured_img {
         ...HeroImageFragment_term
-        file {
+        SEOImage: file {
           ...SEOImageFragment
         }
       }
