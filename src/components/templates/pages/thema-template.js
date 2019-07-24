@@ -19,6 +19,7 @@ const ThemaPageTemplate = ({
         description={thema.description}
         image={
           thema.featured_img &&
+          thema.featured_img.SEOImage &&
           thema.featured_img.SEOImage.childImageSharp.SEO.src
         }
       />
