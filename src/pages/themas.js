@@ -5,7 +5,7 @@ import SEO from "../components/webhart-components/SEO"
 import GatsbyLink from "gatsby-link"
 import css from "@emotion/css"
 import { colors, boxShadow } from "../site/styles"
-import { getShowImage } from "../components/webhart-components/style-functions"
+import { getAspectRatioImage } from "../components/webhart-components/style-functions"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
 import { AspectRatioBox } from "../components/webhart-components"
 
@@ -61,8 +61,7 @@ const ThemasPage = () => (
             `}
           >
             {themas.edges.map(({ node: thema }, i) => {
-              const showImage = getShowImage(thema.featured_img)
-              const cropFocus = "50% 50%" // getCropFocus( thema.featured_img.smartcrop_image_focus )
+              const showImage = getAspectRatioImage(thema.featured_img)
 
               return (
                 <AspectRatioBox
@@ -89,7 +88,10 @@ const ThemasPage = () => (
                   `}
                 >
                   {showImage && (
-                    <GatsbyImage fluid={showImage} objectPosition={cropFocus} />
+                    <GatsbyImage
+                      fluid={showImage.image}
+                      objectPosition={showImage.cropFocus}
+                    />
                   )}
                   <div
                     css={css`
