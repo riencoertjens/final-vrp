@@ -32,8 +32,8 @@ const ActivityCategoryPageTemplate = ({
         title={category.title}
         description={category.description}
       />
-      {category.acf && category.acf.afbeelding && (
-        <AspectRatioImage ratio={1200 / 630} image={category.acf.afbeelding} />
+      {category.featured_img && (
+        <AspectRatioImage ratio={1200 / 630} image={category.featured_img} />
       )}
       <BreadCrumbs crumbs={crumbs} />
       <section>
@@ -80,14 +80,11 @@ export const query = graphql`
       slug
       description
       parent_term
+      featured_img {
+        ...HeroImageFragment_term
+      }
       acf {
         content: inhoud
-        # afbeelding {
-        #   ...HeroImageFragment
-        #   SEOImage: localFile {
-        #     ...SEOImageFragment
-        #   }
-        # }
       }
     }
   }

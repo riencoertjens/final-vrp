@@ -4,9 +4,8 @@ import Layout from "../../Layout"
 import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
 import { colors } from "../../../site/styles"
-import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
+import { AspectRatioImage } from "../../webhart-components"
 import PostList from "../../PostList"
-import { getCropFocus } from "../../webhart-components/style-functions"
 
 const ThemaPageTemplate = ({
   data: { thema, posts },
@@ -19,24 +18,12 @@ const ThemaPageTemplate = ({
         title={thema.title}
         description={thema.description}
         image={
-          thema.acf &&
-          thema.acf.afbeelding &&
-          thema.acf.afbeelding.SEOImage.childImageSharp.SEO.src
+          thema.featured_img &&
+          thema.featured_img.SEOImage.childImageSharp.SEO.src
         }
       />
-      {thema.acf && thema.acf.afbeelding ? (
-        <AspectRatioImage
-          ratio={1200 / 630}
-          image={thema.acf.afbeelding}
-          cropfocus={getCropFocus(thema.acf.afbeelding.smartcrop_image_focus)}
-        />
-      ) : (
-        <AspectRatioBox
-          ratio={1200 / 630}
-          css={css`
-            background: grey;
-          `}
-        />
+      {thema.featured_img && (
+        <AspectRatioImage ratio={1200 / 630} image={thema.featured_img} />
       )}
       <section>
         <h1>{thema.title}</h1>
@@ -74,14 +61,14 @@ export const query = graphql`
       title: name
       slug
       description
+      featured_img {
+        ...HeroImageFragment_term
+        file {
+          ...SEOImageFragment
+        }
+      }
       acf {
         content: inhoud
-        # afbeelding {
-        #   ...HeroImageFragment
-        #   SEOImage: localFile {
-        #     ...SEOImageFragment
-        #   }
-        # }
       }
     }
 

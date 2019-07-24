@@ -79,3 +79,21 @@ export const HeroImageFragment = graphql`
     }
   }
 `
+export const HeroImageFragment_term = graphql`
+  fragment HeroImageFragment_term on TermsJsonFeatured_img {
+    smartcrop_image_focus {
+      top
+      left
+    }
+    file {
+      image: childImageSharp {
+        maxWidth: fluid(maxWidth: 1200) {
+          ...GatsbyImageSharpFluid_tracedSVG
+        }
+        maxHeight: fluid(maxHeight: 630) {
+          ...GatsbyImageSharpFluid_tracedSVG
+        }
+      }
+    }
+  }
+`
