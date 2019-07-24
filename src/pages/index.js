@@ -6,7 +6,7 @@ import PostList from "../components/PostList"
 import css from "@emotion/css"
 import { colors } from "../site/styles"
 import { MqMin } from "../components/webhart-components/style-functions"
-// import HeroSlider from "../components/HeroSlider"
+import HeroSlider from "../components/HeroSlider"
 
 const IndexPage = () => {
   return (
@@ -44,7 +44,7 @@ const IndexPage = () => {
       `}
       render={({ pageInfo, posts }) => (
         <Layout>
-          {/* <HeroSlider posts={pageInfo.acf.featured_posts} /> */}
+          <HeroSlider posts={pageInfo.acf.featured_posts} />
           <div
             css={css`
               ${MqMin("700px")} {
