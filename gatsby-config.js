@@ -16,7 +16,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "wordsby-uploads",
-        path: `${__dirname}/static/wordsby/uploads/`,
+        path: `${__dirname}/wordsby/uploads/`,
       },
     },
     {
