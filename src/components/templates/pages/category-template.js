@@ -14,10 +14,15 @@ const ActivityCategoryPageTemplate = ({
 }) => {
   const crumbs = []
 
-  if (category.parent_term) {
+  if (category.parent_term === "activiteiten") {
     crumbs.push({
       link: "activiteiten",
-      label: category.parent_term,
+      label: "Activiteiten",
+    })
+  }
+  if (category.parent_term === "prijzen") {
+    crumbs.push({
+      label: "Prijzen",
     })
   }
 

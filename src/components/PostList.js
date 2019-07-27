@@ -10,7 +10,7 @@ import { getAspectRatioImage } from "./webhart-components/style-functions"
 export const postTypes = {
   ruimte: "ruimte",
   activity: "activiteit",
-  prijs: "prijsuitreking",
+  prijs: "prijsuitreiking",
   post: "nieuws",
 }
 
@@ -93,6 +93,12 @@ const PostList = ({ posts, multiTypes, type }) => {
                     {node.acf.dateFormatted}
                   </>
                 )}
+                {node.post_type === "post" && (
+                  <>
+                    {multiTypes && " | "}
+                    {node.post_date}
+                  </>
+                )}
               </span>
               <h3>{node.post_title}</h3>
             </div>
@@ -110,11 +116,11 @@ export const PostListFragment = graphql`
     post_title
     post_type
     post_name
-    post_date
+    post_date(formatString: "DD-MM-Y")
     acf {
       datum_publicatie
       date
-      dateFormatted: date(formatString: "D-MM-Y")
+      dateFormatted: date(formatString: "DD-MM-Y")
     }
     featured_img {
       ...BlockImageFragment

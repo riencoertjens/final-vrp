@@ -15,7 +15,7 @@ const BreadCrumbs = ({ crumbs, ...restProps }) => {
         a,
         span {
           color: white;
-          text-transform: capitalize;
+          /* text-transform: capitalize; */
         }
       `}
     >

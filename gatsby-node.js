@@ -23,6 +23,21 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
 
+          prijzen: allCollectionsJson(filter: { post_type: { eq: "prijs" } }) {
+            edges {
+              node {
+                slug: post_name
+              }
+            }
+          }
+          nieuws: allCollectionsJson(filter: { post_type: { eq: "post" } }) {
+            edges {
+              node {
+                slug: post_name
+              }
+            }
+          }
+
           themas: allTermsJson(filter: { taxonomy: { eq: "thema" } }) {
             edges {
               node {
@@ -94,6 +109,28 @@ exports.createPages = ({ graphql, actions }) => {
             path: `/activiteit/${node.slug}`,
             component: path.resolve(
               `./src/components/templates/pages/activiteit-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
+        result.data.prijzen.edges.forEach(({ node }) => {
+          createPage({
+            path: `/prijsuitreiking/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/prijs-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
+        result.data.nieuws.edges.forEach(({ node }) => {
+          createPage({
+            path: `/nieuws/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/nieuws-template.js`
             ),
             context: {
               slug: node.slug,
