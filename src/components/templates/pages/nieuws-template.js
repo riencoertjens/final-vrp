@@ -2,14 +2,8 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../../Layout"
 import BreadCrumbs from "../../BreadCrumbs"
-import { AspectRatioImage, OutboundLink } from "../../webhart-components"
+import { AspectRatioImage } from "../../webhart-components"
 import WpBlocksContent from "../../WpBlocksContent"
-
-const prijsLabels = {
-  "vrp-planningsprijs": "VRP Planningsprijs",
-  "vrp-afstudeerprijs": "VRP Afstudeerprijs",
-  openruimtebeker: "Openruimtebeker",
-}
 
 const NieuwsPageTemplate = ({
   data: {
