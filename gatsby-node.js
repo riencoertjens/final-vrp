@@ -71,7 +71,12 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
 
-          pages: allCollectionsJson(filter: { post_type: { eq: "page" } }) {
+          pages: allCollectionsJson(
+            filter: {
+              post_type: { eq: "page" }
+              post_parent: { post_name: { eq: "home" } }
+            }
+          ) {
             edges {
               node {
                 slug: post_name
