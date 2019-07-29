@@ -9,7 +9,6 @@ const WpPageTemplate = ({
   data: {
     page: { title, content, featured_img },
   },
-  pageContext: { slug },
 }) => (
   <Layout>
     {featured_img && (
