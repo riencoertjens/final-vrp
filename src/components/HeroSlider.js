@@ -201,7 +201,7 @@ class HeroSlider extends Component {
 export default HeroSlider
 
 export const HeroSliderFragment = graphql`
-  fragment HeroSliderFragment on CollectionsJsonAcfIn_de_kijker {
+  fragment HeroSliderFragment on CollectionsJsonAcfSlider_posts {
     post_title
     post_name
     post_type

@@ -22,7 +22,7 @@ const IndexPage = () => {
             }
             post_title
             acf {
-              featured_posts: in_de_kijker {
+              featured_posts: slider_posts {
                 ...HeroSliderFragment
               }
             }
