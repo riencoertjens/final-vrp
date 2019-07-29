@@ -34,7 +34,6 @@ const SiteWrapper = styled("div")`
 
 class Layout extends Component {
   render() {
-    console.log(this.props)
     const { children } = this.props
     return (
       <React.Fragment>
