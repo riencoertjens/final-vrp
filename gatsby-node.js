@@ -30,6 +30,17 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
+
+          vacatures: allCollectionsJson(
+            filter: { post_type: { eq: "job_listing" } }
+          ) {
+            edges {
+              node {
+                slug: post_name
+              }
+            }
+          }
+
           nieuws: allCollectionsJson(filter: { post_type: { eq: "post" } }) {
             edges {
               node {
@@ -42,6 +53,9 @@ exports.createPages = ({ graphql, actions }) => {
             edges {
               node {
                 slug
+                acf {
+                  in_de_kijker
+                }
               }
             }
           }
@@ -74,13 +88,16 @@ exports.createPages = ({ graphql, actions }) => {
           pages: allCollectionsJson(
             filter: {
               post_type: { eq: "page" }
-              post_name: { nin: ["home", "ruimte", "vacatures"] }
+              post_name: { nin: ["ruimte", "vacatures"] }
               post_parent: { post_name: { nin: "vacatures" } }
             }
           ) {
             edges {
               node {
                 slug: post_name
+                acf {
+                  in_de_kijker
+                }
               }
             }
           }
@@ -116,11 +133,24 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
+
         result.data.prijzen.edges.forEach(({ node }) => {
           createPage({
             path: `/prijsuitreiking/${node.slug}`,
             component: path.resolve(
               `./src/components/templates/pages/prijs-template.js`
+            ),
+            context: {
+              slug: node.slug,
+            },
+          })
+        })
+
+        result.data.vacatures.edges.forEach(({ node }) => {
+          createPage({
+            path: `/vacature/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/vacature-template.js`
             ),
             context: {
               slug: node.slug,
@@ -171,19 +201,33 @@ exports.createPages = ({ graphql, actions }) => {
             ),
             context: {
               slug: node.slug,
+              in_de_kijker: node.acf.in_de_kijker || [],
             },
           })
         })
         result.data.pages.edges.forEach(({ node }) => {
-          createPage({
-            path: `/${node.slug}`,
-            component: path.resolve(
-              `./src/components/templates/pages/wp-page-template.js`
-            ),
-            context: {
-              slug: node.slug,
-            },
-          })
+          if (node.slug === "home") {
+            createPage({
+              path: `/`,
+              component: path.resolve(
+                `./src/components/templates/pages/index.js`
+              ),
+              context: {
+                in_de_kijker: node.acf.in_de_kijker || [],
+              },
+            })
+          } else {
+            createPage({
+              path: `/${node.slug}`,
+              component: path.resolve(
+                `./src/components/templates/pages/wp-page-template.js`
+              ),
+              context: {
+                slug: node.slug,
+                in_de_kijker: node.acf.in_de_kijker || [],
+              },
+            })
+          }
         })
         result.data.categories.edges.forEach(({ node }) => {
           createPage({

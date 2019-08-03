@@ -9,9 +9,11 @@ import { getAspectRatioImage } from "./webhart-components/style-functions"
 
 export const postTypes = {
   ruimte: "ruimte",
+  ruimte_artikel: "artikel",
   activity: "activiteit",
   prijs: "prijsuitreiking",
   post: "nieuws",
+  job_listing: "vacature",
 }
 
 const PostList = ({ posts, multiTypes, type }) => {
@@ -28,6 +30,15 @@ const PostList = ({ posts, multiTypes, type }) => {
         const showImage = getAspectRatioImage(node.featured_img, 1)
 
         const typeName = postTypes[node.post_type]
+
+        let itemSlug = "/"
+
+        if (node.post_type === "ruimte_artikel") {
+          itemSlug += `ruimte/${node.acf.ruimte.post_name}/`
+        } else if (node.post_type !== "page") {
+          itemSlug += `${typeName}/`
+        }
+        itemSlug += node.post_name
 
         return (
           <AspectRatioBox
@@ -55,7 +66,7 @@ const PostList = ({ posts, multiTypes, type }) => {
                 }
               }
             `}
-            to={`/${typeName}/${node.post_name}`}
+            to={itemSlug}
           >
             {showImage && (
               <GatsbyImage
@@ -121,12 +132,16 @@ export const PostListFragment = graphql`
       datum_publicatie
       date
       dateFormatted: date(formatString: "DD-MM-Y")
+      ruimte {
+        post_name
+      }
     }
     featured_img {
       ...BlockImageFragment
     }
   }
 `
+
 export const BlockImageFragment = graphql`
   fragment BlockImageFragment on CollectionsJsonFeatured_img {
     smartcrop_image_focus {

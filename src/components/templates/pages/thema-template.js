@@ -8,7 +8,7 @@ import { AspectRatioImage } from "../../webhart-components"
 import PostList from "../../PostList"
 
 const ThemaPageTemplate = ({
-  data: { thema, posts },
+  data: { thema, posts, in_de_kijker },
   pageContext: { slug },
 }) => {
   return (
@@ -43,13 +43,18 @@ const ThemaPageTemplate = ({
           <div dangerouslySetInnerHTML={{ __html: thema.acf.content }} />
         )}
       </section>
-      <section>
-        <h2>in de kijker</h2>
-      </section>
-      <section>
-        <h2>en ook</h2>
-        <PostList posts={posts} />
-      </section>
+      {in_de_kijker.edges.length > 0 && (
+        <section>
+          <h2>in de kijker</h2>
+          <PostList posts={in_de_kijker} multiTypes />
+        </section>
+      )}
+      {posts.edges.length > 0 && (
+        <section>
+          <h2>en ook</h2>
+          <PostList posts={posts} />
+        </section>
+      )}
     </Layout>
   )
 }
@@ -57,7 +62,7 @@ const ThemaPageTemplate = ({
 export default ThemaPageTemplate
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $in_de_kijker: [Int]!) {
     thema: termsJson(slug: { eq: $slug }) {
       title: name
       slug
@@ -73,10 +78,22 @@ export const query = graphql`
       }
     }
 
+    in_de_kijker: allCollectionsJson(
+      filter: { ID: { in: $in_de_kijker } }
+      sort: { fields: post_date, order: DESC }
+    ) {
+      edges {
+        node {
+          ...PostListFragment
+        }
+      }
+    }
+
     posts: allCollectionsJson(
       filter: {
         term_slugs: { in: [$slug] }
         post_type: { in: ["prijs", "activiteit", "post", "page", "ruimte"] }
+        acf: { featured: { eq: true } }
       }
       sort: { fields: post_date, order: DESC }
     ) {
