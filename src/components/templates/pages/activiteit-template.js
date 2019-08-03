@@ -12,6 +12,7 @@ import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
 import BreadCrumbs from "../../BreadCrumbs"
 import WpBlocksContent from "../../WpBlocksContent"
+import { colors, Button } from "../../../site/styles"
 
 const ActivityPageTemplate = ({
   data: { activity },
@@ -130,6 +131,38 @@ const ActivityPageTemplate = ({
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 action="/thanks"
+                css={css`
+                  padding-bottom: 1rem;
+                  label {
+                    display: flex;
+                    flex-wrap: wrap;
+                    width: 100%;
+                    margin-bottom: 1rem;
+                    input,
+                    textarea {
+                      border: 1px solid ${colors.grey};
+                      border-radius: 5px;
+                      padding: 0.25rem;
+                      background: whitesmoke;
+                    }
+                    input {
+                      flex: 1 0 250px;
+                      margin-left: 1rem;
+                    }
+                    input[type="radio"],
+                    input[type="checkbox"] {
+                      flex: 0 0 auto;
+                      margin-left: 0;
+                      margin-right: 1rem;
+                    }
+                    textarea {
+                      margin-top: 0.5rem;
+                      height: 150px;
+                      flex: 1 1 100%;
+                      resize: none;
+                    }
+                  }
+                `}
               >
                 <input type="hidden" name="form-name" value={activity.title} />
                 <input type="hidden" name="bot-field" />
@@ -145,7 +178,7 @@ const ActivityPageTemplate = ({
                     formId={form.id}
                   />
                 ))}
-                <button>send</button>
+                <Button right={1}>verzenden</Button>
               </form>
             </div>
           )}

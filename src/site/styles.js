@@ -85,6 +85,7 @@ export const Button = props => {
   return (
     <TheComponent
       css={css`
+        cursor: pointer;
         background: ${light ? "white" : colors.orange};
         flex: 0 0 auto;
         color: ${light ? colors.orange : "white"};
