@@ -24,21 +24,19 @@ const MapComponent = compose(
   withGoogleMap
 )(props => (
   <GoogleMap defaultOptions={props.defaultOptions}>
-    {props.markerIcon && (
-      <Marker
-        position={props.location}
-        // icon={props.markerIcon}
-        onClick={props.onToggleOpen}
-      >
-        {props.infoWindow && props.isOpen && (
-          <>
-            <InfoWindow onCloseClick={props.onToggleOpen}>
-              {props.infoWindow}
-            </InfoWindow>
-          </>
-        )}
-      </Marker>
-    )}
+    <Marker
+      position={props.location}
+      icon={props.markerIcon || false}
+      onClick={props.onToggleOpen}
+    >
+      {props.infoWindow && props.isOpen && (
+        <>
+          <InfoWindow onCloseClick={props.onToggleOpen}>
+            {props.infoWindow}
+          </InfoWindow>
+        </>
+      )}
+    </Marker>
   </GoogleMap>
 ))
 

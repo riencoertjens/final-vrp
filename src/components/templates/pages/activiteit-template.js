@@ -2,9 +2,12 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../../Layout"
 import GoogleMap from "../../Map"
-import markerIcon from "../../../images/gatsby-icon.png"
 import FormFields from "../../FormFields"
-import { AspectRatioImage, AspectRatioBox } from "../../webhart-components"
+import {
+  AspectRatioImage,
+  AspectRatioBox,
+  OutboundLink,
+} from "../../webhart-components"
 import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
 import BreadCrumbs from "../../BreadCrumbs"
@@ -79,7 +82,7 @@ const ActivityPageTemplate = ({
           <div
             css={css`
               height: 500px;
-              margin: 0 -1rem;
+              margin: 0 -1rem -1rem;
             `}
           >
             <GoogleMap
@@ -88,11 +91,18 @@ const ActivityPageTemplate = ({
                 lat: Number(activity.acf.location.acf.address.lat),
                 lng: Number(activity.acf.location.acf.address.lng),
               }} //{activity.acf.location.acf.address}
-              markerIcon={markerIcon}
               markerInfoComponent={
-                <a href="https://www.google.com/maps/dir//Stationsstraat+95,+9100+Sint-Niklaas,+Belgium">
-                  directions
-                </a>
+                <OutboundLink
+                  href={`https://www.google.com/maps/dir/${
+                    activity.acf.location.acf.address.address !== undefined
+                      ? `/${activity.acf.location.acf.address.address}`
+                      : `/'${activity.acf.location.acf.address.lat},${activity.acf.location.acf.address.lng}'`
+                  }/@${activity.acf.location.acf.address.lat},${
+                    activity.acf.location.acf.address.lng
+                  },15z`}
+                >
+                  wegbeschrijving
+                </OutboundLink>
               }
               options={{
                 center: {
