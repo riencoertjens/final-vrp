@@ -10,7 +10,7 @@ import { getAspectRatioImage } from "./webhart-components/style-functions"
 export const postTypes = {
   ruimte: "ruimte",
   ruimte_artikel: "artikel",
-  activity: "activiteit",
+  activiteit: "activiteit",
   prijs: "prijsuitreiking",
   post: "nieuws",
   blog: "blog",

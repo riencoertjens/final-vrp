@@ -9,7 +9,7 @@ const ActivitiesPage = () => (
     query={graphql`
       {
         activities: allCollectionsJson(
-          filter: { post_type: { in: ["activity"] } }
+          filter: { post_type: { in: ["activiteit"] } }
           sort: { fields: acf___date, order: DESC }
         ) {
           edges {
