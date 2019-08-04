@@ -14,7 +14,7 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(`
         {
           activities: allCollectionsJson(
-            filter: { post_type: { eq: "activity" } }
+            filter: { post_type: { eq: "activiteit" } }
           ) {
             edges {
               node {
