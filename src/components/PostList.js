@@ -13,6 +13,7 @@ export const postTypes = {
   activity: "activiteit",
   prijs: "prijsuitreiking",
   post: "nieuws",
+  blog: "blog",
   job_listing: "vacature",
 }
 
@@ -97,7 +98,10 @@ const PostList = ({ posts, multiTypes, type }) => {
               `}
             >
               <span>
-                {multiTypes && typeName}
+                {typeName === "nieuws"
+                  ? node.acf.nieuws_type_label &&
+                    node.acf.nieuws_type_label + " | "
+                  : multiTypes && typeName}
                 {typeName === "activiteit" && node.acf.date && (
                   <>
                     {multiTypes && " | "}
@@ -129,6 +133,7 @@ export const PostListFragment = graphql`
     post_name
     post_date(formatString: "DD-MM-Y")
     acf {
+      nieuws_type_label
       datum_publicatie
       date
       dateFormatted: date(formatString: "DD-MM-Y")
