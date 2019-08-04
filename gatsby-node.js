@@ -88,7 +88,7 @@ exports.createPages = ({ graphql, actions }) => {
           pages: allCollectionsJson(
             filter: {
               post_type: { eq: "page" }
-              post_name: { nin: ["ruimte", "vacatures"] }
+              post_name: { nin: ["ruimte", "vacatures", "contact"] }
               post_parent: { post_name: { nin: "vacatures" } }
             }
           ) {
