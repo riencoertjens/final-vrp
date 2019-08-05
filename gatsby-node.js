@@ -41,6 +41,15 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
 
+          blogPosts: allCollectionsJson(filter: { post_type: { eq: "blog" } }) {
+            edges {
+              node {
+                title: post_title
+                slug: post_name
+              }
+            }
+          }
+
           nieuws: allCollectionsJson(filter: { post_type: { eq: "post" } }) {
             edges {
               node {
@@ -193,6 +202,21 @@ exports.createPages = ({ graphql, actions }) => {
             },
           })
         })
+        const blogPosts = result.data.blogPosts.edges
+        blogPosts.forEach(({ node }, i) => {
+          createPage({
+            path: `/blog/${node.slug}`,
+            component: path.resolve(
+              `./src/components/templates/pages/blogPost-template.js`
+            ),
+            context: {
+              slug: node.slug,
+              prev: i === 0 ? null : blogPosts[i - 1],
+              next: i === blogPosts.length - 1 ? null : blogPosts[i + 1],
+            },
+          })
+        })
+
         result.data.themas.edges.forEach(({ node }) => {
           createPage({
             path: `/themas/${node.slug}`,
