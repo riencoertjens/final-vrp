@@ -132,12 +132,12 @@ const Footer = () => (
                 margin: 0;
                 padding: 0;
                 margin-right: 2rem;
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
                 font-size: 0.833rem;
                 list-style: none;
                 li {
+                  color: white;
                   line-height: 1.1rem;
-
                   :first-of-type {
                     text-transform: uppercase;
                     font-weight: 700;
@@ -176,6 +176,11 @@ const Footer = () => (
                   </GatsbyLink>
                 </li>
               ))}
+              <li>
+                <GatsbyLink to={`/participatie-studio`}>
+                  Participatie Studio
+                </GatsbyLink>
+              </li>
             </ul>
             <ul>
               <li>
@@ -193,13 +198,16 @@ const Footer = () => (
           <div>
             <ul>
               <li>
+                <GatsbyLink to={`/ruimte`}>Ruimte</GatsbyLink>
+              </li>
+            </ul>
+
+            <ul>
+              <li>
                 <GatsbyLink to={`/over-vrp`}>Over VRP</GatsbyLink>
               </li>
               <li>
                 <GatsbyLink to={`/lid-worden`}>Lid Worden</GatsbyLink>
-              </li>
-              <li>
-                <GatsbyLink to={`/contact`}>Contact</GatsbyLink>
               </li>
               <li>
                 <GatsbyLink to={`/sponsors`}>Sponsors</GatsbyLink>
@@ -208,7 +216,38 @@ const Footer = () => (
                 <GatsbyLink to={`/partners`}>Partners</GatsbyLink>
               </li>
               <li>
+                <GatsbyLink to={`/blog`}>Blog</GatsbyLink>
+              </li>
+              <li>
                 <GatsbyLink to={`/nieuws`}>Nieuws</GatsbyLink>
+              </li>
+              <li>
+                <GatsbyLink to={`/contact`}>Contact</GatsbyLink>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <GatsbyLink to={`/startvrp`}>start@vrp</GatsbyLink>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li>Links</li>
+              <li>
+                <OutboundLink href={`http://www.gecoro.info/`}>
+                  Gecoro
+                </OutboundLink>
+              </li>
+              <li>
+                <OutboundLink href={`https://deruimtenaar.wordpress.com/`}>
+                  Blog - De Ruimtenaar
+                </OutboundLink>
+              </li>
+              <li>
+                <OutboundLink href={`http://www.gecoro.info/`}>
+                  Gecoro
+                </OutboundLink>
               </li>
             </ul>
             <ul>
@@ -216,9 +255,9 @@ const Footer = () => (
                 <GatsbyLink to={`/vacatures`}>Vacatures</GatsbyLink>
               </li>
               <li>
-                <GatsbyLink to={`/vacature-plaatsen`}>
+                <OutboundLink to={`https://webhart.one/vacatures/post-a-job/`}>
                   Vacature plaatsen
-                </GatsbyLink>
+                </OutboundLink>
               </li>
             </ul>
           </div>
