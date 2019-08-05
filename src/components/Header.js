@@ -159,7 +159,7 @@ const NavItem = ({ children, dropdown, to, alt, linkPrefix }) => (
         <NavDropdown
           css={css`
             grid-template-rows: repeat(
-              ${Math.round(dropdown.length / 3 + 0.5)},
+              ${Math.round(dropdown.length / 3)},
               auto
             );
           `}
@@ -348,7 +348,7 @@ class Header extends React.Component {
                   </NavGroup>
                   <NavGroup>
                     <NavItem to="/over-vrp">Over VRP</NavItem>
-                    <NavItem to="/lid-worden">Lid worden</NavItem>
+                    <NavItem to="/over-vrp/lid-worden">Lid worden</NavItem>
                     <NavItem to="/nieuws">nieuws</NavItem>
                     <NavItem to="/blog">blog</NavItem>
                     <NavItem to="/nieuwsbrief">nieuwsbrief</NavItem>
