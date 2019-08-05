@@ -39,7 +39,12 @@ const PostList = ({ posts, multiTypes, type }) => {
         } else if (node.post_type !== "page") {
           itemSlug += `${typeName}/`
         }
-        itemSlug += node.post_name
+
+        if (node.post_type === "page") {
+          itemSlug = node.pathname
+        } else {
+          itemSlug += node.post_name
+        }
 
         return (
           <AspectRatioBox
@@ -131,6 +136,7 @@ export const PostListFragment = graphql`
     post_title
     post_type
     post_name
+    pathname
     post_date(formatString: "DD-MM-Y")
     acf {
       nieuws_type_label
