@@ -52,7 +52,7 @@ const ThemaPageTemplate = ({
       {posts.edges.length > 0 && (
         <section>
           <h2>en ook</h2>
-          <PostList posts={posts} />
+          <PostList posts={posts} multiTypes />
         </section>
       )}
     </Layout>
