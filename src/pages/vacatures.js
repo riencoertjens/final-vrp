@@ -52,7 +52,7 @@ const VacaturesPage = () => {
                     key={i}
                     css={css`
                       padding: 1rem;
-                      :nth-child(odd) {
+                      :nth-of-type(odd) {
                         background: whitesmoke;
                       }
                       display: flex;
