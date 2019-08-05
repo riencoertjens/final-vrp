@@ -2,6 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../../Layout"
 
+import LidwordenForm from "../lid-worden-form"
+import RuimteBestellenForm from "../ruimte-bestellen-form"
+
 import { AspectRatioImage } from "../../webhart-components"
 import WpBlocksContent from "../../WpBlocksContent"
 import PostList from "../../PostList"
@@ -11,6 +14,7 @@ const WpPageTemplate = ({
     page: { title, content, featured_img },
     in_de_kijker,
   },
+  pageContext: { slug: pageSlug },
 }) => (
   <Layout>
     {featured_img && (
@@ -19,6 +23,8 @@ const WpPageTemplate = ({
     <section>
       <h1>{title}</h1>
       <WpBlocksContent content={content} />
+      {pageSlug === "lid-worden" && <LidwordenForm />}
+      {pageSlug === "bestelling-ruimte" && <RuimteBestellenForm />}
     </section>
     {in_de_kijker.edges.length > 0 && (
       <section>
