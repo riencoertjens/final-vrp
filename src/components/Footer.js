@@ -207,13 +207,13 @@ const Footer = () => (
                 <GatsbyLink to={`/over-vrp`}>Over VRP</GatsbyLink>
               </li>
               <li>
-                <GatsbyLink to={`/lid-worden`}>Lid Worden</GatsbyLink>
+                <GatsbyLink to={`/over-vrp/lid-worden`}>Lid Worden</GatsbyLink>
               </li>
               <li>
-                <GatsbyLink to={`/sponsors`}>Sponsors</GatsbyLink>
+                <GatsbyLink to={`/over-vrp/sponsors`}>Sponsors</GatsbyLink>
               </li>
               <li>
-                <GatsbyLink to={`/partners`}>Partners</GatsbyLink>
+                <GatsbyLink to={`/over-vrp/partners`}>Partners</GatsbyLink>
               </li>
               <li>
                 <GatsbyLink to={`/blog`}>Blog</GatsbyLink>
@@ -255,7 +255,9 @@ const Footer = () => (
                 <GatsbyLink to={`/vacatures`}>Vacatures</GatsbyLink>
               </li>
               <li>
-                <OutboundLink to={`https://webhart.one/vacatures/post-a-job/`}>
+                <OutboundLink
+                  href={`https://webhart.one/vacatures/post-a-job/`}
+                >
                   Vacature plaatsen
                 </OutboundLink>
               </li>
