@@ -106,7 +106,7 @@ exports.createPages = ({ graphql, actions }) => {
           ) {
             edges {
               node {
-                slug: post_name
+                slug: pathname
                 acf {
                   in_de_kijker
                 }
@@ -233,7 +233,7 @@ exports.createPages = ({ graphql, actions }) => {
           })
         })
         result.data.pages.edges.forEach(({ node }) => {
-          if (node.slug === "home") {
+          if (node.slug === "/home/") {
             createPage({
               path: `/`,
               component: path.resolve(
@@ -245,7 +245,7 @@ exports.createPages = ({ graphql, actions }) => {
             })
           } else {
             createPage({
-              path: `/${node.slug}`,
+              path: `${node.slug}`,
               component: path.resolve(
                 `./src/components/templates/pages/wp-page-template.js`
               ),
