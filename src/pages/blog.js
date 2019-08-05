@@ -11,13 +11,30 @@ const BlogPage = () => {
     <StaticQuery
       query={graphql`
         {
-          posts: allCollectionsJson(filter: { post_type: { eq: "blog" } }) {
+          posts: allCollectionsJson(
+            filter: { post_type: { eq: "blog" } }
+            sort: { fields: post_date, order: DESC }
+          ) {
             edges {
               node {
                 title: post_title
                 slug: post_name
                 excerpt: post_excerpt
-                post_date(formatString: "DD-MM-Y")
+                date: post_date(formatString: "DD-MM-Y")
+                taxonomies {
+                  thema {
+                    pathname
+                    terms {
+                      pathname
+                      name
+                    }
+                  }
+                  category {
+                    terms {
+                      name
+                    }
+                  }
+                }
                 featured_img {
                   ...BlockImageFragment
                 }
@@ -41,7 +58,7 @@ const BlogPage = () => {
                     display: flex;
                     flex-wrap: wrap;
                     border-top: 2px solid ${colors.blue};
-                    :nth-child(odd) {
+                    :nth-of-type(odd) {
                       background: whitesmoke;
                     }
                     h3 {
@@ -62,20 +79,41 @@ const BlogPage = () => {
                       }
                     `}
                     image={post.featured_img}
-                  ></AspectRatioImage>
+                  />
                   <div
                     css={css`
                       padding: 1rem;
-                      p {
-                        margin: 0;
-                      }
                       flex: 1 0 350px;
                     `}
                   >
                     <GatsbyLink to={`/blog/${post.slug}`}>
                       <h3>{post.title}</h3>
                     </GatsbyLink>
-                    <p>
+                    <p
+                      css={css`
+                        margin-bottom: 1rem;
+                        margin-top: -0.55rem;
+                        font-size: 0.8rem;
+                        color: ${colors.grey};
+                        span,
+                        a {
+                          margin-right: 0.5rem;
+                        }
+                      `}
+                    >
+                      <span>{post.date}</span>
+                      {post.taxonomies.thema &&
+                        post.taxonomies.thema.terms.map(
+                          ({ pathname: slug, name }, i) => (
+                            <GatsbyLink to={slug}>{name}</GatsbyLink>
+                          )
+                        )}
+                    </p>
+                    <p
+                      css={css`
+                        margin: 0;
+                      `}
+                    >
                       {post.excerpt.slice(0, 300)} [...]{" "}
                       <GatsbyLink to={`/blog/${post.slug}`}>
                         lees meer...
