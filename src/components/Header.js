@@ -230,6 +230,18 @@ class Header extends React.Component {
               slug: "startvrp",
             },
           })
+          activiteitenCategories.push({
+            node: {
+              name: "Participatie Studio",
+              slug: "startvrp",
+            },
+          })
+          activiteitenCategories.push({
+            node: {
+              name: "Vormingsreeksen",
+              slug: "vormingsreeksen",
+            },
+          })
 
           return (
             <>
