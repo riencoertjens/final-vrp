@@ -19,7 +19,6 @@ export const getAspectRatioImage = (image, ratio) => {
   const showImage = getShowImage(image, ratio)
   if (showImage) {
     const cropFocus = getCropFocus(image.smartcrop_image_focus)
-    console.log(cropFocus)
     return {
       image: showImage,
       cropFocus: cropFocus,
