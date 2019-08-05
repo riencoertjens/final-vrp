@@ -157,7 +157,7 @@ const Footer = () => (
               </li>
               {themas.map(({ node: thema }, i) => (
                 <li key={i}>
-                  <GatsbyLink to={`/themas/${thema.slug}`}>
+                  <GatsbyLink to={`/thema/${thema.slug}`}>
                     {thema.name}
                   </GatsbyLink>
                 </li>

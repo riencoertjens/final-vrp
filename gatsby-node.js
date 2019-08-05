@@ -41,7 +41,10 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
 
-          blogPosts: allCollectionsJson(filter: { post_type: { eq: "blog" } }) {
+          blogPosts: allCollectionsJson(
+            filter: { post_type: { eq: "blog" } }
+            sort: { fields: post_date, order: DESC }
+          ) {
             edges {
               node {
                 title: post_title
@@ -219,7 +222,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         result.data.themas.edges.forEach(({ node }) => {
           createPage({
-            path: `/themas/${node.slug}`,
+            path: `/thema/${node.slug}`,
             component: path.resolve(
               `./src/components/templates/pages/thema-template.js`
             ),

@@ -14,7 +14,7 @@ const ThemaPageTemplate = ({
   return (
     <Layout>
       <SEO
-        pathname={`themas/${slug}`}
+        pathname={`thema/${slug}`}
         title={thema.title}
         description={thema.description}
         image={

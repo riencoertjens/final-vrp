@@ -66,7 +66,7 @@ const ThemasPage = () => (
               return (
                 <AspectRatioBox
                   component={GatsbyLink}
-                  to={`/themas/${thema.slug}`}
+                  to={`/thema/${thema.slug}`}
                   css={css`
                     .gatsby-image-wrapper {
                       transition: 0.1s;
