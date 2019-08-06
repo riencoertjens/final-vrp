@@ -8,7 +8,7 @@ import { colors } from "../../../site/styles"
 import { MqMin } from "../../webhart-components/style-functions"
 import HeroSlider from "../../HeroSlider"
 
-const IndexPage = ({ data: { pageInfo, posts, in_de_kijker } }) => (
+const IndexPage = ({ data: { pageInfo, in_de_kijker } }) => (
   <Layout>
     <HeroSlider posts={pageInfo.acf.featured_posts} />
     <div
