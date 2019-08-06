@@ -70,10 +70,10 @@ export const HeroImageFragment = graphql`
     file {
       image: childImageSharp {
         maxWidth: fluid(maxWidth: 1200) {
-          ...GatsbyImageSharpFluid_tracedSVG
+          ...GatsbyImageSharpFluid
         }
         maxHeight: fluid(maxHeight: 630) {
-          ...GatsbyImageSharpFluid_tracedSVG
+          ...GatsbyImageSharpFluid
         }
       }
     }
@@ -88,10 +88,10 @@ export const HeroImageFragment_term = graphql`
     file {
       image: childImageSharp {
         maxWidth: fluid(maxWidth: 1200) {
-          ...GatsbyImageSharpFluid_tracedSVG
+          ...GatsbyImageSharpFluid
         }
         maxHeight: fluid(maxHeight: 630) {
-          ...GatsbyImageSharpFluid_tracedSVG
+          ...GatsbyImageSharpFluid
         }
       }
     }
