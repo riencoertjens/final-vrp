@@ -36,6 +36,10 @@ const ActivityCategoryPageTemplate = ({
         pathname={`/${crumbs[0].link}/${slug}`}
         title={category.title}
         description={category.description}
+        image={
+          category.featured_img &&
+          category.featured_img.SEOImage.childImageSharp.SEO.src
+        }
       />
       {category.featured_img && (
         <AspectRatioImage ratio={1200 / 630} image={category.featured_img} />
@@ -87,6 +91,9 @@ export const query = graphql`
       parent_term
       featured_img {
         ...HeroImageFragment_term
+        SEOImage: file {
+          ...SEOImageFragment
+        }
       }
       acf {
         content: inhoud

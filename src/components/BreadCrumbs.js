@@ -22,7 +22,7 @@ const BreadCrumbs = ({ crumbs, ...restProps }) => {
       {crumbs.map((crumb, i) => (
         <React.Fragment key={i}>
           {crumb.link ? (
-            <GatsbyLink to={crumb.link}>{crumb.label}</GatsbyLink>
+            <GatsbyLink to={`/${crumb.link}`}>{crumb.label}</GatsbyLink>
           ) : (
             <span>{crumb.label}</span>
           )}

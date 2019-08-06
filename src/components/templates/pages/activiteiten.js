@@ -18,7 +18,8 @@ const ActivitiesPage = ({ data: { activities, in_de_kijker } }) => {
 
   return (
     <Layout>
-      <SEO title="activiteiten" />
+      <SEO title="activiteiten" pathname={`activiteiten`} />
+
       <section>
         <h1>Activiteiten</h1>
         <h2>in de kijker</h2>

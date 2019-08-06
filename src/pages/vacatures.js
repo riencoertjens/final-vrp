@@ -4,6 +4,7 @@ import Layout from "../components/Layout"
 import GatsbyLink from "gatsby-link"
 import css from "@emotion/css"
 import { colors } from "../site/styles"
+import SEO from "../components/webhart-components/SEO"
 
 const VacaturesPage = () => {
   return (
@@ -34,6 +35,7 @@ const VacaturesPage = () => {
       `}
       render={({ vacatures }) => (
         <Layout>
+          <SEO title="Vacatures" />
           <section>
             <h1>Vacatures</h1>
             <ul

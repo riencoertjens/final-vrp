@@ -12,6 +12,7 @@ import {
   FaInstagram as Instagram,
 } from "react-icons/fa"
 import css from "@emotion/css"
+import SEO from "../../webhart-components/SEO"
 
 const prijsLabels = {
   "vrp-planningsprijs": "VRP Planningsprijs",
@@ -21,10 +22,17 @@ const prijsLabels = {
 
 const PrijsPageTemplate = ({
   data: {
-    page: { title, content, featured_img, acf },
+    page: { title, content, excerpt, featured_img, acf },
   },
+  pageContext: { slug },
 }) => (
   <Layout>
+    <SEO
+      title={title}
+      pathname={`nieuws/${slug}/`}
+      description={excerpt}
+      image={featured_img && featured_img.SEOImage.childImageSharp.SEO.src}
+    />
     {featured_img && (
       <AspectRatioImage ratio={1200 / 630} image={featured_img} />
     )}
@@ -101,6 +109,7 @@ export const query = graphql`
     ) {
       title: post_title
       content: post_content
+      excerpt: post_excerpt
       featured_img {
         ...HeroImageFragment
         SEOImage: file {

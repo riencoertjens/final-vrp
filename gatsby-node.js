@@ -261,6 +261,7 @@ exports.createPages = ({ graphql, actions }) => {
                 `./src/components/templates/pages/wp-page-template.js`
               ),
               context: {
+                pathname: node.pathname,
                 slug: node.slug,
                 in_de_kijker: node.acf.in_de_kijker || [],
               },

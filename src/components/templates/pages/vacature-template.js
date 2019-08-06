@@ -14,13 +14,21 @@ import {
 
 import Obfuscate from "react-obfuscate"
 import css from "@emotion/css"
+import SEO from "../../webhart-components/SEO"
 
 const WpPageTemplate = ({
   data: {
-    page: { title, content, featured_img, job_info },
+    page: { title, content, excerpt, featured_img, job_info },
   },
+  pageContext: { slug },
 }) => (
   <Layout>
+    <SEO
+      title={title}
+      pathname={`vacature/${slug}/`}
+      description={excerpt}
+      image={featured_img && featured_img.SEOImage.childImageSharp.SEO.src}
+    />
     {featured_img && (
       <AspectRatioImage ratio={1200 / 630} image={featured_img} />
     )}
@@ -93,6 +101,7 @@ export const query = graphql`
     ) {
       title: post_title
       content: post_content
+      excerpt: post_excerpt
       job_info {
         filled
         application

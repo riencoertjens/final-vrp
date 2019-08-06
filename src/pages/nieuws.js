@@ -19,6 +19,7 @@ const NieuwsPage = () => {
       `}
       render={({ posts }) => (
         <Layout>
+          <SEO title="Nieuws" />
           <section>
             <h1>Nieuws</h1>
             <PostList posts={posts}></PostList>

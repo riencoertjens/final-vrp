@@ -7,7 +7,10 @@ class ErrorPage extends Component {
   render() {
     return (
       <Layout>
-        <SEO title="error: 404 page not found"></SEO>
+        <SEO
+          title="error: 404 page not found"
+          description="sorry, deze pagina werd niet gevonden."
+        />
         <section>
           <h1>Error: 404 pagina niet gevonden</h1>
           <p>sorry, deze pagina werd niet gevonden.</p>
