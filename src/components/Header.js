@@ -200,7 +200,7 @@ class Header extends React.Component {
               edges {
                 node {
                   name
-                  slug
+                  slug: pathname
                 }
               }
             }
@@ -327,12 +327,7 @@ class Header extends React.Component {
                 />
                 <Nav menuActive={menuActive}>
                   <NavGroup role="menu">
-                    <NavItem
-                      to="/themas"
-                      dropdown={themas}
-                      alt={1}
-                      linkPrefix="themas"
-                    >
+                    <NavItem to="/themas" dropdown={themas} alt={1}>
                       Thema's
                     </NavItem>
                     <NavItem
