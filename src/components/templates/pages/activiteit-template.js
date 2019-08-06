@@ -2,7 +2,6 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../../Layout"
 import GoogleMap from "../../Map"
-import FormFields from "../../FormFields"
 import {
   AspectRatioImage,
   AspectRatioBox,
@@ -12,15 +11,12 @@ import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
 import BreadCrumbs from "../../BreadCrumbs"
 import WpBlocksContent from "../../WpBlocksContent"
-import { colors, Button } from "../../../site/styles"
+import ActivityForm from "../../ActivityForm"
 
 const ActivityPageTemplate = ({
   data: { activity },
   pageContext: { slug },
 }) => {
-  const close_date = new Date(activity.acf.close_date)
-  const now = new Date()
-
   let parentCategory = false
 
   activity.taxonomies.category.terms.forEach(category => {
@@ -118,72 +114,7 @@ const ActivityPageTemplate = ({
           </div>
         </section>
       )}
-      {activity.acf.hasform && (
-        <section>
-          {close_date < now ? (
-            <p>inschrijvingen gesloten</p>
-          ) : (
-            <div>
-              <h3>inschrijven:</h3>
-              <form
-                name={activity.title}
-                method="POST"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
-                action="/thanks"
-                css={css`
-                  padding-bottom: 1rem;
-                  label {
-                    display: flex;
-                    flex-wrap: wrap;
-                    width: 100%;
-                    margin-bottom: 1rem;
-                    input,
-                    textarea {
-                      border: 1px solid ${colors.grey};
-                      border-radius: 5px;
-                      padding: 0.25rem;
-                      background: whitesmoke;
-                    }
-                    input {
-                      flex: 1 0 250px;
-                      margin-left: 1rem;
-                    }
-                    input[type="radio"],
-                    input[type="checkbox"] {
-                      flex: 0 0 auto;
-                      margin-left: 0;
-                      margin-right: 1rem;
-                    }
-                    textarea {
-                      margin-top: 0.5rem;
-                      height: 150px;
-                      flex: 1 1 100%;
-                      resize: none;
-                    }
-                  }
-                `}
-              >
-                <input type="hidden" name="form-name" value={activity.title} />
-                <input type="hidden" name="bot-field" />
-                <input
-                  type="hidden"
-                  name="activity_id"
-                  value={activity.wordpress_id}
-                />
-                {activity.acf.register_form.map((form, i) => (
-                  <FormFields
-                    postContent={form.post_content}
-                    key={i}
-                    formId={form.id}
-                  />
-                ))}
-                <Button right={1}>verzenden</Button>
-              </form>
-            </div>
-          )}
-        </section>
-      )}
+      {activity.acf.hasform && <ActivityForm activity={activity} />}
     </Layout>
   )
 }
