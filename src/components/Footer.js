@@ -88,7 +88,7 @@ const Footer = () => (
               width: auto;
               fill: white;
               :hover {
-                fill: ${colors.blue};
+                fill: ${colors.orange};
               }
             `}
           />
