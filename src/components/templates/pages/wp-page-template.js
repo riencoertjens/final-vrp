@@ -8,6 +8,7 @@ import RuimteBestellenForm from "../ruimte-bestellen-form"
 import { AspectRatioImage } from "../../webhart-components"
 import WpBlocksContent from "../../WpBlocksContent"
 import PostList from "../../PostList"
+import RuimteDigitaalForm from "../ruimte-digitaal-form"
 
 const WpPageTemplate = ({
   data: {
@@ -25,6 +26,7 @@ const WpPageTemplate = ({
       <WpBlocksContent content={content} />
       {pageSlug === "lid-worden" && <LidwordenForm />}
       {pageSlug === "bestelling-ruimte" && <RuimteBestellenForm />}
+      {pageSlug === "toegang-tot-het-archief" && <RuimteDigitaalForm />}
     </section>
     {in_de_kijker.edges.length > 0 && (
       <section>
