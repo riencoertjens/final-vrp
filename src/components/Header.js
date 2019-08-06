@@ -167,8 +167,8 @@ const NavItem = ({ children, dropdown, to, alt, linkPrefix }) => (
           {dropdown.map(({ node: item }, i) => (
             <li key={i}>
               <GatsbyLink
-                to={`/${linkPrefix ? `${linkPrefix}/` : ""}${
-                  item.parent_term ? `${item.parent_term}/` : ""
+                to={`${linkPrefix ? `/${linkPrefix}/` : ""}${
+                  item.parent_term ? `/${item.parent_term}/` : ""
                 }${item.slug}`}
               >
                 {item.name}
@@ -227,19 +227,19 @@ class Header extends React.Component {
           activiteitenCategories.push({
             node: {
               name: "Start@vrp",
-              slug: "startvrp",
+              slug: "/startvrp",
             },
           })
           activiteitenCategories.push({
             node: {
               name: "Participatie Studio",
-              slug: "startvrp",
+              slug: "/participatie-studio",
             },
           })
           activiteitenCategories.push({
             node: {
               name: "Vormingsreeksen",
-              slug: "vormingsreeksen",
+              slug: "/vormingsreeksen",
             },
           })
 
