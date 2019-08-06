@@ -159,6 +159,8 @@ export const query = graphql`
       post_title
       acf {
         featured_artikel
+        date_year: datum_publicatie(formatString: "Y")
+        date_month: datum_publicatie(formatString: "M")
       }
       post_excerpt
       content: post_content
