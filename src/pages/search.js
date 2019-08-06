@@ -3,6 +3,7 @@ import Layout from "../components/Layout"
 import GatsbyLink from "gatsby-link"
 import css from "@emotion/css"
 import { Button } from "../site/styles"
+import SEO from "../components/webhart-components/SEO"
 
 // const urlBase = "https://www.googleapis.com/customsearch/v1/siterestrict"
 const urlBase = "https://www.googleapis.com/customsearch/v1"
@@ -98,6 +99,8 @@ class SearchPage extends Component {
 
     return (
       <Layout showSearch={true}>
+        <SEO title="Zoeken" />
+
         <section>
           <h1>Zoeken</h1>
           {searchQuery ? (
