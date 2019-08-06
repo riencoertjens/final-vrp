@@ -2,6 +2,7 @@ import React from "react"
 import { StaticQuery, graphql } from "gatsby"
 import Layout from "../components/Layout"
 import PostList from "../components/PostList"
+import SEO from "../components/webhart-components/SEO"
 
 const NieuwsPage = () => {
   return (
