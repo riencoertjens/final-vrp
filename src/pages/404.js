@@ -9,7 +9,7 @@ class ErrorPage extends Component {
       <Layout>
         <SEO title="error: 404 page not found"></SEO>
         <section>
-          <h1>Error: 404 pagina niet gevonde</h1>
+          <h1>Error: 404 pagina niet gevonden</h1>
           <p>sorry, deze pagina werd niet gevonden.</p>
           <p>
             Probeer de <GatsbyLink to="/search">zoekfunctie</GatsbyLink> van

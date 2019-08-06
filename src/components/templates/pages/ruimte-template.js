@@ -121,7 +121,7 @@ const RuimtePageTemplate = ({
               padding: 1rem;
               border-bottom: 1px solid ${colors.blue};
             }
-            li:last-child {
+            li:last-of-type {
               border-bottom: none;
             }
           `}

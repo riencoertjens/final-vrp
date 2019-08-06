@@ -99,12 +99,12 @@ export const WpBlockStyle = css`
       flex-basis: calc(50% - 16px);
       flex-grow: 0;
     }
-    .wp-block-column:nth-child(even) {
+    .wp-block-column:nth-of-type(even) {
       margin-left: 32px;
     }
   }
   @media (min-width: 782px) {
-    .wp-block-column:not(:first-child) {
+    .wp-block-column:not(:first-of-type) {
       margin-left: 32px;
     }
   }
@@ -222,23 +222,23 @@ export const WpBlockStyle = css`
     background-color: transparent;
     border-bottom: 1px solid #f3f4f5;
   }
-  .wp-block-table.is-style-stripes tr:nth-child(odd) {
+  .wp-block-table.is-style-stripes tr:nth-of-type(odd) {
     background-color: #f3f4f5;
   }
   .wp-block-table.is-style-stripes.has-subtle-light-gray-background-color
-    tr:nth-child(odd) {
+    tr:nth-of-type(odd) {
     background-color: #f3f4f5;
   }
   .wp-block-table.is-style-stripes.has-subtle-pale-green-background-color
-    tr:nth-child(odd) {
+    tr:nth-of-type(odd) {
     background-color: #e9fbe5;
   }
   .wp-block-table.is-style-stripes.has-subtle-pale-blue-background-color
-    tr:nth-child(odd) {
+    tr:nth-of-type(odd) {
     background-color: #e7f5fe;
   }
   .wp-block-table.is-style-stripes.has-subtle-pale-pink-background-color
-    tr:nth-child(odd) {
+    tr:nth-of-type(odd) {
     background-color: #fcf0ef;
   }
   .wp-block-table.is-style-stripes td {
