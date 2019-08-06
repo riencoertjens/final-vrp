@@ -183,9 +183,7 @@ const Footer = () => (
               </li>
             </ul>
             <ul>
-              <li>
-                <GatsbyLink to={`/prijzen`}>prijzen</GatsbyLink>
-              </li>
+              <li>prijzen</li>
               {prijzen.map(({ node: prijs }, i) => (
                 <li key={i}>
                   <GatsbyLink to={`/prijzen/${prijs.slug}`}>
