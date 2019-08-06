@@ -244,6 +244,16 @@ exports.createPages = ({ graphql, actions }) => {
                 in_de_kijker: node.acf.in_de_kijker || [],
               },
             })
+          } else if (node.slug === "activiteiten") {
+            createPage({
+              path: `/activiteiten`,
+              component: path.resolve(
+                `./src/components/templates/pages/activiteiten.js`
+              ),
+              context: {
+                in_de_kijker: node.acf.in_de_kijker || [],
+              },
+            })
           } else {
             createPage({
               path: `${node.pathname}`,
