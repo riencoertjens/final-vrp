@@ -33,16 +33,16 @@ const IndexPage = ({ data: { pageInfo, in_de_kijker } }) => (
           }
         `}
       >
-        <h2>activiteiten</h2>
+        <h2>over vrp</h2>
         <p>
-          Enim commodo adipisicing dolore dolore aute veniam est aliqua amet
-          cupidatat anim enim nostrud labore. Tempor do magna sint esse et
-          adipisicing. Nostrud irure ut in esse elit ad ad. Ea sit exercitation
-          tempor sint incididunt enim consequat ullamco id amet nisi velit. Enim
-          adipisicing deserunt nisi occaecat cillum est anim laboris Lorem sit
-          exercitation. Quis nulla tempor anim non esse cillum laborum consequat
-          est mollit minim. Aliquip sint pariatur magna Lorem officia velit
-          velit dolore id cupidatat fugiat qui ipsum.
+          De Vlaamse Vereniging voor Ruimte en Planning (VRP vzw) groepeert
+          sinds 1997 ruimtelijk planners en stedenbouwkundigen uit Vlaanderen en
+          Brussel. Onder de ca. 1.000 leden bevinden zich vaklui uit de
+          academische wereld, de privésector en overheidsdiensten. Daarnaast
+          zoekt de VRP ook aansluiting bij disciplines, organisaties en
+          activiteiten op het raakvlak van stedenbouw en ruimtelijke planning
+          (wonen, mobiliteit, open ruimte, economie, wetgeving, monumentenzorg,
+          vastgoed, natuur, toerisme, gezondheid …).
         </p>
       </aside>
     </div>
