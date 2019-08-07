@@ -22,10 +22,15 @@ const RuimtePageTemplate = ({
       content,
     },
     artikels,
+    featured_artikel,
   },
 
-  pageContext: { slug },
+  pageContext: {
+    slug,
+    // featured_artikel
+  },
 }) => {
+  console.log(featured_artikel)
   return (
     <Layout>
       <SEO
@@ -106,7 +111,8 @@ const RuimtePageTemplate = ({
           h1,
           h2,
           h3,
-          p {
+          p,
+          span {
             color: white;
           }
         `}
@@ -117,30 +123,11 @@ const RuimtePageTemplate = ({
             list-style: none;
             margin: 0 -1rem;
             padding: 0;
-            li {
-              padding: 1rem;
-              border-bottom: 1px solid ${colors.blue};
-            }
-            li:last-of-type {
-              border-bottom: none;
-            }
           `}
         >
+          <Artikel artikel={featured_artikel} ruimteSlug={slug} featured={1} />
           {artikels.edges.map(({ node: artikel }, i) => (
-            <li key={isFinite}>
-              <h3 dangerouslySetInnerHTML={{ __html: artikel.title }} />
-              <p>{artikel.acf.beschrijving}</p>
-              <Button
-                right={1}
-                component={GatsbyLink}
-                to={`/ruimte/${slug}/${artikel.slug}`}
-                css={css`
-                  background: ${colors.blue};
-                `}
-              >
-                lees meer
-              </Button>
-            </li>
+            <Artikel artikel={artikel} ruimteSlug={slug} key={i} />
           ))}
         </ul>
       </section>
@@ -151,14 +138,13 @@ const RuimtePageTemplate = ({
 export default RuimtePageTemplate
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $featured_artikel: [Int!]) {
     ruimte: collectionsJson(
       post_type: { eq: "ruimte" }
       post_name: { eq: $slug }
     ) {
       post_title
       acf {
-        featured_artikel
         date_year: datum_publicatie(formatString: "Y")
         date_month: datum_publicatie(formatString: "M")
       }
@@ -178,9 +164,17 @@ export const query = graphql`
         }
       }
     }
+    featured_artikel: collectionsJson(ID: { in: $featured_artikel }) {
+      title: post_title
+      slug: post_name
+      acf {
+        beschrijving
+      }
+    }
     artikels: allCollectionsJson(
       filter: {
         post_type: { eq: "ruimte_artikel" }
+        ID: { nin: $featured_artikel }
         acf: { ruimte: { post_name: { eq: $slug } } }
       }
       sort: { fields: post_name }
@@ -197,3 +191,38 @@ export const query = graphql`
     }
   }
 `
+
+const Artikel = ({ artikel, ruimteSlug, featured }) => (
+  <li
+    css={css`
+      padding: 1rem;
+      border-bottom: 1px solid ${colors.blue};
+      :last-of-type {
+        border-bottom: none;
+      }
+      ${featured &&
+        `
+        background: ${colors.blue};
+      `}
+      span {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+      }
+    `}
+  >
+    {featured && <span>sneak peek | lees het volledige artikel</span>}
+    <h3 dangerouslySetInnerHTML={{ __html: artikel.title }} />
+    <p>{artikel.acf.beschrijving}</p>
+    <Button
+      right={1}
+      component={GatsbyLink}
+      to={`/ruimte/${ruimteSlug}/${artikel.slug}`}
+      css={css`
+        ${!featured && `background: ${colors.blue};`}
+      `}
+    >
+      lees meer
+    </Button>
+  </li>
+)

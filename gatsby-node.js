@@ -10,6 +10,7 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return new Promise((resolve, reject) => {
     // Query for markdown nodes to use in creating pages.
+
     resolve(
       graphql(`
         {
@@ -77,6 +78,9 @@ exports.createPages = ({ graphql, actions }) => {
             edges {
               node {
                 slug: post_name
+                acf {
+                  featured_artikel
+                }
               }
             }
           }
@@ -190,6 +194,7 @@ exports.createPages = ({ graphql, actions }) => {
             ),
             context: {
               slug: node.slug,
+              featured_artikel: node.acf.featured_artikel || [],
             },
           })
         })
