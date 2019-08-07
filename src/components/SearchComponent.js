@@ -40,7 +40,7 @@ class SearchComponent extends Component {
             `}
             onSubmit={event => {
               event.preventDefault()
-              navigate(`/search?q=${encodeURI(event.target.query.value)}`)
+              navigate(`/zoeken?q=${encodeURI(event.target.query.value)}`)
             }}
           >
             <input type="text" name="query" />

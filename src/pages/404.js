@@ -15,7 +15,7 @@ class ErrorPage extends Component {
           <h1>Error: 404 pagina niet gevonden</h1>
           <p>sorry, deze pagina werd niet gevonden.</p>
           <p>
-            Probeer de <GatsbyLink to="/search">zoekfunctie</GatsbyLink> van
+            Probeer de <GatsbyLink to="/zoeken">zoekfunctie</GatsbyLink> van
             deze site om de gewenste pagina terug te vinden.
           </p>
         </section>

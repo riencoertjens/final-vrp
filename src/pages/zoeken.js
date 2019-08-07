@@ -167,7 +167,7 @@ class SearchPage extends Component {
                           <Button
                             left
                             component={GatsbyLink}
-                            to={`/search?q=${searchQuery.params.q}&start=${queries.previousPage[0].startIndex}`}
+                            to={`/zoeken?q=${searchQuery.params.q}&start=${queries.previousPage[0].startIndex}`}
                           >
                             vorige
                           </Button>
@@ -180,7 +180,7 @@ class SearchPage extends Component {
                                 <span>{i + 1}</span>
                               ) : (
                                 <GatsbyLink
-                                  to={`/search?q=${
+                                  to={`/zoeken?q=${
                                     searchQuery.params.q
                                   }&start=${i * 10 + 1}`}
                                 >
@@ -193,7 +193,7 @@ class SearchPage extends Component {
                           <Button
                             right={1}
                             component={GatsbyLink}
-                            to={`/search?q=${searchQuery.params.q}&start=${queries.nextPage[0].startIndex}`}
+                            to={`/zoeken?q=${searchQuery.params.q}&start=${queries.nextPage[0].startIndex}`}
                           >
                             volgende
                           </Button>
