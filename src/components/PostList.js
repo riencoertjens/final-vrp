@@ -6,6 +6,7 @@ import GatsbyLink from "gatsby-link"
 import { colors, boxShadow } from "../site/styles"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
 import { getAspectRatioImage } from "./webhart-components/style-functions"
+import { ReactComponent as VRPLabel } from "../images/svg/vrp-label.svg"
 
 export const postTypes = {
   ruimte: "ruimte",
@@ -91,6 +92,8 @@ const PostList = ({ posts, multiTypes, type }) => {
                 transition: 0.2s;
                 h3 {
                   margin-bottom: 0;
+                  font-size: 1rem;
+                  color: black;
                 }
                 span {
                   color: ${colors.grey};
@@ -100,9 +103,15 @@ const PostList = ({ posts, multiTypes, type }) => {
                   font-size: 0.666rem;
                 }
                 color: black;
+                svg {
+                  height: 1rem;
+                  margin-right: 0.25rem;
+                  vertical-align: bottom;
+                }
               `}
             >
               <span>
+                {node.acf.is_vrp && <VRPLabel />}
                 {typeName === "nieuws"
                   ? node.acf.nieuws_type_label &&
                     node.acf.nieuws_type_label + " | "
@@ -141,6 +150,7 @@ export const PostListFragment = graphql`
     acf {
       nieuws_type_label
       datum_publicatie
+      is_vrp
       date
       dateFormatted: date(formatString: "DD-MM-Y")
       ruimte {
