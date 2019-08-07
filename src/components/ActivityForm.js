@@ -13,7 +13,7 @@ class ActivityForm extends Component {
 
   fetchPlaces = id => {
     fetch(
-      `http://webhart.one/wp-json/vrp-api/v1/activity/submission-count/${id}`
+      `https://webhart.one/wp-json/vrp-api/v1/activity/submission-count/${id}`
     )
       .then(response => response.json())
       .then(placesData => {
