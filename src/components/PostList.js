@@ -88,7 +88,7 @@ const PostList = ({ posts, multiTypes, type }) => {
                 width: 100%;
                 bottom: 0;
                 background: white;
-                padding: 0.25rem 0.5rem 0.5rem;
+                padding: 0.5rem;
                 transition: 0.2s;
                 h3 {
                   margin-bottom: 0;
@@ -98,13 +98,16 @@ const PostList = ({ posts, multiTypes, type }) => {
                 span {
                   color: ${colors.grey};
                   font-weight: 300;
+                  line-height: 1;
+                  margin-bottom: 0.25rem;
+                  display: block;
                   text-transform: uppercase;
                   letter-spacing: 0.16rem;
-                  font-size: 0.666rem;
+                  font-size: ${2 / 3}rem;
                 }
                 color: black;
                 svg {
-                  height: 1rem;
+                  height: 0.75rem;
                   margin-right: 0.25rem;
                   vertical-align: bottom;
                 }
