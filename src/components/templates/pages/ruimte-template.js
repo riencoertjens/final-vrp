@@ -25,10 +25,7 @@ const RuimtePageTemplate = ({
     featured_artikel,
   },
 
-  pageContext: {
-    slug,
-    // featured_artikel
-  },
+  pageContext: { slug },
 }) => {
   console.log(featured_artikel)
   return (
@@ -125,7 +122,7 @@ const RuimtePageTemplate = ({
             padding: 0;
           `}
         >
-          <Artikel artikel={featured_artikel} ruimteSlug={slug} featured={1} />
+          {featured_artikel && <Artikel artikel={featured_artikel} ruimteSlug={slug} featured={1} />}
           {artikels.edges.map(({ node: artikel }, i) => (
             <Artikel artikel={artikel} ruimteSlug={slug} key={i} />
           ))}
