@@ -106,6 +106,9 @@ const PostList = ({ posts, multiTypes, type }) => {
                   text-transform: uppercase;
                   letter-spacing: 0.16rem;
                   font-size: ${2 / 3}rem;
+                  &:empty {
+                    margin: 0;
+                  }
                 }
                 color: black;
                 svg {
