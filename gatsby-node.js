@@ -57,6 +57,7 @@ exports.createPages = ({ graphql, actions }) => {
             edges {
               node {
                 slug: post_name
+                pathname
               }
             }
           }
@@ -172,7 +173,7 @@ exports.createPages = ({ graphql, actions }) => {
         })
         result.data.nieuws.edges.forEach(({ node }) => {
           createPage({
-            path: `/nieuws/${node.slug}`,
+            path: `/nieuws/${node.pathname}`,
             component: path.resolve(
               `./src/components/templates/pages/nieuws-template.js`
             ),

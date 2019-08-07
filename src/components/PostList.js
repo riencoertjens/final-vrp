@@ -43,6 +43,8 @@ const PostList = ({ posts, multiTypes, type }) => {
 
         if (node.post_type === "page") {
           itemSlug = node.pathname
+        } else if (node.post_type === "post") {
+          itemSlug += node.pathname
         } else {
           itemSlug += node.post_name
         }
