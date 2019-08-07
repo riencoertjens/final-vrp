@@ -1,3 +1,4 @@
+/admin/* /wp-admin/*
 /wp-admin/* https://webhart.one/wp-admin/:splat 200
 
 
