@@ -148,7 +148,10 @@ const PostList = ({ posts, multiTypes, type }) => {
                   </>
                 )}
               </span>
-              <h3>{node.post_title}</h3>
+              <h3>
+                {node.post_title}
+                {node.acf.subject && ` - ${node.acf.subject}`}
+              </h3>
             </div>
           </AspectRatioBox>
         )
@@ -175,6 +178,7 @@ export const PostListFragment = graphql`
       ruimte {
         post_name
       }
+      subject
       cover {
         url {
           childImageSharp {
