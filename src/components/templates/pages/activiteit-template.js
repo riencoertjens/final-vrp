@@ -48,7 +48,7 @@ const ActivityPageTemplate = ({
       <SEO
         pathname={`activiteit/${slug}`}
         title={activity.title}
-        description={activity.content}
+        description={activity.excerpt}
         image={
           activity.featured_img &&
           activity.featured_img.SEOImage.childImageSharp.SEO.src
@@ -126,6 +126,7 @@ export const query = graphql`
     activity: collectionsJson(post_name: { eq: $slug }) {
       title: post_title
       content: post_content
+      excerpt: post_excerpt
       wordpress_id: ID
       taxonomies {
         category {

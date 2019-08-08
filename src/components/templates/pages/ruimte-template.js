@@ -17,6 +17,7 @@ const RuimtePageTemplate = ({
     ruimte: {
       post_title,
       acf: {
+        subject,
         date_year,
         date_month,
         cover: { cover, SEOImage },
@@ -28,7 +29,6 @@ const RuimtePageTemplate = ({
     artikels,
     featured_artikel,
   },
-
   pageContext: { slug },
 }) => {
   console.log(featured_artikel)
@@ -36,7 +36,7 @@ const RuimtePageTemplate = ({
     <Layout>
       <SEO
         pathname={`ruimte/${slug}`}
-        title={post_title}
+        title={`${post_title}${subject && ` - ${subject}`}`}
         description={post_excerpt}
         image={SEOImage && SEOImage.childImageSharp.SEO.src}
       />
@@ -72,6 +72,7 @@ const RuimtePageTemplate = ({
         >
           {maanden[date_month - 1]} {date_year}
         </span>
+        {subject && <h2>{subject}</h2>}
         <div
           css={css`
             display: flex;
@@ -150,6 +151,7 @@ export const query = graphql`
     ) {
       post_title
       acf {
+        subject
         cover {
           SEOImage: url {
             ...SEOImageFragment
@@ -185,6 +187,7 @@ export const query = graphql`
       title: post_title
       slug: post_name
       acf {
+        subject
         beschrijving
       }
     }
