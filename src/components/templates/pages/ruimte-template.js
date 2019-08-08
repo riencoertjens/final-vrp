@@ -122,7 +122,13 @@ const RuimtePageTemplate = ({
             padding: 0;
           `}
         >
-          {featured_artikel && <Artikel artikel={featured_artikel} ruimteSlug={slug} featured={1} />}
+          {featured_artikel && (
+            <Artikel
+              artikel={featured_artikel}
+              ruimteSlug={slug}
+              featured={1}
+            />
+          )}
           {artikels.edges.map(({ node: artikel }, i) => (
             <Artikel artikel={artikel} ruimteSlug={slug} key={i} />
           ))}
@@ -142,6 +148,18 @@ export const query = graphql`
     ) {
       post_title
       acf {
+        cover {
+          SEOImage: file {
+            ...SEOImageFragment
+          }
+          cover: file {
+            childImageSharp {
+              fixed(width: 250) {
+                ...GatsbyImageSharpFixed
+              }
+            }
+          }
+        }
         date_year: datum_publicatie(formatString: "Y")
         date_month: datum_publicatie(formatString: "M")
       }
