@@ -110,7 +110,7 @@ class HeroSlider extends Component {
                     max-width: calc(100% - 4rem);
                   }
                   ${MqMin(breakpoints[1])} {
-                    width: 300px;
+                    width: 600px;
                     left: ${300 / 4}px;
                     bottom: ${300 / 4}px;
                   }
@@ -120,12 +120,10 @@ class HeroSlider extends Component {
                   css={css`
                     margin: 0;
                     flex: 0 1 auto;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
+                    color: black;
+
                     ${MqMin(breakpoints[0])} {
                       font-size: 1.5rem;
-                      color: black;
                       text-shadow: unset;
                     }
                   `}
