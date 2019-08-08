@@ -48,21 +48,23 @@ const AllRuimtePage = () => (
               acf {
                 datum_publicatie
                 nummer
+                cover {
+                  url {
+                    childImageSharp {
+                      fixed(width: 250) {
+                        ...GatsbyImageSharpFixed
+                      }
+                    }
+                  }
+                  SEOImage: url {
+                    ...SEOImageFragment
+                  }
+                }
                 date_year: datum_publicatie(formatString: "Y")
                 date_month: datum_publicatie(formatString: "M")
               }
               f_media: featured_img {
                 ...HeroImageFragment
-                cover: file {
-                  childImageSharp {
-                    fixed(width: 250) {
-                      ...GatsbyImageSharpFixed
-                    }
-                  }
-                }
-                SEOImage: file {
-                  ...SEOImageFragment
-                }
               }
             }
           }
@@ -75,7 +77,14 @@ const AllRuimtePage = () => (
       lastRuimteEdges,
     }) => {
       const lastRuimte = lastRuimteEdges.edges[0].node
-      const { f_media } = lastRuimte
+      const {
+        f_media,
+        acf: {
+          cover: {
+            url: { SEOImage },
+          },
+        },
+      } = lastRuimte
 
       return (
         <Layout>
@@ -83,7 +92,7 @@ const AllRuimtePage = () => (
             title="Ruimte magazine"
             pathname="/ruimte"
             description={post_excerpt}
-            image={f_media && f_media.SEOImage.childImageSharp.SEO.src}
+            image={SEOImage && SEOImage.childImageSharp.SEO.src}
           />
           {f_media && <AspectRatioImage ratio={1200 / 630} image={f_media} />}
           <div
@@ -129,7 +138,11 @@ const LastRuimte = ({ ruimte }) => {
     post_title,
     post_content,
     post_name,
-    acf: { date_year, date_month },
+    acf: {
+      date_year,
+      date_month,
+      cover: { url: cover },
+    },
     f_media,
   } = ruimte
   return (
@@ -168,7 +181,7 @@ const LastRuimte = ({ ruimte }) => {
             {maanden[date_month - 1]} {date_year}
           </span>
         </h3>
-        {f_media && <GatsbyImage fixed={f_media.cover.childImageSharp.fixed} />}
+        {f_media && <GatsbyImage fixed={cover.childImageSharp.fixed} />}
       </div>
       <div>
         <div

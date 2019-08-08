@@ -29,7 +29,18 @@ const PostList = ({ posts, multiTypes, type }) => {
       `}
     >
       {posts.edges.map(({ node }, i) => {
-        const showImage = getAspectRatioImage(node.featured_img, 1)
+        let showImage = null
+
+        if (node.post_type === "ruimte" && node.acf.cover.url.childImageSharp) {
+          showImage = {
+            image: node.acf.cover.url.childImageSharp.fluid,
+            cropFocus: "0 50%",
+          }
+        }
+
+        if (!showImage) {
+          showImage = getAspectRatioImage(node.featured_img, 1)
+        }
 
         const typeName = postTypes[node.post_type]
 
@@ -163,6 +174,15 @@ export const PostListFragment = graphql`
       dateFormatted: date(formatString: "DD-MM-Y")
       ruimte {
         post_name
+      }
+      cover {
+        url {
+          childImageSharp {
+            fluid(maxWidth: 500) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
     featured_img {

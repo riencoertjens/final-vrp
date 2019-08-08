@@ -16,7 +16,11 @@ const RuimtePageTemplate = ({
   data: {
     ruimte: {
       post_title,
-      acf: { date_year, date_month },
+      acf: {
+        date_year,
+        date_month,
+        cover: { cover, SEOImage },
+      },
       f_media,
       post_excerpt,
       content,
@@ -34,7 +38,7 @@ const RuimtePageTemplate = ({
         pathname={`ruimte/${slug}`}
         title={post_title}
         description={post_excerpt}
-        image={f_media && f_media.SEOImage.childImageSharp.SEO.src}
+        image={SEOImage && SEOImage.childImageSharp.SEO.src}
       />
       {f_media ? (
         <AspectRatioImage ratio={1200 / 630} image={f_media} />
@@ -97,9 +101,7 @@ const RuimtePageTemplate = ({
               content goes here
             </div>
           )}
-          {f_media && (
-            <GatsbyImage fixed={f_media.cover.childImageSharp.fixed} />
-          )}
+          {cover && <GatsbyImage fixed={cover.childImageSharp.fixed} />}
         </div>
       </section>
       <section
@@ -149,10 +151,10 @@ export const query = graphql`
       post_title
       acf {
         cover {
-          SEOImage: file {
+          SEOImage: url {
             ...SEOImageFragment
           }
-          cover: file {
+          cover: url {
             childImageSharp {
               fixed(width: 250) {
                 ...GatsbyImageSharpFixed
