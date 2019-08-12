@@ -36,7 +36,7 @@ const RuimtePageTemplate = ({
     <Layout>
       <SEO
         pathname={`ruimte/${slug}`}
-        title={`${post_title}${subject && ` - ${subject}`}`}
+        title={`${post_title}${subject ? ` - ${subject}` : ""}`}
         description={post_excerpt}
         image={SEOImage && SEOImage.childImageSharp.SEO.src}
       />
