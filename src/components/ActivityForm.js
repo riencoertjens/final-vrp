@@ -37,16 +37,15 @@ class ActivityForm extends Component {
           this.fetchPlaces(this.props.activity.wordpress_id)
         }, 5000)
         return (
-          <section>
+          <section id="inschrijvingsformulier">
             <h3>inschrijven.</h3>
             <p>formulier wordt geladen...</p>
           </section>
         )
       } else {
-        console.log(places)
         if (places.places < 0 || places.count < places.places) {
           return (
-            <section>
+            <section id="inschrijvingsformulier">
               <h3>inschrijven:</h3>
               <p
                 css={css`
@@ -115,7 +114,7 @@ class ActivityForm extends Component {
           )
         } else {
           return (
-            <section>
+            <section id="inschrijvingsformulier">
               <h3>inschrijven.</h3>
               <p>helaas, inschrijvingen voor deze activiteit zijn volzet</p>
             </section>
@@ -124,7 +123,7 @@ class ActivityForm extends Component {
       }
     } else {
       return (
-        <section>
+        <section id="inschrijvingsformulier">
           <h3>inschrijven.</h3>
           <p>helaas, inschrijvingen voor deze activiteit zijn gesloten</p>
         </section>

@@ -7,6 +7,7 @@ import {
   AspectRatioBox,
   OutboundLink,
 } from "../../webhart-components"
+import { Button } from "../../../site/styles"
 import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
 import BreadCrumbs from "../../BreadCrumbs"
@@ -19,11 +20,12 @@ const ActivityPageTemplate = ({
 }) => {
   let parentCategory = false
 
-  activity.taxonomies.category.terms.forEach(category => {
-    if (category.parent === "activiteiten") {
-      parentCategory = category
-    }
-  })
+  activity.taxonomies.category &&
+    activity.taxonomies.category.terms.forEach(category => {
+      if (category.parent === "activiteiten") {
+        parentCategory = category
+      }
+    })
 
   const crumbs = [
     {
@@ -68,7 +70,24 @@ const ActivityPageTemplate = ({
       <BreadCrumbs crumbs={crumbs} />
       <section>
         <h1>{activity.title}</h1>
+        {activity.acf.hasform && (
+          <Button
+            right={1}
+            css={css`
+              margin-bottom: 1rem;
+            `}
+            component="a"
+            href="#inschrijvingsformulier"
+          >
+            inschrijven
+          </Button>
+        )}
         <WpBlocksContent content={activity.content} />
+        {activity.acf.hasform && (
+          <Button component="a" href="#inschrijvingsformulier" right={1}>
+            inschrijven
+          </Button>
+        )}
       </section>
 
       {activity.acf.has_location && (
