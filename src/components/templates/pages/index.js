@@ -7,8 +7,10 @@ import css from "@emotion/css"
 import { colors } from "../../../site/styles"
 import { MqMin } from "../../webhart-components/style-functions"
 import HeroSlider from "../../HeroSlider"
+import GatsbyLink from "gatsby-link"
+import ActivityList from "../../ActivityList"
 
-const IndexPage = ({ data: { pageInfo, in_de_kijker } }) => (
+const IndexPage = ({ data: { pageInfo, in_de_kijker, activities } }) => (
   <Layout>
     <HeroSlider posts={pageInfo.acf.featured_posts} />
     <div
@@ -28,21 +30,20 @@ const IndexPage = ({ data: { pageInfo, in_de_kijker } }) => (
           padding: 1rem;
           color: white;
           h2 {
-            color: inherit;
+            color: white;
             margin-top: 0;
+          }
+          a {
+            color: white;
+            text-decoration: none;
           }
         `}
       >
-        <h2>over vrp</h2>
+        <GatsbyLink to="/activiteiten">
+          <h2>Activiteiten</h2>
+        </GatsbyLink>
         <p>
-          De Vlaamse Vereniging voor Ruimte en Planning (VRP vzw) groepeert
-          sinds 1997 ruimtelijk planners en stedenbouwkundigen uit Vlaanderen en
-          Brussel. Onder de ca. 1.000 leden bevinden zich vaklui uit de
-          academische wereld, de privésector en overheidsdiensten. Daarnaast
-          zoekt de VRP ook aansluiting bij disciplines, organisaties en
-          activiteiten op het raakvlak van stedenbouw en ruimtelijke planning
-          (wonen, mobiliteit, open ruimte, economie, wetgeving, monumentenzorg,
-          vastgoed, natuur, toerisme, gezondheid …).
+          <ActivityList homePage activities={activities} />
         </p>
       </aside>
     </div>
@@ -64,6 +65,26 @@ export const homepagequery = graphql`
       acf {
         featured_posts: slider_posts {
           ...HeroSliderFragment
+        }
+      }
+    }
+
+    activities: allCollectionsJson(
+      filter: { post_type: { in: ["activiteit"] } }
+      sort: { fields: acf___date, order: ASC }
+    ) {
+      edges {
+        node {
+          title: post_title
+          slug: post_name
+          pathname
+          acf {
+            date
+            is_vrp
+            date_end
+            date_formatted: date(formatString: "DD-MM-Y")
+            end_date_formatted: date_end(formatString: "DD-MM-Y")
+          }
         }
       }
     }

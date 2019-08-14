@@ -125,12 +125,10 @@ const PostList = ({ posts, multiTypes, type }) => {
                 svg {
                   height: 0.75rem;
                   margin-right: 0.25rem;
-                  vertical-align: bottom;
                 }
               `}
             >
               <span>
-                {node.acf.is_vrp && <VRPLabel />}
                 {typeName === "nieuws"
                   ? node.acf.nieuws_type_label &&
                     node.acf.nieuws_type_label + " | "
@@ -149,6 +147,7 @@ const PostList = ({ posts, multiTypes, type }) => {
                 )}
               </span>
               <h3>
+                {node.acf.is_vrp && <VRPLabel />}
                 {node.post_title}
                 {node.acf.subject && ` - ${node.acf.subject}`}
               </h3>

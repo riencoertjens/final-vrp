@@ -14,18 +14,20 @@ const ActivitiesPage = ({ data: { activities, in_de_kijker } }) => {
       <section>
         <h1>Activiteiten</h1>
         <h2>in de kijker</h2>
-        <PostList posts={in_de_kijker} />
+        <PostList posts={in_de_kijker} multiTypes />
       </section>
-      <section
-        css={css`
-          ul {
-            list-style: none;
-            padding: 0;
-          }
-        `}
-      >
+      <section>
         <h2>kalender</h2>
-        <ActivityList activities={activities} />
+        <ActivityList
+          activities={activities}
+          css={css`
+            li {
+              &:nth-last-of-type(odd) {
+                background-color: whitesmoke;
+              }
+            }
+          `}
+        />
       </section>
     </Layout>
   )
