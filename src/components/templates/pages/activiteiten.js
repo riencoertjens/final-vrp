@@ -33,13 +33,13 @@ const ActivitiesPage = ({ data: { activities, in_de_kijker } }) => {
           }
         `}
       >
-        <h2>en ook</h2>
+        <h2>kalender</h2>
         <ul>
           {grouped_activities.future.map(({ node: activity }, i) => (
             <ActivityLi activity={activity} key={i} />
           ))}
         </ul>
-        <h3>voorbij activiteiten</h3>
+        <h3>voorbije activiteiten</h3>
         <ul>
           {_.sortBy(grouped_activities.past, ({ node }) => {
             return node.acf.date
