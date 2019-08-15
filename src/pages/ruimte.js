@@ -51,7 +51,7 @@ const AllRuimtePage = () => (
                 cover {
                   url {
                     childImageSharp {
-                      fixed(width: 250) {
+                      fixed(width: 250, quality: 75) {
                         ...GatsbyImageSharpFixed
                       }
                     }

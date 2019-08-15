@@ -223,10 +223,10 @@ export const HeroSliderFragment = graphql`
       }
       file {
         image: childImageSharp {
-          maxWidth: fluid(maxWidth: 1200) {
+          maxWidth: fluid(maxWidth: 1200, quality: 75) {
             ...GatsbyImageSharpFluid
           }
-          maxHeight: fluid(maxHeight: 630) {
+          maxHeight: fluid(maxHeight: 630, quality: 75) {
             ...GatsbyImageSharpFluid
           }
         }

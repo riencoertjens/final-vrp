@@ -175,7 +175,7 @@ export const PostListFragment = graphql`
       cover {
         url {
           childImageSharp {
-            fluid(maxWidth: 500) {
+            fluid(maxWidth: 500, quality: 75) {
               ...GatsbyImageSharpFluid
             }
           }
@@ -196,10 +196,10 @@ export const BlockImageFragment = graphql`
     }
     file {
       image: childImageSharp {
-        maxWidth: fluid(maxWidth: 500) {
+        maxWidth: fluid(maxWidth: 500, quality: 75) {
           ...GatsbyImageSharpFluid
         }
-        maxHeight: fluid(maxHeight: 500) {
+        maxHeight: fluid(maxHeight: 500, quality: 75) {
           ...GatsbyImageSharpFluid
         }
       }
@@ -212,10 +212,10 @@ export const BlockImageFragment = graphql`
     }
     file {
       image: childImageSharp {
-        maxWidth: fluid(maxWidth: 500) {
+        maxWidth: fluid(maxWidth: 500, quality: 75) {
           ...GatsbyImageSharpFluid
         }
-        maxHeight: fluid(maxHeight: 500) {
+        maxHeight: fluid(maxHeight: 500, quality: 75) {
           ...GatsbyImageSharpFluid
         }
       }

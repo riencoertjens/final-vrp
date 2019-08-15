@@ -158,7 +158,7 @@ export const query = graphql`
           }
           cover: url {
             childImageSharp {
-              fixed(width: 250) {
+              fixed(width: 250, quality: 75) {
                 ...GatsbyImageSharpFixed
               }
             }
@@ -176,7 +176,7 @@ export const query = graphql`
         }
         cover: file {
           childImageSharp {
-            fixed(width: 250) {
+            fixed(width: 250, quality: 75) {
               ...GatsbyImageSharpFixed
             }
           }
