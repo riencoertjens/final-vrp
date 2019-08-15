@@ -83,7 +83,6 @@ const ActivityLi = ({ activity, past, homePage }) => (
 )
 
 const ActivityLiStyle = past => {
-  console.log(past)
   return css`
     display: flex;
     flex-wrap: wrap;
@@ -113,8 +112,6 @@ const ActivityLiStyle = past => {
 }
 
 const ActivityLiStyleHome = () => css`
-  ${"" /* display: flex; */}
-  ${"" /* justify-content: space-between; */}
   color: white;
   padding: 0.5rem 1rem;
   margin: 0 -1rem;
