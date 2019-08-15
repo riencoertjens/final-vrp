@@ -10,6 +10,8 @@ import HeroSlider from "../../HeroSlider"
 import GatsbyLink from "gatsby-link"
 import ActivityList from "../../ActivityList"
 
+import { FaAngleRight as ArrowRightIcon } from "react-icons/fa"
+
 const IndexPage = ({ data: { pageInfo, in_de_kijker, activities } }) => (
   <Layout>
     <HeroSlider posts={pageInfo.acf.featured_posts} />
@@ -31,16 +33,26 @@ const IndexPage = ({ data: { pageInfo, in_de_kijker, activities } }) => (
           color: white;
           h2 {
             color: white;
-            margin-top: 0;
+            margin: 0;
           }
           a {
             color: white;
             text-decoration: none;
+            :hover h2 svg {
+              transform: translateX(0.5rem);
+            }
+            h2 svg {
+              transition: 0.2s;
+              height: 1rem;
+            }
           }
         `}
       >
         <GatsbyLink to="/activiteiten">
-          <h2>Activiteiten</h2>
+          <h2>
+            Activiteiten
+            <ArrowRightIcon />
+          </h2>
         </GatsbyLink>
         <p>
           <ActivityList homePage activities={activities} />
