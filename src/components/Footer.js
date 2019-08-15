@@ -137,7 +137,7 @@ const Footer = () => (
                 list-style: none;
                 li {
                   color: white;
-                  line-height: 1.1rem;
+                  line-height: 1.5rem;
                   :first-of-type {
                     text-transform: uppercase;
                     font-weight: 700;
