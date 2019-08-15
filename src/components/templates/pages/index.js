@@ -4,7 +4,7 @@ import Layout from "../../Layout"
 import PostList from "../../PostList"
 
 import css from "@emotion/css"
-import { colors } from "../../../site/styles"
+import { colors, Button } from "../../../site/styles"
 import { MqMin } from "../../webhart-components/style-functions"
 import HeroSlider from "../../HeroSlider"
 import GatsbyLink from "gatsby-link"
@@ -12,9 +12,11 @@ import ActivityList from "../../ActivityList"
 
 import { FaAngleRight as ArrowRightIcon } from "react-icons/fa"
 
-const IndexPage = ({ data: { pageInfo, in_de_kijker, activities } }) => (
+const IndexPage = ({
+  data: { pageInfo, slider_posts, in_de_kijker, activities },
+}) => (
   <Layout>
-    <HeroSlider posts={pageInfo.acf.featured_posts} />
+    <HeroSlider posts={slider_posts.edges} />
     <div
       css={css`
         ${MqMin("700px")} {
@@ -30,21 +32,20 @@ const IndexPage = ({ data: { pageInfo, in_de_kijker, activities } }) => (
         css={css`
           background: ${colors.orange};
           padding: 1rem;
-          color: white;
           h2 {
             color: white;
             margin: 0;
-          }
-          a {
-            color: white;
-            text-decoration: none;
-            :hover h2 svg {
-              transform: translateX(0.5rem);
-            }
-            h2 svg {
+            svg {
               transition: 0.2s;
               height: 1rem;
             }
+          }
+          li a {
+            :hover h2 svg {
+              transform: translateX(0.5rem);
+            }
+            color: inherit;
+            text-decoration: none;
           }
         `}
       >
@@ -54,9 +55,10 @@ const IndexPage = ({ data: { pageInfo, in_de_kijker, activities } }) => (
             <ArrowRightIcon />
           </h2>
         </GatsbyLink>
-        <p>
-          <ActivityList homePage activities={activities} />
-        </p>
+        <ActivityList homePage activities={activities} />
+        <Button component={GatsbyLink} light={1} to="/activiteiten" right={1}>
+          toon alle
+        </Button>
       </aside>
     </div>
   </Layout>
@@ -65,7 +67,11 @@ const IndexPage = ({ data: { pageInfo, in_de_kijker, activities } }) => (
 export default IndexPage
 
 export const homepagequery = graphql`
-  query($in_de_kijker: [Int]!) {
+  query(
+    $in_de_kijker: [Int]!
+    $featured_activities: [Int]!
+    $slider_posts: [Int]!
+  ) {
     pageInfo: collectionsJson(
       post_type: { eq: "page" }
       post_name: { eq: "home" }
@@ -74,15 +80,24 @@ export const homepagequery = graphql`
         type
       }
       post_title
-      acf {
-        featured_posts: slider_posts {
+    }
+
+    slider_posts: allCollectionsJson(
+      filter: { ID: { in: $slider_posts } }
+      sort: { fields: post_date, order: ASC }
+    ) {
+      edges {
+        node {
           ...HeroSliderFragment
         }
       }
     }
 
     activities: allCollectionsJson(
-      filter: { post_type: { in: ["activiteit"] } }
+      filter: {
+        post_type: { in: ["activiteit"] }
+        ID: { in: $featured_activities }
+      }
       sort: { fields: acf___date, order: ASC }
     ) {
       edges {

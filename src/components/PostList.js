@@ -49,7 +49,7 @@ const PostList = ({ posts, multiTypes, type }) => {
         if (node.post_type === "ruimte_artikel") {
           itemSlug += `ruimte/${node.acf.ruimte.post_name}/`
         } else if (node.post_type !== "page") {
-          itemSlug += `${typeName}/`
+          itemSlug += `${typeName}`
         }
 
         if (node.post_type === "page") {
@@ -57,7 +57,7 @@ const PostList = ({ posts, multiTypes, type }) => {
         } else if (node.post_type === "post") {
           itemSlug += node.pathname
         } else {
-          itemSlug += node.post_name
+          itemSlug += `/${node.post_name}`
         }
 
         return (
@@ -130,8 +130,7 @@ const PostList = ({ posts, multiTypes, type }) => {
             >
               <span>
                 {typeName === "nieuws"
-                  ? node.acf.nieuws_type_label &&
-                    node.acf.nieuws_type_label + " | "
+                  ? node.acf.nieuws_type_label + " | "
                   : multiTypes && typeName}
                 {typeName === "activiteit" && node.acf.date && (
                   <>
@@ -139,12 +138,7 @@ const PostList = ({ posts, multiTypes, type }) => {
                     {node.acf.dateFormatted}
                   </>
                 )}
-                {node.post_type === "post" && (
-                  <>
-                    {multiTypes && " | "}
-                    {node.post_date}
-                  </>
-                )}
+                {node.post_type === "post" && `${node.post_date}`}
               </span>
               <h3>
                 {node.acf.is_vrp && <VRPLabel />}

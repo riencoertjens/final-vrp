@@ -115,6 +115,8 @@ exports.createPages = ({ graphql, actions }) => {
                 slug: post_name
                 acf {
                   in_de_kijker
+                  featured_activities
+                  slider_posts
                 }
               }
             }
@@ -177,7 +179,7 @@ exports.createPages = ({ graphql, actions }) => {
         })
         result.data.nieuws.edges.forEach(({ node }) => {
           createPage({
-            path: `/nieuws/${node.pathname}`,
+            path: `/nieuws${node.pathname}`,
             component: path.resolve(
               `./src/components/templates/pages/nieuws-template.js`
             ),
@@ -248,6 +250,8 @@ exports.createPages = ({ graphql, actions }) => {
               ),
               context: {
                 in_de_kijker: node.acf.in_de_kijker || [],
+                slider_posts: node.acf.slider_posts || [],
+                featured_activities: node.acf.featured_activities || [],
               },
             })
           } else if (node.slug === "activiteiten") {

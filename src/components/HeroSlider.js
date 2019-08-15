@@ -6,10 +6,10 @@ import {
   getAspectRatioImage,
 } from "./webhart-components/style-functions"
 import { boxShadow, breakpoints, Button, colors } from "../site/styles"
-import { postTypes } from "./PostList"
 import GatsbyImage from "gatsby-image"
 import GatsbyLink from "gatsby-link"
 import { graphql } from "gatsby"
+import { postTypes } from "./PostList"
 
 const timeout = 5000
 
@@ -61,9 +61,24 @@ class HeroSlider extends Component {
           position: relative;
         `}
       >
-        {posts.map((post, i) => {
+        {posts.map(({ node: post }, i) => {
           const showImage = getAspectRatioImage(post.featured_img, 1200 / 630)
 
+          const typeName = postTypes[post.post_type]
+          let itemSlug = "/"
+          if (post.post_type === "ruimte_artikel") {
+            itemSlug += `ruimte/${post.acf.ruimte.post_name}/`
+          } else if (post.post_type !== "page") {
+            itemSlug += `${typeName}`
+          }
+
+          if (post.post_type === "page") {
+            itemSlug = post.pathname
+          } else if (post.post_type === "post") {
+            itemSlug += post.pathname
+          } else {
+            itemSlug += `/${post.post_name}`
+          }
           return (
             <div //slide
               key={i}
@@ -141,11 +156,7 @@ class HeroSlider extends Component {
                 >
                   {post.post_excerpt}
                 </p>
-                <Button
-                  right={1}
-                  to={`/${postTypes[post.post_type]}/${post.post_name}`}
-                  component={GatsbyLink}
-                >
+                <Button right={1} to={itemSlug} component={GatsbyLink}>
                   lees meer
                 </Button>
               </div>
@@ -199,11 +210,12 @@ class HeroSlider extends Component {
 export default HeroSlider
 
 export const HeroSliderFragment = graphql`
-  fragment HeroSliderFragment on CollectionsJsonAcfSlider_posts {
+  fragment HeroSliderFragment on CollectionsJson {
     post_title
     post_name
     post_type
     post_excerpt
+    pathname
     featured_img {
       smartcrop_image_focus {
         top
