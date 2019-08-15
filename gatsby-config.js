@@ -28,12 +28,12 @@ module.exports = {
     },
     // build & transform
     `gatsby-transformer-json`,
-    // {
-    //   resolve: "gatsby-plugin-nprogress",
-    //   options: {
-    //     color: config.base.primaryColor,
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-nprogress",
+      options: {
+        color: config.base.primaryColor,
+      },
+    },
     `gatsby-plugin-catch-links`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
