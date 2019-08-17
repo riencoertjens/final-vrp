@@ -2,11 +2,15 @@ export const MqMin = bp => `@media (min-width: ${bp})`
 export const MqMax = bp => `@media (max-width: ${bp})`
 
 export const getShowImage = (image, ratio) => {
-  return image && image.file
-    ? image.file.image.maxWidth.aspectRatio > ratio
-      ? image.file.image.maxWidth
-      : image.file.image.maxHeight
-    : false
+  if (image.file) {
+    if (image.file.image.maxWidth.aspectRatio < ratio) {
+      return image.file.image.maxWidth
+    } else {
+      return image.file.image.maxHeight
+    }
+  } else {
+    return false
+  }
 }
 
 export const getCropFocus = smartcrop_image_focus => {
