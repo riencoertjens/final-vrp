@@ -2,7 +2,7 @@ export const MqMin = bp => `@media (min-width: ${bp})`
 export const MqMax = bp => `@media (max-width: ${bp})`
 
 export const getShowImage = (image, ratio) => {
-  if (image.file) {
+  if (image && image.file) {
     if (image.file.image.maxWidth.aspectRatio < ratio) {
       return image.file.image.maxWidth
     } else {
