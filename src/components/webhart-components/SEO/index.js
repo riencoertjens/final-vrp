@@ -115,7 +115,7 @@ export default SEO
 export const SEOImageFragment = graphql`
   fragment SEOImageFragment on File {
     childImageSharp {
-      SEO: fixed(width: 1200, height: 630, quality: 75) {
+      SEO: fixed(width: 1200, height: 630, quality: 50) {
         src
       }
     }
