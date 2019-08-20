@@ -7,16 +7,7 @@ import { colors, boxShadow } from "../site/styles"
 import GatsbyImage from "gatsby-image/withIEPolyfill"
 import { getAspectRatioImage } from "./webhart-components/style-functions"
 import { ReactComponent as VRPLabel } from "../images/svg/vrp-label.svg"
-
-export const postTypes = {
-  ruimte: "ruimte",
-  ruimte_artikel: "artikel",
-  activiteit: "activiteit",
-  prijs: "prijsuitreiking",
-  post: "nieuws",
-  blog: "blog",
-  job_listing: "vacature",
-}
+import { getPathname, getPostLabel } from "../site/utils"
 
 const PostList = ({ posts, multiTypes, type }) => {
   return (
@@ -42,23 +33,7 @@ const PostList = ({ posts, multiTypes, type }) => {
           showImage = getAspectRatioImage(node.featured_img, 1)
         }
 
-        const typeName = postTypes[node.post_type]
-
-        let itemSlug = "/"
-
-        if (node.post_type === "ruimte_artikel") {
-          itemSlug += `ruimte/${node.acf.ruimte.post_name}/`
-        } else if (node.post_type !== "page") {
-          itemSlug += `${typeName}`
-        }
-
-        if (node.post_type === "page") {
-          itemSlug = node.pathname
-        } else if (node.post_type === "post") {
-          itemSlug += node.pathname
-        } else {
-          itemSlug += `/${node.post_name}`
-        }
+        const itemSlug = getPathname(node)
 
         return (
           <AspectRatioBox
@@ -128,18 +103,7 @@ const PostList = ({ posts, multiTypes, type }) => {
                 }
               `}
             >
-              <span>
-                {typeName === "nieuws"
-                  ? node.acf.nieuws_type_label + " | "
-                  : multiTypes && typeName}
-                {typeName === "activiteit" && node.acf.date && (
-                  <>
-                    {multiTypes && " | "}
-                    {node.acf.dateFormatted}
-                  </>
-                )}
-                {node.post_type === "post" && `${node.post_date}`}
-              </span>
+              <span>{getPostLabel(node, multiTypes)}</span>
               <h3>
                 {node.acf.is_vrp && <VRPLabel />}
                 {node.post_title}

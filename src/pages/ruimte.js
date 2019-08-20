@@ -6,7 +6,7 @@ import SEO from "../components/webhart-components/SEO"
 import css from "@emotion/css"
 import { colors, Button, breakpoints } from "../site/styles"
 import GatsbyImage from "gatsby-image"
-import { maanden } from "../site/functions"
+import { maanden } from "../site/utils"
 import { AspectRatioImage } from "../components/webhart-components"
 import GatsbyLink from "gatsby-link"
 import { MqMin } from "../components/webhart-components/style-functions"
@@ -48,6 +48,7 @@ const AllRuimtePage = () => (
               acf {
                 datum_publicatie
                 nummer
+                subject
                 cover {
                   url {
                     childImageSharp {
@@ -139,6 +140,7 @@ const LastRuimte = ({ ruimte }) => {
     post_content,
     post_name,
     acf: {
+      subject,
       date_year,
       date_month,
       cover: { url: cover },
@@ -164,9 +166,10 @@ const LastRuimte = ({ ruimte }) => {
           grid-template-columns: auto;
         }
         grid-column-gap: 2rem;
+        grid-template-rows: max-content;
       `}
     >
-      <div>
+      <div css={css``}>
         <h2>laatste editie</h2>
         <h3
           css={css`
@@ -184,6 +187,7 @@ const LastRuimte = ({ ruimte }) => {
         {f_media && <GatsbyImage fixed={cover.childImageSharp.fixed} />}
       </div>
       <div>
+        <h2>{subject}</h2>
         <div
           css={css`
             && * {

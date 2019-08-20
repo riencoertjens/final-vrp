@@ -9,7 +9,7 @@ import { boxShadow, breakpoints, Button, colors } from "../site/styles"
 import GatsbyImage from "gatsby-image"
 import GatsbyLink from "gatsby-link"
 import { graphql } from "gatsby"
-import { postTypes } from "./PostList"
+import { getPathname } from "../site/utils"
 
 const timeout = 5000
 
@@ -64,21 +64,8 @@ class HeroSlider extends Component {
         {posts.map(({ node: post }, i) => {
           const showImage = getAspectRatioImage(post.featured_img, 1200 / 630)
 
-          const typeName = postTypes[post.post_type]
-          let itemSlug = "/"
-          if (post.post_type === "ruimte_artikel") {
-            itemSlug += `ruimte/${post.acf.ruimte.post_name}/`
-          } else if (post.post_type !== "page") {
-            itemSlug += `${typeName}`
-          }
+          const itemSlug = getPathname(post)
 
-          if (post.post_type === "page") {
-            itemSlug = post.pathname
-          } else if (post.post_type === "post") {
-            itemSlug += post.pathname
-          } else {
-            itemSlug += `/${post.post_name}`
-          }
           return (
             <div //slide
               key={i}
