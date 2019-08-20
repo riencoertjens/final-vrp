@@ -13,9 +13,10 @@ import css from "@emotion/css"
 import BreadCrumbs from "../../BreadCrumbs"
 import WpBlocksContent from "../../WpBlocksContent"
 import ActivityForm from "../../ActivityForm"
+import SuggestionsAsideWrapper from "../../Suggestions"
 
 const ActivityPageTemplate = ({
-  data: { activity },
+  data: { activity, suggestions },
   pageContext: { slug },
 }) => {
   let parentCategory = false
@@ -68,72 +69,73 @@ const ActivityPageTemplate = ({
         />
       )}
       <BreadCrumbs crumbs={crumbs} />
-      <section>
-        <h1>{activity.title}</h1>
-        {activity.acf.hasform && (
-          <Button
-            right={1}
-            css={css`
-              margin-bottom: 1rem;
-            `}
-            component="a"
-            href="#inschrijvingsformulier"
-          >
-            inschrijven
-          </Button>
-        )}
-        <WpBlocksContent content={activity.content} />
-        {activity.acf.hasform && (
-          <Button component="a" href="#inschrijvingsformulier" right={1}>
-            inschrijven
-          </Button>
-        )}
-      </section>
-
-      {activity.acf.has_location && (
+      <SuggestionsAsideWrapper suggestions={suggestions}>
         <section>
-          <h3>locatie:</h3>
-          <h2>{activity.acf.location.title}</h2>
-          <p>{activity.acf.location.acf.address.address}</p>
-          <div
-            css={css`
-              height: 500px;
-              margin: 0 -1rem -1rem;
-            `}
-          >
-            <GoogleMap
-              apiKey={process.env.GATSBY_MAPS_API}
-              location={{
-                lat: Number(activity.acf.location.acf.address.lat),
-                lng: Number(activity.acf.location.acf.address.lng),
-              }} //{activity.acf.location.acf.address}
-              markerInfoComponent={
-                <OutboundLink
-                  href={`https://www.google.com/maps/dir/${
-                    activity.acf.location.acf.address.address !== undefined
-                      ? `/${activity.acf.location.acf.address.address}`
-                      : `/'${activity.acf.location.acf.address.lat},${activity.acf.location.acf.address.lng}'`
-                  }/@${activity.acf.location.acf.address.lat},${
-                    activity.acf.location.acf.address.lng
-                  },15z`}
-                >
-                  wegbeschrijving
-                </OutboundLink>
-              }
-              options={{
-                center: {
+          <h1>{activity.title}</h1>
+          {activity.acf.hasform && (
+            <Button
+              right={1}
+              css={css`
+                margin-bottom: 1rem;
+              `}
+              component="a"
+              href="#inschrijvingsformulier"
+            >
+              inschrijven
+            </Button>
+          )}
+          <WpBlocksContent content={activity.content} />
+          {activity.acf.hasform && (
+            <Button component="a" href="#inschrijvingsformulier" right={1}>
+              inschrijven
+            </Button>
+          )}
+        </section>
+        {activity.acf.has_location && (
+          <section>
+            <h3>locatie:</h3>
+            <h2>{activity.acf.location.title}</h2>
+            <p>{activity.acf.location.acf.address.address}</p>
+            <div
+              css={css`
+                height: 500px;
+                margin: 0 -1rem -1rem;
+              `}
+            >
+              <GoogleMap
+                apiKey={process.env.GATSBY_MAPS_API}
+                location={{
                   lat: Number(activity.acf.location.acf.address.lat),
                   lng: Number(activity.acf.location.acf.address.lng),
-                }, //activity.acf.location.acf.address,
-                zoom: 15,
-                disableDefaultUI: true,
-                styles: [],
-              }}
-            />
-          </div>
-        </section>
-      )}
-      {activity.acf.hasform && <ActivityForm activity={activity} />}
+                }} //{activity.acf.location.acf.address}
+                markerInfoComponent={
+                  <OutboundLink
+                    href={`https://www.google.com/maps/dir/${
+                      activity.acf.location.acf.address.address !== undefined
+                        ? `/${activity.acf.location.acf.address.address}`
+                        : `/'${activity.acf.location.acf.address.lat},${activity.acf.location.acf.address.lng}'`
+                    }/@${activity.acf.location.acf.address.lat},${
+                      activity.acf.location.acf.address.lng
+                    },15z`}
+                  >
+                    wegbeschrijving
+                  </OutboundLink>
+                }
+                options={{
+                  center: {
+                    lat: Number(activity.acf.location.acf.address.lat),
+                    lng: Number(activity.acf.location.acf.address.lng),
+                  }, //activity.acf.location.acf.address,
+                  zoom: 15,
+                  disableDefaultUI: true,
+                  styles: [],
+                }}
+              />
+            </div>
+          </section>
+        )}
+        {activity.acf.hasform && <ActivityForm activity={activity} />}
+      </SuggestionsAsideWrapper>
     </Layout>
   )
 }
@@ -141,7 +143,7 @@ const ActivityPageTemplate = ({
 export default ActivityPageTemplate
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $suggestions: [String]!) {
     activity: collectionsJson(post_name: { eq: $slug }) {
       title: post_title
       content: post_content
@@ -179,6 +181,21 @@ export const query = graphql`
         close_date
         register_form {
           post_content
+        }
+      }
+    }
+    suggestions: allCollectionsJson(
+      filter: {
+        term_slugs: { in: $suggestions }
+        post_name: { ne: $slug }
+        # acf: { featured: { eq: true } }
+      }
+      limit: 7
+      sort: { fields: post_date }
+    ) {
+      edges {
+        node {
+          ...SuggestionsItemFragment
         }
       }
     }

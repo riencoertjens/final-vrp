@@ -5,10 +5,12 @@ import BreadCrumbs from "../../BreadCrumbs"
 import { AspectRatioImage } from "../../webhart-components"
 import WpBlocksContent from "../../WpBlocksContent"
 import SEO from "../../webhart-components/SEO"
+import SuggestionsAsideWrapper from "../../Suggestions"
 
 const NieuwsPageTemplate = ({
   data: {
     page: { title, content, featured_img, excerpt },
+    suggestions,
   },
   pageContext: { slug },
 }) => (
@@ -33,17 +35,34 @@ const NieuwsPageTemplate = ({
         },
       ]}
     />
-    <section>
-      <h1>{title}</h1>
-      <WpBlocksContent content={content} />
-    </section>
+    <SuggestionsAsideWrapper suggestions={suggestions}>
+      <section>
+        <h1>{title}</h1>
+        <WpBlocksContent content={content} />
+      </section>
+    </SuggestionsAsideWrapper>
   </Layout>
 )
 
 export default NieuwsPageTemplate
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $suggestions: [String]!) {
+    suggestions: allCollectionsJson(
+      filter: {
+        term_slugs: { in: $suggestions }
+        post_name: { ne: $slug }
+        # acf: { featured: { eq: true } }
+      }
+      limit: 7
+      sort: { fields: post_date }
+    ) {
+      edges {
+        node {
+          ...SuggestionsItemFragment
+        }
+      }
+    }
     page: collectionsJson(post_type: { eq: "post" }, post_name: { eq: $slug }) {
       title: post_title
       content: post_content

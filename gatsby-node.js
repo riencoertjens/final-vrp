@@ -9,8 +9,6 @@ const path = require("path")
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   return new Promise((resolve, reject) => {
-    // Query for markdown nodes to use in creating pages.
-
     resolve(
       graphql(`
         {
@@ -19,6 +17,7 @@ exports.createPages = ({ graphql, actions }) => {
           ) {
             edges {
               node {
+                suggestions: term_slugs
                 slug: post_name
               }
             }
@@ -27,6 +26,7 @@ exports.createPages = ({ graphql, actions }) => {
           prijzen: allCollectionsJson(filter: { post_type: { eq: "prijs" } }) {
             edges {
               node {
+                suggestions: term_slugs
                 slug: post_name
               }
             }
@@ -48,6 +48,7 @@ exports.createPages = ({ graphql, actions }) => {
           ) {
             edges {
               node {
+                suggestions: term_slugs
                 title: post_title
                 slug: post_name
               }
@@ -57,6 +58,7 @@ exports.createPages = ({ graphql, actions }) => {
           nieuws: allCollectionsJson(filter: { post_type: { eq: "post" } }) {
             edges {
               node {
+                suggestions: term_slugs
                 slug: post_name
                 pathname
               }
@@ -77,6 +79,7 @@ exports.createPages = ({ graphql, actions }) => {
           ruimte: allCollectionsJson(filter: { post_type: { eq: "ruimte" } }) {
             edges {
               node {
+                suggestions: term_slugs
                 slug: post_name
                 acf {
                   featured_artikel
@@ -91,6 +94,7 @@ exports.createPages = ({ graphql, actions }) => {
           ) {
             edges {
               node {
+                suggestions: term_slugs
                 slug: post_name
                 title: post_title
                 acf {
@@ -149,6 +153,7 @@ exports.createPages = ({ graphql, actions }) => {
               `./src/components/templates/pages/activiteit-template.js`
             ),
             context: {
+              suggestions: node.suggestions || [],
               slug: node.slug,
             },
           })
@@ -161,6 +166,7 @@ exports.createPages = ({ graphql, actions }) => {
               `./src/components/templates/pages/prijs-template.js`
             ),
             context: {
+              suggestions: node.suggestions || [],
               slug: node.slug,
             },
           })
@@ -184,6 +190,7 @@ exports.createPages = ({ graphql, actions }) => {
               `./src/components/templates/pages/nieuws-template.js`
             ),
             context: {
+              suggestions: node.suggestions || [],
               slug: node.slug,
             },
           })
@@ -195,6 +202,7 @@ exports.createPages = ({ graphql, actions }) => {
               `./src/components/templates/pages/ruimte-template.js`
             ),
             context: {
+              // suggestions:node.suggestions || [],
               slug: node.slug,
               featured_artikel: node.acf.featured_artikel || [],
             },
@@ -208,6 +216,7 @@ exports.createPages = ({ graphql, actions }) => {
               `./src/components/templates/pages/artikel-template.js`
             ),
             context: {
+              // suggestions: node.suggestions || [],
               slug: node.slug,
               prev: i === 0 ? null : artikels[i - 1],
               next: i === artikels.length - 1 ? null : artikels[i + 1],
@@ -222,6 +231,7 @@ exports.createPages = ({ graphql, actions }) => {
               `./src/components/templates/pages/blogPost-template.js`
             ),
             context: {
+              suggestions: node.suggestions || [],
               slug: node.slug,
               prev: i === 0 ? null : blogPosts[i - 1],
               next: i === blogPosts.length - 1 ? null : blogPosts[i + 1],
