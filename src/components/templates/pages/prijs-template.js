@@ -114,7 +114,7 @@ export const query = graphql`
         # acf: { featured: { eq: true } }
       }
       limit: 7
-      sort: { fields: post_date }
+      sort: { fields: [acf___featured, post_date] }
     ) {
       edges {
         node {
