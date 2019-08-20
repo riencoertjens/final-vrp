@@ -31,7 +31,6 @@ const RuimtePageTemplate = ({
   },
   pageContext: { slug },
 }) => {
-  console.log(featured_artikel)
   return (
     <Layout>
       <SEO
