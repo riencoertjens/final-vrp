@@ -31,22 +31,51 @@ class ActivityForm extends Component {
 
     const { places } = this.state
 
+    let formStatus = false
+    let formLoaded = false
+
     if (close_date > now) {
       if (places === false) {
+        formStatus = "loading"
         setTimeout(() => {
           this.fetchPlaces(this.props.activity.wordpress_id)
         }, 5000)
+      } else {
+        if (places.places < 0 || places.count < places.places) {
+          formStatus = "open"
+        } else {
+          formStatus = "full"
+        }
+      }
+    } else {
+      formStatus = "closed"
+    }
+
+    switch (formStatus) {
+      case "closed":
         return (
           <section id="inschrijvingsformulier">
             <h3>inschrijven.</h3>
-            <p>formulier wordt geladen...</p>
+            <p>helaas, inschrijvingen voor deze activiteit zijn gesloten</p>
           </section>
         )
-      } else {
-        if (places.places < 0 || places.count < places.places) {
-          return (
-            <section id="inschrijvingsformulier">
-              <h3>inschrijven:</h3>
+
+      case "full":
+        return (
+          <section id="inschrijvingsformulier">
+            <h3>inschrijven.</h3>
+            <p>helaas, alle plaatsen voor deze activiteit zijn volzet</p>
+          </section>
+        )
+
+      case "open":
+        formLoaded = true
+      // break
+      case "loading":
+        return (
+          <section id="inschrijvingsformulier">
+            <h3>inschrijven:</h3>
+            {formLoaded ? (
               <p
                 css={css`
                   color: ${colors.grey};
@@ -55,43 +84,54 @@ class ActivityForm extends Component {
                 {places.places > 0 &&
                   `${places.count} van de ${places.places} plaatsen zolvet`}
               </p>
-              <form
-                name={activity.title}
-                method="POST"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
-                action="/thanks"
-                css={css`
-                  padding-bottom: 1rem;
-                  label {
-                    display: flex;
-                    flex-wrap: wrap;
-                    width: 100%;
-                    margin-bottom: 1rem;
-                    input,
-                    textarea {
-                      border: 1px solid ${colors.grey};
-                      border-radius: 5px;
-                      padding: 0.25rem;
-                      background: whitesmoke;
-                    }
-                    input {
-                      flex: 1 0 250px;
-                      margin-left: 1rem;
-                    }
-                    input[type="radio"],
-                    input[type="checkbox"] {
-                      flex: 0 0 auto;
-                      margin-left: 0;
-                      margin-right: 1rem;
-                    }
-                    textarea {
-                      margin-top: 0.5rem;
-                      height: 150px;
-                      flex: 1 1 100%;
-                      resize: none;
-                    }
+            ) : (
+              <p>formulier wordt geladen...</p>
+            )}
+            <form
+              name={activity.title}
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              action="/thanks"
+              css={css`
+                padding-bottom: 1rem;
+                label {
+                  display: flex;
+                  flex-wrap: wrap;
+                  width: 100%;
+                  margin-bottom: 1rem;
+                  input,
+                  textarea {
+                    border: 1px solid ${colors.grey};
+                    border-radius: 5px;
+                    padding: 0.25rem;
+                    background: whitesmoke;
                   }
+                  input {
+                    flex: 1 0 250px;
+                    margin-left: 1rem;
+                  }
+                  input[type="radio"],
+                  input[type="checkbox"] {
+                    flex: 0 0 auto;
+                    margin-left: 0;
+                    margin-right: 1rem;
+                  }
+                  textarea {
+                    margin-top: 0.5rem;
+                    height: 150px;
+                    flex: 1 1 100%;
+                    resize: none;
+                  }
+                }
+              `}
+            >
+              <fieldset
+                disabled={formLoaded ? false : true}
+                css={css`
+                  opacity: ${formLoaded ? 1 : 0.2};
+                  border: none;
+                  padding: 0;
                 `}
               >
                 <input type="hidden" name="form-name" value={activity.title} />
@@ -109,25 +149,13 @@ class ActivityForm extends Component {
                   />
                 ))}
                 <Button right={1}>verzenden</Button>
-              </form>
-            </section>
-          )
-        } else {
-          return (
-            <section id="inschrijvingsformulier">
-              <h3>inschrijven.</h3>
-              <p>helaas, inschrijvingen voor deze activiteit zijn volzet</p>
-            </section>
-          )
-        }
-      }
-    } else {
-      return (
-        <section id="inschrijvingsformulier">
-          <h3>inschrijven.</h3>
-          <p>helaas, inschrijvingen voor deze activiteit zijn gesloten</p>
-        </section>
-      )
+              </fieldset>
+            </form>
+          </section>
+        )
+
+      default:
+        break
     }
   }
 }
