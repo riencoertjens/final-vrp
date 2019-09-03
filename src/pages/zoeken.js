@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import Layout from "../components/Layout"
 import GatsbyLink from "gatsby-link"
 import css from "@emotion/css"
-import { Button } from "../site/styles"
+import { Button, colors } from "../site/styles"
 import SEO from "../components/webhart-components/SEO"
 
 // const urlBase = "https://www.googleapis.com/customsearch/v1/siterestrict"
@@ -142,10 +142,25 @@ class SearchPage extends Component {
                       >
                         {searchResult.items.map((result, i) => (
                           <li key={i}>
-                            <GatsbyLink to="/">
-                              <h3>{result.title}</h3>
-                              <p>{result.snippet}</p>
-                            </GatsbyLink>
+                            <a
+                              href={result.link}
+                              css={css`
+                                b {
+                                  color: ${colors.blue};
+                                }
+                              `}
+                            >
+                              <h3
+                                dangerouslySetInnerHTML={{
+                                  __html: result.htmlTitle,
+                                }}
+                              />
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: result.htmlSnippet,
+                                }}
+                              />
+                            </a>
                           </li>
                         ))}
                       </ul>
@@ -179,25 +194,29 @@ class SearchPage extends Component {
                               i + 1 === currentPage ? (
                                 <span>{i + 1}</span>
                               ) : (
-                                <GatsbyLink
-                                  to={`/zoeken?q=${
-                                    searchQuery.params.q
-                                  }&start=${i * 10 + 1}`}
-                                >
-                                  {i + 1}
-                                </GatsbyLink>
+                                i < 10 && (
+                                  <GatsbyLink
+                                    key={i}
+                                    to={`/zoeken?q=${
+                                      searchQuery.params.q
+                                    }&start=${i * 10 + 1}`}
+                                  >
+                                    {i + 1}
+                                  </GatsbyLink>
+                                )
                               )
                             )}
                         </div>
-                        {queries.nextPage && (
-                          <Button
-                            right={1}
-                            component={GatsbyLink}
-                            to={`/zoeken?q=${searchQuery.params.q}&start=${queries.nextPage[0].startIndex}`}
-                          >
-                            volgende
-                          </Button>
-                        )}
+                        {queries.nextPage &&
+                          queries.nextPage[0].startIndex <= 91 && (
+                            <Button
+                              right={1}
+                              component={GatsbyLink}
+                              to={`/zoeken?q=${searchQuery.params.q}&start=${queries.nextPage[0].startIndex}`}
+                            >
+                              volgende
+                            </Button>
+                          )}
                       </div>
                     </>
                   ) : (
