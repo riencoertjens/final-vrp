@@ -19,9 +19,13 @@ const NieuwsPageTemplate = ({
       title={title}
       pathname={`nieuws/${slug}/`}
       description={excerpt}
-      image={featured_img && featured_img.SEOImage.childImageSharp.SEO.src}
+      image={
+        featured_img &&
+        featured_img.file &&
+        featured_img.SEOImage.childImageSharp.SEO.src
+      }
     />
-    {featured_img && (
+    {featured_img && featured_img.file && (
       <AspectRatioImage ratio={1200 / 630} image={featured_img} />
     )}
     <BreadCrumbs
