@@ -1,9 +1,9 @@
+# https://vrp-final.netlify.com/* https://www.vrp.be/:splat 301!
+
 /wp-admin/* https://webhart.one/wp-admin/:splat 200
 /admin/* https://webhart.one/wp-admin/:splat 200
 /vacatures/vacature-dashboard/ https://webhart.one/vacatures/job-dashboard/ 301
 /vacatures/vacature-plaatsen/  https://webhart.one/vacatures/post-a-job/ 301
-
-https://vrp-final.netlify.com/* https://www.vrp.be/:splat 301!
 
 /2019-groenblauwe-klimaatoplossingen-in-stadsrand/ /activiteit/2019-groenblauwe-klimaatoplossingen-in-stadsrand-2/ 302
 /activiteiten/ /activiteiten/ 302
@@ -856,7 +856,6 @@ https://vrp-final.netlify.com/* https://www.vrp.be/:splat 301!
 /werelddag-van-de-stedenbouw/werelddag-van-de-stedenbouw/ /activiteiten/werelddag-van-de-stedenbouw 302
 /werelddag-van-de-stedenbouw/werelddag-van-de-stedenbouw/werelddag-van-de-stedenbouw-2/ /activiteiten/werelddag-van-de-stedenbouw 302
 /wonen/ /thema/wonen 302
-
 /wp-includes/* / 302
 
 /* https://vrp-legacy.netlify.com/:splat 200
