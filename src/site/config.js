@@ -10,8 +10,8 @@ const base = {
   facebookAppID: ``,
   facebookPage: `1382034548696817`,
   // url: `localhost:8000`, // no trailing slash!
-  url: `https://vrp-final.netlify.com`, // no trailing slash!
-  // url: `https://www.nicdougall.com`, // no trailing slash!
+  // url: `https://vrp-final.netlify.com`, // no trailing slash!
+  url: `https://www.vrp.be`, // no trailing slash!
   titleTemplateSeperator: ` | `,
   icon: `src/images/seo/site-icon.png`, // 1500x1500 This path is relative to the root of the site.
   image: `src/images/seo/social-image.png`, // 1200x630 This path is relative to the root of the site.
