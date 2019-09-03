@@ -1,9 +1,13 @@
-/admin/* /wp-admin/*
-/wp-admin/* https://webhart.one/wp-admin/:splat 200
+# https://vrp-final.netlify.com/* https://www.vrp.be/:splat 301!
 
 
-/nl/vrp-afstudeerprijs/ /prijzen/vrp-afstudeerprijs/ 301
-/ruimte/voorbije-edities /ruimte 301
+
+/admin/*                            https://webhart.one/wp-admin/:splat 200
+/wp-admin/*                         https://webhart.one/wp-admin/:splat 200
+
+
+/nl/vrp-afstudeerprijs/             /prijzen/vrp-afstudeerprijs/ 301
+/ruimte/voorbije-edities            /ruimte 301
 
 
 
