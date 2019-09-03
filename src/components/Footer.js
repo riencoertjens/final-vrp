@@ -286,9 +286,7 @@ const Footer = () => (
             &copy; {new Date().getFullYear()} VRP -{" "}
             <GatsbyLink to={`/privacyverklaring`}>Privacyverklaring</GatsbyLink>{" "}
             | site by{" "}
-            <OutboundLink href="https://www.web-hart.com">
-              WEB-hart
-            </OutboundLink>
+            <OutboundLink href="https://www.lucifer.be">Lu'cifer</OutboundLink>
           </span>
         </div>
       </footer>
