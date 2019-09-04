@@ -5,8 +5,12 @@ import PostList from "../../PostList"
 import ActivityList from "../../ActivityList"
 import SEO from "../../webhart-components/SEO"
 import css from "@emotion/css"
+import { sortPosts } from "../../../site/utils"
 
-const ActivitiesPage = ({ data: { activities, in_de_kijker } }) => {
+const ActivitiesPage = ({
+  data: { activities, in_de_kijker },
+  pageContext: { in_de_kijker: in_de_kijkerIDs },
+}) => {
   return (
     <Layout>
       <SEO title="activiteiten" pathname={`activiteiten`} />
@@ -14,7 +18,7 @@ const ActivitiesPage = ({ data: { activities, in_de_kijker } }) => {
       <section>
         <h1>Activiteiten</h1>
         <h2>in de kijker</h2>
-        <PostList posts={in_de_kijker} multiTypes />
+        <PostList posts={sortPosts(in_de_kijker, in_de_kijkerIDs)} multiTypes />
       </section>
       <section>
         <h2>kalender</h2>

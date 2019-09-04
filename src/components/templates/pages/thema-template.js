@@ -6,10 +6,11 @@ import css from "@emotion/css"
 import { colors } from "../../../site/styles"
 import { AspectRatioImage } from "../../webhart-components"
 import PostList from "../../PostList"
+import { sortPosts } from "../../../site/utils"
 
 const ThemaPageTemplate = ({
   data: { thema, posts, in_de_kijker },
-  pageContext: { slug },
+  pageContext: { slug, in_de_kijker: in_de_kijkerIDs },
 }) => {
   return (
     <Layout>
@@ -46,7 +47,10 @@ const ThemaPageTemplate = ({
       {in_de_kijker.edges.length > 0 && (
         <section>
           <h2>in de kijker</h2>
-          <PostList posts={in_de_kijker} multiTypes />
+          <PostList
+            posts={sortPosts(in_de_kijker, in_de_kijkerIDs)}
+            multiTypes
+          />
         </section>
       )}
       {posts.edges.length > 0 && (

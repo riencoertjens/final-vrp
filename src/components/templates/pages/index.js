@@ -11,9 +11,11 @@ import GatsbyLink from "gatsby-link"
 import ActivityList from "../../ActivityList"
 
 import { FaAngleRight as ArrowRightIcon } from "react-icons/fa"
+import { sortPosts } from "../../../site/utils"
 
 const IndexPage = ({
   data: { pageInfo, slider_posts, in_de_kijker, activities },
+  pageContext: { in_de_kijker: in_de_kijkerIDs },
 }) => (
   <Layout>
     <HeroSlider posts={slider_posts.edges} />
@@ -26,7 +28,7 @@ const IndexPage = ({
       `}
     >
       <section>
-        <PostList posts={in_de_kijker} multiTypes />
+        <PostList posts={sortPosts(in_de_kijker, in_de_kijkerIDs)} multiTypes />
       </section>
       <aside
         css={css`

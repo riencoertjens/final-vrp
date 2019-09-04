@@ -65,3 +65,15 @@ export const getPostLabel = (post, multiTypes) => {
 
   return label
 }
+
+export const sortPosts = (originalPosts, sortArray = false) => {
+  return sortArray
+    ? {
+        edges: originalPosts.edges
+          .slice()
+          .sort(function({ node: { ID: idA } }, { node: { ID: idB } }) {
+            return sortArray.indexOf(idA) - sortArray.indexOf(idB)
+          }),
+      }
+    : originalPosts
+}

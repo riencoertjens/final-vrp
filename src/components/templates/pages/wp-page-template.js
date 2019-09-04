@@ -10,13 +10,14 @@ import WpBlocksContent from "../../WpBlocksContent"
 import PostList from "../../PostList"
 import RuimteDigitaalForm from "../ruimte-digitaal-form"
 import SEO from "../../webhart-components/SEO"
+import { sortPosts } from "../../../site/utils"
 
 const WpPageTemplate = ({
   data: {
     page: { title, content, excerpt, featured_img },
     in_de_kijker,
   },
-  pageContext: { slug: pageSlug, pathname },
+  pageContext: { slug: pageSlug, pathname, in_de_kijker: in_de_kijkerIDs },
 }) => (
   <Layout>
     <SEO
@@ -38,7 +39,7 @@ const WpPageTemplate = ({
     {in_de_kijker.edges.length > 0 && (
       <section>
         <h2>lees meer</h2>
-        <PostList posts={in_de_kijker} multiTypes />
+        <PostList posts={sortPosts(in_de_kijker, in_de_kijkerIDs)} multiTypes />
       </section>
     )}
   </Layout>

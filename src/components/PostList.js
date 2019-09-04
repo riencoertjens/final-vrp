@@ -121,6 +121,7 @@ export default PostList
 
 export const PostListFragment = graphql`
   fragment PostListFragment on CollectionsJson {
+    ID
     post_title
     post_type
     post_name
