@@ -75,18 +75,7 @@ class ActivityForm extends Component {
         return (
           <section id="inschrijvingsformulier">
             <h3>inschrijven:</h3>
-            {formLoaded ? (
-              <p
-                css={css`
-                  color: ${colors.grey};
-                `}
-              >
-                {places.places > 0 &&
-                  `${places.count} van de ${places.places} plaatsen zolvet`}
-              </p>
-            ) : (
-              <p>formulier wordt geladen...</p>
-            )}
+            {!formLoaded && <p>formulier wordt geladen...</p>}
             <form
               name={activity.title}
               method="POST"
