@@ -9,7 +9,10 @@ const NieuwsPage = () => {
     <StaticQuery
       query={graphql`
         {
-          posts: allCollectionsJson(filter: { post_type: { eq: "post" } }) {
+          posts: allCollectionsJson(
+            filter: { post_type: { eq: "post" } }
+            sort: { fields: post_date, order: DESC }
+          ) {
             edges {
               node {
                 ...PostListFragment

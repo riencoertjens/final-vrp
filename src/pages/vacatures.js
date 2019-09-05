@@ -13,6 +13,7 @@ const VacaturesPage = () => {
         {
           vacatures: allCollectionsJson(
             filter: { post_type: { eq: "job_listing" } }
+            sort: { fields: post_date, order: DESC }
           ) {
             edges {
               node {
