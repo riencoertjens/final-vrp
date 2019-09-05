@@ -6,9 +6,9 @@
 
 # https://vrp-final.netlify.com/* https://www.vrp.be/:splat 301!
 
-/activiteiten/groenblauwe-klimaatoplossingen-in-het-buitengebied/*   /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied/ 302
+/activiteiten/groenblauwe-klimaatoplossingen-in-het-buitengebied     /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied/ 302
 /activiteiten/groenblauwe-klimaatoplossingen-in-het-buitengebied/    /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied/ 302
-/events/lab-groenblauw-buitengebied/*                                /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied/ 302
+/events/lab-groenblauw-buitengebied                                  /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied/ 302
 /events/lab-groenblauw-buitengebied/                                 /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied/ 302
 
 /2019-groenblauwe-klimaatoplossingen-in-stadsrand/ /activiteit/2019-groenblauwe-klimaatoplossingen-in-stadsrand-2/ 302
