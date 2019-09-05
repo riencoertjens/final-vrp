@@ -1,11 +1,8 @@
+/admin/* /wp-admin/*
+/wp-admin/* https://webhart.one/wp-admin/:splat 200
 
-/wp-admin* https://webhart.one/wp-admin/:splat 302
-/admin* https://webhart.one/wp-admin/:splat 302
-/vacatures/vacature-dashboard/ https://webhart.one/vacatures/job-dashboard/ 302
-/vacatures/vacature-plaatsen/  https://webhart.one/vacatures/post-a-job/ 302
 
-https://vrp-final.netlify.com/* https://www.vrp.be/:splat 301!
-
-/wp-includes/* / 301
+/nl/vrp-afstudeerprijs/ /prijzen/vrp-afstudeerprijs/ 301
+/ruimte/voorbije-edities /ruimte 301
 
 /* https://vrp-legacy.netlify.com/:splat 200
