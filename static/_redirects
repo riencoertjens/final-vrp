@@ -6,6 +6,10 @@
 
 # https://vrp-final.netlify.com/* https://www.vrp.be/:splat 301!
 
+/activiteiten/groenblauwe-klimaatoplossingen-in-het-buitengebied/   /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied 302
+/events/lab-groenblauw-buitengebied/                                /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied 302
+
+
 /2019-groenblauwe-klimaatoplossingen-in-stadsrand/ /activiteit/2019-groenblauwe-klimaatoplossingen-in-stadsrand-2/ 302
 /activiteiten/ /activiteiten/ 302
 /activiteiten/antwerpen-3/ /activiteiten/ 302
@@ -161,9 +165,6 @@
 /events/vrp-studiereis-bordeaux/ /activiteiten 302
 /events/wenen-2019/ /activiteiten 302
 /events/werelddag-van-de-stedenbouw-2018/ /activiteiten 302
-
-/activiteiten/groenblauwe-klimaatoplossingen-in-het-buitengebied/   /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied 302
-/events/lab-groenblauw-buitengebied/                                /activiteit/groenblauwe-klimaatoplossingen-in-het-buitengebied 302
 
 /events/* /activiteiten 302
 
