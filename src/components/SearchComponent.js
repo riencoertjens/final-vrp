@@ -44,7 +44,7 @@ class SearchComponent extends Component {
             }}
           >
             <input type="text" name="query" />
-            <button>
+            <button aria-label="zoeken">
               <SearchIcon />
             </button>
           </form>
