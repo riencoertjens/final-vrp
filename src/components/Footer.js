@@ -104,19 +104,19 @@ const Footer = () => (
           >
             <OutboundLink
               href="https://twitter.com/VRPvzw"
-              alt="vrp twitter profile"
+              aria-label="vrp twitter profile"
             >
               <Twitter />
             </OutboundLink>
             <OutboundLink
               href="https://facebook.com/VRPvzw"
-              alt="vrp facebook profile"
+              aria-label="vrp facebook profile"
             >
               <Facebook />
             </OutboundLink>
             <OutboundLink
               href="https://linkedin.com/company/vlaamse-vereniging-voor-ruimte-en-planning-vrp-/"
-              alt="vrp linkedin profile"
+              aria-label="vrp linkedin profile"
             >
               <Linkedin />
             </OutboundLink>

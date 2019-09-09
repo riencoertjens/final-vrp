@@ -172,6 +172,7 @@ class HeroSlider extends Component {
         >
           {posts.map((post, i) => (
             <button
+              aria-label={`header slider foto - ${post.post_title}`}
               key={i}
               css={css`
                 height: 100%;

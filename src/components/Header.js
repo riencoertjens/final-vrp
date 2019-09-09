@@ -19,6 +19,7 @@ import SearchComponent from "./SearchComponent"
 const Logo = () => (
   <GatsbyLink
     to="/"
+    aria-label="HOME | vrp - vlaamse vereniging voor ruimte en planning"
     css={css`
       && {
         flex: 0 0 10rem;
