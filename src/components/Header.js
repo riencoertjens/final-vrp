@@ -263,6 +263,7 @@ class Header extends React.Component {
               >
                 <Logo />
                 <button
+                  aria-label="zoeken"
                   css={css`
                     border: none;
                     padding: 7px 10px 0;
