@@ -4,13 +4,15 @@ import PropTypes from "prop-types"
 import { globalStyle, MediaQuery } from "./webhart-components"
 import { Global, css } from "@emotion/core"
 import styled from "@emotion/styled"
+import CookieBanner from "react-cookie-banner"
 
-import { breakpoints } from "../site/styles"
+import { breakpoints, colors } from "../site/styles"
 
 import SEO from "./webhart-components/SEO"
 import Header from "./Header"
 import { graphql } from "gatsby"
 import Footer from "./Footer"
+import GatsbyLink from "gatsby-link"
 // import GatsbyLink from "gatsby-link"
 // import Obfuscate from "react-obfuscate"
 
@@ -40,6 +42,42 @@ class Layout extends Component {
         <Global styles={globalStyle} />
         <SEO />
         <SiteWrapper>
+          <CookieBanner
+            disableStyle
+            css={css`
+              background-color: ${colors.blue};
+              font-size: 0.8rem;
+              display: flex;
+              align-items: center;
+
+              span {
+                margin: 0 auto;
+                line-height: 1;
+                padding: 0.5rem;
+                font-weight: 500;
+                color: white;
+                a {
+                  color: inherit;
+                }
+              }
+              button {
+                background-color: rgba(255, 255, 255, 0.6);
+                border: none;
+                margin: 0.25rem;
+                border-radius: 3px;
+                color: rgb(36, 36, 36);
+                cursor: pointer;
+              }
+            `}
+            link={
+              <GatsbyLink to="/privacyverklaring">privacyverklaring</GatsbyLink>
+            }
+            dismissOnScroll={false}
+            message="Deze website maakt gebruik van cookies, lees hier onze "
+            onAccept={() => {}}
+            cookie="user-has-accepted-cookies"
+            buttonMessage="ok"
+          />
           <Header showSearch={this.props.showSearch} />
           <main
             css={css`
