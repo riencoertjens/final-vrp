@@ -27,6 +27,9 @@ const Logo = () => (
         height: auto;
         padding: 1rem 0 0;
         display: block;
+        top: 0;
+        position: sticky;
+        z-index: 10000000;
       }
     `}
   >
