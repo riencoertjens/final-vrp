@@ -41,7 +41,10 @@ class ActivityForm extends Component {
           this.fetchPlaces(this.props.activity.wordpress_id)
         }, 5000)
       } else {
-        if (places.places < 0 || places.count < places.places) {
+        if (
+          parseInt(places.places) < 0 ||
+          parseInt(places.count) < parseInt(places.places)
+        ) {
           formStatus = "open"
         } else {
           formStatus = "full"
