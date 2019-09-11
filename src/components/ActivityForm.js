@@ -26,7 +26,9 @@ class ActivityForm extends Component {
 
   render() {
     const { activity } = this.props
-    const close_date = new Date(activity.acf.close_date)
+    const close_date = activity.acf.close_date
+      ? new Date(activity.acf.close_date)
+      : false
     const now = new Date()
 
     const { places } = this.state
@@ -34,7 +36,9 @@ class ActivityForm extends Component {
     let formStatus = false
     let formLoaded = false
 
-    if (close_date > now) {
+    // console.log(close_date)
+
+    if (!close_date || close_date > now) {
       if (places === false) {
         formStatus = "loading"
         setTimeout(() => {

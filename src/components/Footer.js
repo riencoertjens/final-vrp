@@ -242,11 +242,6 @@ const Footer = () => (
                   Blog - De Ruimtenaar
                 </OutboundLink>
               </li>
-              <li>
-                <OutboundLink href={`http://www.gecoro.info/`}>
-                  Gecoro
-                </OutboundLink>
-              </li>
             </ul>
             <ul>
               <li>

@@ -46,6 +46,8 @@ const ActivityPageTemplate = ({
     label: activity.title,
   })
 
+  const hasForm = activity.acf.hasform && activity.acf.register_form
+
   return (
     <Layout>
       <SEO
@@ -72,7 +74,7 @@ const ActivityPageTemplate = ({
       <SuggestionsAsideWrapper suggestions={suggestions}>
         <section>
           <h1>{activity.title}</h1>
-          {activity.acf.hasform && (
+          {hasForm && (
             <Button
               right={1}
               css={css`
@@ -85,7 +87,7 @@ const ActivityPageTemplate = ({
             </Button>
           )}
           <WpBlocksContent content={activity.content} />
-          {activity.acf.hasform && (
+          {hasForm && (
             <Button component="a" href="#inschrijvingsformulier" right={1}>
               inschrijven
             </Button>
@@ -134,7 +136,7 @@ const ActivityPageTemplate = ({
             </div>
           </section>
         )}
-        {activity.acf.hasform && <ActivityForm activity={activity} />}
+        {hasForm && <ActivityForm activity={activity} />}
       </SuggestionsAsideWrapper>
     </Layout>
   )
