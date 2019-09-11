@@ -73,7 +73,19 @@ const ActivityPageTemplate = ({
       <BreadCrumbs crumbs={crumbs} />
       <SuggestionsAsideWrapper suggestions={suggestions}>
         <section>
+          <p
+            css={css`
+              line-height: 1;
+              margin: 0;
+              font-weight: 600;
+            `}
+          >
+            {activity.acf.date && activity.acf.dateFormatted}
+            {activity.acf.date_end && ` - ${activity.acf.endDateFormatted}`}
+            {activity.acf.time && ` (${activity.acf.time})`}
+          </p>
           <h1>{activity.title}</h1>
+
           {hasForm && (
             <Button
               right={1}
@@ -167,6 +179,11 @@ export const query = graphql`
         }
       }
       acf {
+        date
+        dateFormatted: date(formatString: "DD-MM-Y")
+        date_end
+        endDateFormatted: date_end(formatString: "DD-MM-Y")
+        time
         has_location
         location {
           title: post_title
