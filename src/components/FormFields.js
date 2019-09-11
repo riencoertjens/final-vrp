@@ -79,8 +79,8 @@ const CheckboxField = props => {
           <label key={i}>
             <input
               type="checkbox"
-              // value={i}
               name={`${formId}_${id}_${i + 1}`}
+              value="1"
               // required={required}
             />{" "}
             {choice.label}
