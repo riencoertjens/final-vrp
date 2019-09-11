@@ -5,6 +5,7 @@ import GatsbyLink from "gatsby-link"
 import { colors, Button } from "../site/styles"
 import { ReactComponent as VRPLabelInvert } from "../images/svg/vrp-label-invert.svg"
 import { ReactComponent as VRPLabel } from "../images/svg/vrp-label.svg"
+import { MqMax } from "./webhart-components/style-functions"
 
 class ActivityList extends Component {
   constructor(props) {
@@ -85,22 +86,26 @@ const ActivityLi = ({ activity, past, homePage }) => (
 const ActivityLiStyle = past => {
   return css`
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     color: ${colors.grey};
     padding: 0.5rem 1rem;
     margin: 0 -1rem;
-
+    ${MqMax("600px")} {
+      flex-direction: column;
+    }
     p {
       display: flex;
-      margin: 0;
       flex-wrap: wrap;
+      margin: 0;
+      flex: 0 0 250px;
+      ${MqMax("600px")} {
+        flex: 1 0 auto;
+      }
       span {
         margin-right: 0.25rem;
       }
     }
     a {
-      text-align: right;
+      ${"" /* text-align: right; */}
       svg {
         height: 1rem;
         margin-right: 0.5rem;
