@@ -105,12 +105,11 @@ const ActivityPageTemplate = ({
             </Button>
           )}
         </section>
-        {console.log(activity.acf.location.acf.address)}
         {activity.acf.has_location && activity.acf.location && (
           <section>
             <h3>locatie:</h3>
             <h2>{activity.acf.location.title}</h2>
-            {activity.acf.location.acf.address && (
+            {activity.acf.location.acf && activity.acf.location.acf.address && (
               <>
                 <p>{activity.acf.location.acf.address.address}</p>
                 <div
