@@ -105,47 +105,53 @@ const ActivityPageTemplate = ({
             </Button>
           )}
         </section>
-        {activity.acf.has_location && activity.acf.location.address && (
+        {console.log(activity.acf.location.acf.address)}
+        {activity.acf.has_location && activity.acf.location && (
           <section>
             <h3>locatie:</h3>
             <h2>{activity.acf.location.title}</h2>
-            {<p>{activity.acf.location.acf.address.address}</p>}
-            <div
-              css={css`
-                height: 500px;
-                margin: 0 -1rem -1rem;
-              `}
-            >
-              <GoogleMap
-                apiKey={process.env.GATSBY_MAPS_API}
-                location={{
-                  lat: Number(activity.acf.location.acf.address.lat),
-                  lng: Number(activity.acf.location.acf.address.lng),
-                }} //{activity.acf.location.acf.address}
-                markerInfoComponent={
-                  <OutboundLink
-                    href={`https://www.google.com/maps/dir/${
-                      activity.acf.location.acf.address.address !== undefined
-                        ? `/${activity.acf.location.acf.address.address}`
-                        : `/'${activity.acf.location.acf.address.lat},${activity.acf.location.acf.address.lng}'`
-                    }/@${activity.acf.location.acf.address.lat},${
-                      activity.acf.location.acf.address.lng
-                    },15z`}
-                  >
-                    wegbeschrijving
-                  </OutboundLink>
-                }
-                options={{
-                  center: {
-                    lat: Number(activity.acf.location.acf.address.lat),
-                    lng: Number(activity.acf.location.acf.address.lng),
-                  }, //activity.acf.location.acf.address,
-                  zoom: 15,
-                  disableDefaultUI: true,
-                  styles: [],
-                }}
-              />
-            </div>
+            {activity.acf.location.acf.address && (
+              <>
+                <p>{activity.acf.location.acf.address.address}</p>
+                <div
+                  css={css`
+                    height: 500px;
+                    margin: 0 -1rem -1rem;
+                  `}
+                >
+                  <GoogleMap
+                    apiKey={process.env.GATSBY_MAPS_API}
+                    location={{
+                      lat: Number(activity.acf.location.acf.address.lat),
+                      lng: Number(activity.acf.location.acf.address.lng),
+                    }} //{activity.acf.location.acf.address}
+                    markerInfoComponent={
+                      <OutboundLink
+                        href={`https://www.google.com/maps/dir/${
+                          activity.acf.location.acf.address.address !==
+                          undefined
+                            ? `/${activity.acf.location.acf.address.address}`
+                            : `/'${activity.acf.location.acf.address.lat},${activity.acf.location.acf.address.lng}'`
+                        }/@${activity.acf.location.acf.address.lat},${
+                          activity.acf.location.acf.address.lng
+                        },15z`}
+                      >
+                        wegbeschrijving
+                      </OutboundLink>
+                    }
+                    options={{
+                      center: {
+                        lat: Number(activity.acf.location.acf.address.lat),
+                        lng: Number(activity.acf.location.acf.address.lng),
+                      }, //activity.acf.location.acf.address,
+                      zoom: 15,
+                      disableDefaultUI: true,
+                      styles: [],
+                    }}
+                  />
+                </div>
+              </>
+            )}
           </section>
         )}
         {hasForm && <ActivityForm activity={activity} />}
