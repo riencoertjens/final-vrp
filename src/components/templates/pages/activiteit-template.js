@@ -105,11 +105,11 @@ const ActivityPageTemplate = ({
             </Button>
           )}
         </section>
-        {activity.acf.has_location && (
+        {activity.acf.has_location && activity.acf.location.address && (
           <section>
             <h3>locatie:</h3>
             <h2>{activity.acf.location.title}</h2>
-            <p>{activity.acf.location.acf.address.address}</p>
+            {<p>{activity.acf.location.acf.address.address}</p>}
             <div
               css={css`
                 height: 500px;
