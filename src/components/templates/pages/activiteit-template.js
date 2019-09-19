@@ -212,7 +212,7 @@ export const query = graphql`
       filter: {
         term_slugs: { in: $suggestions }
         post_name: { ne: $slug }
-        # acf: { featured: { eq: true } }
+        acf: { featured: { eq: true } }
       }
       limit: 7
       sort: { fields: [acf___featured, post_date], order: [ASC, DESC] }
