@@ -25,14 +25,20 @@ commands:
             - ./node_modules
       - restore_cache:
           keys:
-            - gatsby-public-cache-v1-{{ .Branch }}
+            # - gatsby-public-cache-v1-{{ .Branch }}
+            - www_public_dir
+            - www_cache_dir
       - run:
           name: Gatsby Build
           command: GATSBY_CPU_COUNT=2 yarn build
       - save_cache:
-          key: gatsby-public-cache-v1-{{ .Branch }}
+          key: www_public_dir_{{ epoch }}
           paths:
             - ./public
+      - save_cache:
+          key: www_cache_dir_{{ epoch }}
+          paths:
+            - ./.cache
 
 workflows:
   version: 2
