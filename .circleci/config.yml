@@ -23,11 +23,12 @@ commands:
           key: yarn-cache-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
+
       - restore_cache:
-          keys:
-            # - gatsby-public-cache-v1-{{ .Branch }}
-            - www_public_dir
-            - www_cache_dir
+          key: www_public_dir
+      - restore_cache:
+          key: www_cache_dir
+
       - run:
           name: Gatsby Build
           command: GATSBY_CPU_COUNT=2 yarn build
