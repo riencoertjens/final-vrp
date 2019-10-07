@@ -56,11 +56,12 @@ const ActivityPageTemplate = ({
         description={activity.excerpt}
         image={
           activity.featured_img &&
+          activity.featured_img.SEOImage.childImageSharp &&
           activity.featured_img.SEOImage.childImageSharp.SEO.src
         }
       />
 
-      {activity.featured_img ? (
+      {activity.featured_img && activity.featured_img.file ? (
         <AspectRatioImage ratio={1200 / 630} image={activity.featured_img} />
       ) : (
         <AspectRatioBox
