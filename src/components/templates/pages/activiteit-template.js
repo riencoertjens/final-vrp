@@ -56,7 +56,6 @@ const ActivityPageTemplate = ({
         description={activity.excerpt}
         image={
           activity.featured_img &&
-          activity.featured_img.SEOImage.childImageSharp &&
           activity.featured_img.SEOImage.childImageSharp.SEO.src
         }
       />
