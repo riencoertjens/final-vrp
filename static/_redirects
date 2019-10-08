@@ -855,4 +855,4 @@
 /werelddag-van-de-stedenbouw/werelddag-van-de-stedenbouw/* /activiteiten/werelddag-van-de-stedenbouw 301
 /werelddag-van-de-stedenbouw/werelddag-van-de-stedenbouw/werelddag-van-de-stedenbouw-2/* /activiteiten/werelddag-van-de-stedenbouw 301
 /wonen/* /thema/wonen 301
-/* https://vrp-legacy.netlify.com/:splat 200
+# /* https://vrp-legacy.netlify.com/:splat 200
