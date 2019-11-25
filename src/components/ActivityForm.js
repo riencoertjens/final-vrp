@@ -2,6 +2,7 @@
 
 import React, { Component } from "react"
 import FormFields from "./FormFields"
+import Obfusate from "react-obfuscate"
 import { colors, Button } from "../site/styles"
 import css from "@emotion/css"
 
@@ -25,6 +26,22 @@ class ActivityForm extends Component {
   }
 
   render() {
+    const isIE = /*@cc_on!@*/ false || !!document.documentMode
+    if (!isIE) {
+      return (
+        <section id="inschrijvingsformulier">
+          <h3>inschrijven.</h3>
+          <p>
+            Inschrijvingsformulier ‘blijft hangen’? Dan bent u wellicht online
+            met Internet Explorer. Die oude jongen is ook blijven hangen (in de
+            tijd). Probeert u eens een andere browser (chrome, firefox,
+            duckduckgo …). Als het dan nog niet lukt graag een mail naar{" "}
+            <Obfusate email="info@vrp.be" />.
+          </p>
+        </section>
+      )
+    }
+
     const { activity } = this.props
     const close_date = activity.acf.close_date
       ? new Date(activity.acf.close_date)

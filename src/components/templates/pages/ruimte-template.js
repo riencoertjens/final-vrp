@@ -89,6 +89,7 @@ const RuimtePageTemplate = ({
             <WpBlocksContent
               content={content}
               css={css`
+                align-self: flex-start;
                 flex: 1 0 200px;
               `}
             />
