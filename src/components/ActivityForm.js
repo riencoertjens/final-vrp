@@ -9,7 +9,11 @@ import css from "@emotion/css"
 class ActivityForm extends Component {
   constructor(props) {
     super(props)
-    this.state = { places: false }
+    this.state = { places: false, isIE: false }
+  }
+
+  componentDidMount() {
+    this.setState({ isIE: /*@cc_on!@*/ false || !!document.documentMode })
   }
 
   fetchPlaces = id => {
@@ -26,8 +30,9 @@ class ActivityForm extends Component {
   }
 
   render() {
-    const isIE = /*@cc_on!@*/ false || (document && !!document.documentMode)
-    if (!isIE) {
+    const { isIE } = this.state
+
+    if (isIE) {
       return (
         <section id="inschrijvingsformulier">
           <h3>inschrijven.</h3>
