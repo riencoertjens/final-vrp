@@ -26,7 +26,7 @@ class ActivityForm extends Component {
   }
 
   render() {
-    const isIE = /*@cc_on!@*/ false || !!document.documentMode
+    const isIE = /*@cc_on!@*/ false || (document && !!document.documentMode)
     if (!isIE) {
       return (
         <section id="inschrijvingsformulier">

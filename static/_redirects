@@ -857,7 +857,4 @@
 /wonen/* /thema/wonen 301
 
 
-
-
-
-# /* https://vrp-legacy.netlify.com/:splat 200 
+/* https://vrp-legacy.netlify.com/:splat 200
