@@ -34,9 +34,10 @@ class ActivityList extends Component {
         `}
       >
         <ul>
-          {grouped_activities.future.map(({ node: activity }, i) => (
-            <ActivityLi activity={activity} key={i} homePage={homePage} />
-          ))}
+          {grouped_activities.future &&
+            grouped_activities.future.map(({ node: activity }, i) => (
+              <ActivityLi activity={activity} key={i} homePage={homePage} />
+            ))}
         </ul>
         {!homePage && (
           <>
