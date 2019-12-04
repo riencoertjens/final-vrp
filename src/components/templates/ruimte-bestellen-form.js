@@ -72,7 +72,7 @@ const RuimteBestellenForm = () => (
         </label>
         <label>
           <span>ruimte nummer:</span>
-          <select>
+          <select name="ruimte">
             {ruimtes.edges.map(({ node: ruimte }) => (
               <option value={ruimte.post_name}>{ruimte.post_title}</option>
             ))}

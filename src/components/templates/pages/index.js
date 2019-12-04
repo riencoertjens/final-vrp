@@ -86,7 +86,7 @@ export const homepagequery = graphql`
 
     slider_posts: allCollectionsJson(
       filter: { ID: { in: $slider_posts } }
-      sort: { fields: post_date }
+      sort: { fields: post_date, order: DESC }
     ) {
       edges {
         node {
