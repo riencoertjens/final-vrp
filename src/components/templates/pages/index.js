@@ -15,10 +15,16 @@ import { sortPosts } from "../../../site/utils"
 
 const IndexPage = ({
   data: { pageInfo, slider_posts, in_de_kijker, activities },
-  pageContext: { in_de_kijker: in_de_kijkerIDs },
+  pageContext: { in_de_kijker: in_de_kijkerIDs, slider_posts: slider_postIDs },
 }) => (
   <Layout>
-    <HeroSlider posts={slider_posts.edges} />
+    <HeroSlider
+      posts={slider_posts.edges.sort(
+        (postA, postB) =>
+          slider_postIDs.indexOf(postA.node.ID) -
+          slider_postIDs.indexOf(postB.node.ID)
+      )}
+    />
     <div
       css={css`
         ${MqMin("700px")} {
@@ -90,6 +96,7 @@ export const homepagequery = graphql`
     ) {
       edges {
         node {
+          ID
           ...HeroSliderFragment
         }
       }
