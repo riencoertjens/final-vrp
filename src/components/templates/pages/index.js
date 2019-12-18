@@ -14,7 +14,7 @@ import { FaAngleRight as ArrowRightIcon } from "react-icons/fa"
 import { sortPosts } from "../../../site/utils"
 
 const IndexPage = ({
-  data: { pageInfo, slider_posts, in_de_kijker, activities },
+  data: { slider_posts, in_de_kijker, activities },
   pageContext: { in_de_kijker: in_de_kijkerIDs, slider_posts: slider_postIDs },
 }) => (
   <Layout>
@@ -80,16 +80,6 @@ export const homepagequery = graphql`
     $featured_activities: [Int]!
     $slider_posts: [Int]!
   ) {
-    pageInfo: collectionsJson(
-      post_type: { eq: "page" }
-      post_name: { eq: "home" }
-    ) {
-      internal {
-        type
-      }
-      post_title
-    }
-
     slider_posts: allCollectionsJson(
       filter: { ID: { in: $slider_posts } }
       sort: { fields: post_date, order: DESC }
