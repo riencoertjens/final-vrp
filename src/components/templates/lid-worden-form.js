@@ -77,7 +77,7 @@ const LidwordenForm = () => {
           <input type="phone" name="telefoon" required />
         </label>
         <label>
-          <span>Facturatieadres</span>
+          <span>Facturatieadres (indien anders dan postadres)</span>
           <input type="text" name="facturatie-adres" required />
         </label>
         <label>
@@ -93,12 +93,13 @@ const LidwordenForm = () => {
           <input type="text" name="PO-nummer" />
         </label>
         <label>
-          <span>PO-nummer (optioneel)</span>
-          <input type="text" name="PO-nummer" />
-        </label>
-        <label>
-          <input type="radio" value="lid" name="lidmaatschap-type" required />
-          <span>Ik wil lid worden (incl. abonnement Ruimte)</span>
+          <input
+            type="radio"
+            value="lid-worden"
+            name="lidmaatschap-type"
+            required
+          />
+          <span>Ik wil lid worden (inclusief abonnement)</span>
         </label>
         <label>
           <input
@@ -112,7 +113,7 @@ const LidwordenForm = () => {
             <Obfuscate
               email="info@vrp.be"
               headers={{
-                subject: `studentenkaart lidmaatschape`,
+                subject: `studentenkaart lidmaatschap`,
               }}
             />
             )
@@ -125,7 +126,7 @@ const LidwordenForm = () => {
             name="lidmaatschap-type"
             required
           />
-          <span>Ik wil lid worden (incl. abonnement Ruimte)</span>
+          <span>Ik wil enkel een abonnement op Ruimte.</span>
         </label>
         <Button>verzenden</Button>
       </form>
