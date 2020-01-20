@@ -1,10 +1,10 @@
 /admin/* /wp-admin/*	
 /wp-admin/* https://webhart.one/wp-admin/:splat 200	
 
-/gemeenten https://www.vrp.be/lid-worden?utm_source=folder&utm_medium=qr-code&utm_campaign=gemeenten 301
+/gemeenten /lid-worden?utm_source=folder&utm_medium=qr-code&utm_campaign=gemeenten 301
 
-/abonneer https://www.vrp.be/ruimte?utm_source=7luik&utm_medium=qr-code&utm_campaign=abonneer 301
-/voordelen https://www.vrp.be/lid-worden?utm_source=7luik&utm_medium=qr-code&utm_campaign=voordelen 301
+/abonneer /ruimte?utm_source=7luik&utm_medium=qr-code&utm_campaign=abonneer 301
+/voordelen /lid-worden?utm_source=7luik&utm_medium=qr-code&utm_campaign=voordelen 301
 
 
 /2019-groenblauwe-klimaatoplossingen-in-stadsrand/* /activiteit/2019-groenblauwe-klimaatoplossingen-in-stadsrand-2/ 301	
