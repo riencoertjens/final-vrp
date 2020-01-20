@@ -78,7 +78,7 @@ const LidwordenForm = () => {
         </label>
         <label>
           <span>Facturatieadres (indien anders dan postadres)</span>
-          <input type="text" name="facturatie-adres" required />
+          <input type="text" name="facturatie-adres" />
         </label>
         <label>
           <span>Facturatie e-mail (optioneel)</span>
