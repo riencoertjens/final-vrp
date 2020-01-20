@@ -137,6 +137,9 @@ exports.createPages = ({ graphql, actions }) => {
                 name
                 slug
                 parent_term
+                acf {
+                  in_de_kijker
+                }
               }
             }
           }
@@ -296,6 +299,7 @@ exports.createPages = ({ graphql, actions }) => {
             ),
             context: {
               slug: node.slug,
+              in_de_kijker: node.acf.in_de_kijker || [],
             },
           })
         })

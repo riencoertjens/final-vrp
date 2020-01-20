@@ -240,12 +240,6 @@ class Header extends React.Component {
               slug: "/participatie-studio",
             },
           })
-          activiteitenCategories.push({
-            node: {
-              name: "Vormingsreeksen",
-              slug: "/vormingsreeksen",
-            },
-          })
 
           return (
             <>
