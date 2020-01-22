@@ -18,17 +18,7 @@ const ArtikelPageTemplate = ({
       featured_media,
       title: artikelTitle,
       slug,
-      acf: {
-        beschrijving,
-        pdf_thumb: {
-          localFile: {
-            publicURL: pdf_thumb_original,
-            childImageSharp: { fixed: pdf_thumb },
-          },
-        },
-        pdf,
-        ruimte,
-      },
+      acf: { beschrijving, pdf_thumb, pdf, ruimte },
     },
   },
   pageContext: { next, prev },
@@ -73,15 +63,7 @@ const ArtikelPageTemplate = ({
             margin-bottom: 1rem;
           `}
         >
-          <a
-            href={pdf && pdf.url ? pdf.url.publicURL : pdf_thumb_original}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <GatsbyImage fixed={pdf_thumb} />
-            <br />
-            <span>open pdf</span>
-          </a>
+          <PDFImage pdf={pdf} pdf_thumb={pdf_thumb} />
           <p>{beschrijving}</p>
         </div>
         <div
@@ -162,3 +144,26 @@ export const query = graphql`
     }
   }
 `
+
+const PDFImage = ({ pdf, pdf_thumb }) => {
+  if (!pdf_thumb || !pdf) return null
+
+  const {
+    localFile: {
+      publicURL: pdf_thumb_original,
+      childImageSharp: { fixed: pdf_thumb_fixed },
+    },
+  } = pdf_thumb
+
+  return (
+    <a
+      href={pdf && pdf.url ? pdf.url.publicURL : pdf_thumb_original}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <GatsbyImage fixed={pdf_thumb_fixed} />
+      <br />
+      <span>open pdf</span>
+    </a>
+  )
+}
