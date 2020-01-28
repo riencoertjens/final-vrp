@@ -39,10 +39,12 @@ const ActivityCategoryPageTemplate = ({
         description={category.description}
         image={
           category.featured_img &&
+          category.featured_img.SEOImage &&
+          category.featured_img.SEOImage.childImageSharp &&
           category.featured_img.SEOImage.childImageSharp.SEO.src
         }
       />
-      {category.featured_img && (
+      {category.featured_img && category.featured_img.SEOImage && (
         <AspectRatioImage ratio={1200 / 630} image={category.featured_img} />
       )}
       <BreadCrumbs crumbs={crumbs} />
