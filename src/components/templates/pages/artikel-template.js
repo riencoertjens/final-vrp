@@ -75,7 +75,7 @@ const ArtikelPageTemplate = ({
             }
           `}
         >
-          {prev && (
+          {prev && prev.node.acf.ruimte && (
             <GatsbyLink
               css={css`
                 margin-right: auto;
@@ -86,7 +86,7 @@ const ArtikelPageTemplate = ({
               {prev.node.title}
             </GatsbyLink>
           )}
-          {next && (
+          {next && next.node.acf.ruimte && (
             <GatsbyLink
               css={css`
                 margin-left: auto;
