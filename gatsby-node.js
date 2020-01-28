@@ -126,12 +126,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
 
-          categories: allTermsJson(
-            filter: {
-              taxonomy: { eq: "category" }
-              parent_term: { in: ["activiteiten", "prijzen"] }
-            }
-          ) {
+          categories: allTermsJson(filter: { taxonomy: { eq: "category" } }) {
             edges {
               node {
                 name
@@ -295,7 +290,9 @@ exports.createPages = ({ graphql, actions }) => {
         })
         result.data.categories.edges.forEach(({ node }) => {
           createPage({
-            path: `/${node.parent_term}/${node.slug}`,
+            path: `/${node.parent_term ? `${node.parent_term}/` : ""}${
+              node.slug
+            }`,
             component: path.resolve(
               `./src/components/templates/pages/category-template.js`
             ),
@@ -306,15 +303,15 @@ exports.createPages = ({ graphql, actions }) => {
           })
         })
         // create extra page for the start@vrp category
-        createPage({
-          path: `/startvrp`,
-          component: path.resolve(
-            `./src/components/templates/pages/category-template.js`
-          ),
-          context: {
-            slug: `startvrp`,
-          },
-        })
+        // createPage({
+        //   path: `/startvrp`,
+        //   component: path.resolve(
+        //     `./src/components/templates/pages/category-template.js`
+        //   ),
+        //   context: {
+        //     slug: `startvrp`,
+        //   },
+        // })
       })
     )
   })
