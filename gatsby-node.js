@@ -126,7 +126,24 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
 
-          categories: allTermsJson(filter: { taxonomy: { eq: "category" } }) {
+          categories: allTermsJson(
+            filter: {
+              taxonomy: { eq: "category" }
+              parent_term: { in: ["activiteiten", "prijzen"] }
+            }
+          ) {
+            edges {
+              node {
+                name
+                slug
+                parent_term
+                acf {
+                  in_de_kijker
+                }
+              }
+            }
+          }
+          startVrp: allTermsJson(filter: { slug: { eq: "startvrp" } }) {
             edges {
               node {
                 name
@@ -288,7 +305,13 @@ exports.createPages = ({ graphql, actions }) => {
             })
           }
         })
-        result.data.categories.edges.forEach(({ node }) => {
+
+        const categories = [
+          ...result.data.categories.edges,
+          ...result.data.startVrp.edges,
+        ]
+
+        categories.forEach(({ node }) => {
           createPage({
             path: `/${node.parent_term ? `${node.parent_term}/` : ""}${
               node.slug
