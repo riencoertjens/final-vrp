@@ -213,18 +213,20 @@ exports.createPages = ({ graphql, actions }) => {
         })
         const artikels = result.data.artikels.edges
         artikels.forEach(({ node }, i) => {
-          createPage({
-            path: `/ruimte/${node.acf.ruimte.ruimteSlug}/${node.slug}`,
-            component: path.resolve(
-              `./src/components/templates/pages/artikel-template.js`
-            ),
-            context: {
-              // suggestions: node.suggestions || [],
-              slug: node.slug,
-              prev: i === 0 ? null : artikels[i - 1],
-              next: i === artikels.length - 1 ? null : artikels[i + 1],
-            },
-          })
+          if (node.acf.ruimte) {
+            createPage({
+              path: `/ruimte/${node.acf.ruimte.ruimteSlug}/${node.slug}`,
+              component: path.resolve(
+                `./src/components/templates/pages/artikel-template.js`
+              ),
+              context: {
+                // suggestions: node.suggestions || [],
+                slug: node.slug,
+                prev: i === 0 ? null : artikels[i - 1],
+                next: i === artikels.length - 1 ? null : artikels[i + 1],
+              },
+            })
+          }
         })
         const blogPosts = result.data.blogPosts.edges
         blogPosts.forEach(({ node }, i) => {
