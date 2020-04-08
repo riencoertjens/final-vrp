@@ -17,7 +17,7 @@ const NieuwsPageTemplate = ({
   <Layout>
     <SEO
       title={title}
-      pathname={`nieuws${slug}/`}
+      pathname={`nieuws/${slug}/`}
       description={excerpt}
       image={
         featured_img &&
