@@ -206,7 +206,7 @@ exports.createPages = ({ graphql, actions }) => {
             ),
             context: {
               suggestions: node.suggestions || [],
-              slug: node.slug,
+              slug: node.pathname,
             },
           })
         })
