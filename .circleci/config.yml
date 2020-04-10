@@ -30,6 +30,9 @@ commands:
           key: www_cache_dir
 
       - run:
+          name: Resize Images
+          command: yarn resize-images
+      - run:
           name: Gatsby Build
           command: GATSBY_CPU_COUNT=2 yarn build
       - save_cache:
@@ -63,7 +66,6 @@ jobs:
     executor: node-executor
     working_directory: ~/repo
     steps:
-      - resize-images
       - gatsby-build
       - run:
           name: Netlify Deploy
@@ -73,7 +75,6 @@ jobs:
     executor: node-executor
     working_directory: ~/repo
     steps:
-      - resize-images
       - gatsby-build
       - run:
           name: Netlify Deploy
