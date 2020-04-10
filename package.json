@@ -40,8 +40,10 @@
     "underscore": "^1.9.1"
   },
   "devDependencies": {
+    "is-image": "^3.0.0",
     "netlify-cli": "^2.7.0",
-    "prettier": "^2.0.4"
+    "prettier": "^2.0.4",
+    "sharp": "^0.25.2"
   },
   "keywords": [
     "gatsby"
