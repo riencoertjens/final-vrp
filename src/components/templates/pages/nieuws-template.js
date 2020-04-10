@@ -12,41 +12,43 @@ const NieuwsPageTemplate = ({
     page: { title, content, featured_img, excerpt },
     suggestions,
   },
-  pageContext: { slug },
-}) => (
-  <Layout>
-    <SEO
-      title={title}
-      pathname={`nieuws/${slug}/`}
-      description={excerpt}
-      image={
-        featured_img &&
-        featured_img.file &&
-        featured_img.SEOImage.childImageSharp.SEO.src
-      }
-    />
-    {featured_img && featured_img.file && (
-      <AspectRatioImage ratio={1200 / 630} image={featured_img} />
-    )}
-    <BreadCrumbs
-      crumbs={[
-        {
-          label: "Nieuws",
-          link: "nieuws",
-        },
-        {
-          label: title,
-        },
-      ]}
-    />
-    <SuggestionsAsideWrapper suggestions={suggestions}>
-      <section>
-        <h1>{title}</h1>
-        <WpBlocksContent content={content} />
-      </section>
-    </SuggestionsAsideWrapper>
-  </Layout>
-)
+  pageContext: { slug, pathname },
+}) => {
+  return (
+    <Layout>
+      <SEO
+        title={title}
+        pathname={`nieuws${pathname}`}
+        description={excerpt}
+        image={
+          featured_img &&
+          featured_img.file &&
+          featured_img.SEOImage.childImageSharp.SEO.src
+        }
+      />
+      {featured_img && featured_img.file && (
+        <AspectRatioImage ratio={1200 / 630} image={featured_img} />
+      )}
+      <BreadCrumbs
+        crumbs={[
+          {
+            label: "Nieuws",
+            link: "nieuws",
+          },
+          {
+            label: title,
+          },
+        ]}
+      />
+      <SuggestionsAsideWrapper suggestions={suggestions}>
+        <section>
+          <h1>{title}</h1>
+          <WpBlocksContent content={content} />
+        </section>
+      </SuggestionsAsideWrapper>
+    </Layout>
+  )
+}
 
 export default NieuwsPageTemplate
 

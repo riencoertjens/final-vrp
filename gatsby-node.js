@@ -156,7 +156,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
-      `).then(result => {
+      `).then((result) => {
         if (result.errors) {
           reject(result.errors)
         }
@@ -207,6 +207,7 @@ exports.createPages = ({ graphql, actions }) => {
             context: {
               suggestions: node.suggestions || [],
               slug: node.slug,
+              pathname: node.pathname,
             },
           })
         })
