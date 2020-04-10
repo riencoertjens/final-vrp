@@ -91,7 +91,7 @@ const AllRuimtePage = () => (
         <Layout>
           <SEO
             title="Ruimte magazine"
-            pathname="/ruimte"
+            pathname="ruimte"
             description={post_excerpt}
             image={SEOImage && SEOImage.childImageSharp.SEO.src}
           />

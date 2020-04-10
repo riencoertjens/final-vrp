@@ -99,7 +99,7 @@ class SearchPage extends Component {
 
     return (
       <Layout showSearch={true}>
-        <SEO title="Zoeken" />
+        <SEO title="Zoeken" pathname="zoeken" />
 
         <section>
           <h1>Zoeken</h1>

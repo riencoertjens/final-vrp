@@ -46,7 +46,7 @@ const BlogPage = () => {
       `}
       render={({ posts }) => (
         <Layout>
-          <SEO title="Blog" />
+          <SEO title="Blog" pathname="nieuws" />
           <section>
             <h1>Blog</h1>
             <div

@@ -23,7 +23,7 @@ const NieuwsPage = () => {
       `}
       render={({ posts }) => (
         <Layout>
-          <SEO title="Nieuws" />
+          <SEO title="Nieuws" pathname="nieuws" />
           <section>
             <h1>Nieuws</h1>
             <PostList posts={posts}></PostList>

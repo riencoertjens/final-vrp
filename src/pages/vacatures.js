@@ -36,7 +36,7 @@ const VacaturesPage = () => {
       `}
       render={({ vacatures }) => (
         <Layout>
-          <SEO title="Vacatures" />
+          <SEO title="Vacatures" pathname="vacatures" />
           <section>
             <h1>Vacatures</h1>
             <ul
