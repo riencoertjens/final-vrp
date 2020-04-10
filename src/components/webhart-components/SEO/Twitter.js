@@ -1,8 +1,8 @@
-import React from 'react'
-import Helmet from 'react-helmet'
+import React from "react"
+import { Helmet } from "react-helmet"
 
 export default ({
-  cardType = 'summary_large_image',
+  cardType = "summary_large_image",
   username = null,
   title = null,
   description = null,
