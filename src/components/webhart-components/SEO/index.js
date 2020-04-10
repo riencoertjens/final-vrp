@@ -59,7 +59,7 @@ const SEO = ({
         title: title || defaultTitle,
         description: description || defaultDescription,
         image: `${siteUrl}${image || defaultImage}`,
-        url: `${siteUrl}/${pathname || "/"}`,
+        url: `${siteUrl}/${pathname || ""}`,
         author: author || defaultAuthor,
       }
 
