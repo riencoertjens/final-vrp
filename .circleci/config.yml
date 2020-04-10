@@ -7,7 +7,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:12
 
 commands:
   gatsby-build:
@@ -30,8 +30,12 @@ commands:
           key: www_cache_dir
 
       - run:
+          name: Resize Images
+          command: yarn resize-images
+      - run:
           name: Gatsby Build
           command: GATSBY_CPU_COUNT=2 yarn build
+
       - save_cache:
           key: www_public_dir_{{ epoch }}
           paths:

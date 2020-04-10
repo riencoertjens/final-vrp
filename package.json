@@ -40,8 +40,10 @@
     "underscore": "^1.9.1"
   },
   "devDependencies": {
+    "is-image": "^3.0.0",
     "netlify-cli": "^2.7.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "sharp": "^0.25.2"
   },
   "keywords": [
     "gatsby"
@@ -49,6 +51,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
+    "resize-images": "node resize-images.js",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
