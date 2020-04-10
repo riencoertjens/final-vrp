@@ -207,6 +207,7 @@ exports.createPages = ({ graphql, actions }) => {
             context: {
               suggestions: node.suggestions || [],
               slug: node.slug,
+              seoLink: `nieuws${node.pathname}`,
             },
           })
         })

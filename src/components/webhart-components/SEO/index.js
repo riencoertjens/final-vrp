@@ -55,11 +55,15 @@ const SEO = ({
       },
       socialImage: { defaultImage },
     }) => {
+      const path =
+        pathname && pathname.length
+          ? `${pathname.charAt(0) !== "/" ? "/" : ""}${pathname}`
+          : ""
       const seo = {
         title: title || defaultTitle,
         description: description || defaultDescription,
         image: `${siteUrl}${image || defaultImage}`,
-        url: `${siteUrl}/${pathname || "/"}`,
+        url: `${siteUrl}/${path}`,
         author: author || defaultAuthor,
       }
 

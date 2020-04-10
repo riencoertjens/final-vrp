@@ -25,7 +25,7 @@ const ContactPage = () => (
     `}
     render={({ pageInfo }) => (
       <Layout>
-        <SEO title="contact" />
+        <SEO title="Contact" pathname="contact" />
         <section>
           <h1>contact</h1>
           <div

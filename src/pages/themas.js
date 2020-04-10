@@ -33,7 +33,7 @@ const ThemasPage = () => (
     `}
     render={({ themas }) => (
       <Layout>
-        <SEO title="themas" />
+        <SEO title="Themas" pathname="themas" />
         <section>
           <h1>thema's</h1>
 
