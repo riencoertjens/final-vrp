@@ -48,7 +48,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "node resize-images.js && gatsby build",
+    "build": "gatsby build",
     "resize-images": "node resize-images.js",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",

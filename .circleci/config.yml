@@ -63,6 +63,7 @@ jobs:
     executor: node-executor
     working_directory: ~/repo
     steps:
+      - resize-images
       - gatsby-build
       - run:
           name: Netlify Deploy
@@ -72,6 +73,7 @@ jobs:
     executor: node-executor
     working_directory: ~/repo
     steps:
+      - resize-images
       - gatsby-build
       - run:
           name: Netlify Deploy
