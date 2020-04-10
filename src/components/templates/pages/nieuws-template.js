@@ -12,12 +12,12 @@ const NieuwsPageTemplate = ({
     page: { title, content, featured_img, excerpt },
     suggestions,
   },
-  pageContext: { slug },
+  pageContext: { pathname },
 }) => (
   <Layout>
     <SEO
       title={title}
-      pathname={`nieuws/${slug}/`}
+      pathname={`nieuws${pathname}`}
       description={excerpt}
       image={
         featured_img &&
