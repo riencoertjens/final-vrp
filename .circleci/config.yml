@@ -34,7 +34,7 @@ commands:
           command: yarn resize-images
       - run:
           name: Gatsby Build
-          command: GATSBY_CPU_COUNT=2 yarn build
+          command: GATSBY_CPU_COUNT=2 GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true yarn build --log-pages
 
       - save_cache:
           key: www_public_dir_{{ epoch }}
