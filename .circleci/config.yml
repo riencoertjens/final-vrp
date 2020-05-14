@@ -54,13 +54,13 @@ workflows:
             branches:
               only:
                 - master
-  preview-deploy:
-    jobs:
-      - preview:
-          filters:
-            branches:
-              ignore:
-                - master
+  # preview-deploy:
+  #   jobs:
+  #     - preview:
+  #         filters:
+  #           branches:
+  #             ignore:
+  #               - master
 
 jobs:
   release:
