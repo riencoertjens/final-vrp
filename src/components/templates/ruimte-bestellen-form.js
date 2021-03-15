@@ -67,8 +67,12 @@ const RuimteBestellenForm = () => (
           <input type="text" name="adres" required />
         </label>
         <label>
-          <span>email</span>
+          <span>Email</span>
           <input type="email" name="email" required />
+        </label>
+        <label>
+          <span>Telefoon</span>
+          <input type="phone" name="phone" required />
         </label>
         <label>
           <span>ruimte nummer:</span>
