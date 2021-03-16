@@ -31,7 +31,7 @@ const PrijsPageTemplate = ({
   <Layout>
     <SEO
       title={title}
-      pathname={`nieuws/${slug}/`}
+      pathname={`prijsuitreiking/${slug}/`}
       description={excerpt}
       image={featured_img && featured_img.SEOImage.childImageSharp.SEO.src}
     />
