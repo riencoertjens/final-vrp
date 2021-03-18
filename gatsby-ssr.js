@@ -4,4 +4,11 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-// You can delete this file if you're not using it
+exports.onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
+  const headComponents = getHeadComponents()
+  const newHeadComponents = [
+    '<script async defer data-domain="vrp.be" src="https://plausible.io/js/plausible.js"></script>',
+    ...headComponents
+  ]
+  replaceHeadComponents(newHeadComponents)
+}
