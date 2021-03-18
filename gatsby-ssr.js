@@ -4,11 +4,12 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-exports.onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
-  const headComponents = getHeadComponents()
-  const newHeadComponents = [
-    '<script async defer data-domain="vrp.be" src="https://plausible.io/js/plausible.js"></script>',
-    ...headComponents
-  ]
-  replaceHeadComponents(newHeadComponents)
+const React = require("react")
+
+const HeadComponents = [
+  <script async defer dataDomain="vrp.be" src="https://plausible.io/js/plausible.js"></script>
+]
+
+exports.onRenderBody = ({ setHtmlAttributes }) => {
+  setHeadComponents(HeadComponents)
 }
