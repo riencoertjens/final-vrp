@@ -10,6 +10,6 @@ const HeadComponents = [
   <script async defer dataDomain="vrp.be" src="https://plausible.io/js/plausible.js"></script>
 ]
 
-exports.onRenderBody = ({ setHtmlAttributes }) => {
+exports.onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents(HeadComponents)
 }
