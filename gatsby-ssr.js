@@ -6,10 +6,12 @@
 
 const React = require("react")
 
-const HeadComponents = [
-  <script async defer dataDomain="vrp.be" src="https://plausible.io/js/plausible.js"></script>
-]
+export const onRenderBody = (
+  { setHeadComponents },
+  pluginOptions
+) => {
 
-exports.onRenderBody = ({ setHeadComponents }) => {
-  setHeadComponents(HeadComponents)
+  setHeadComponents([
+    <script async defer dataDomain="vrp.be" src="https://plausible.io/js/plausible.js"></script>
+  ])
 }
