@@ -42,7 +42,6 @@ const AllRuimtePage = () => (
           edges {
             node {
               post_title
-              post_content
               post_name
               post_excerpt
               acf {
@@ -137,7 +136,7 @@ export default AllRuimtePage
 const LastRuimte = ({ ruimte }) => {
   const {
     post_title,
-    post_content,
+    post_excerpt,
     post_name,
     acf: {
       subject,
@@ -194,7 +193,7 @@ const LastRuimte = ({ ruimte }) => {
               color: white;
             }
           `}
-          dangerouslySetInnerHTML={{ __html: post_content }}
+          dangerouslySetInnerHTML={{ __html: post_excerpt }}
         />
         <Button
           right={1}
