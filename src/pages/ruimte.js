@@ -192,6 +192,7 @@ const LastRuimte = ({ ruimte }) => {
             && * {
               color: white;
             }
+            margin-bottom: 1rem;
           `}
           dangerouslySetInnerHTML={{ __html: post_excerpt }}
         />
