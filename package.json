@@ -37,7 +37,7 @@
     "react-obfuscate": "^3.6.2",
     "recompose": "^0.30.0",
     "typeface-montserrat": "^0.0.54",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "is-image": "^3.0.0",
