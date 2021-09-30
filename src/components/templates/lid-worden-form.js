@@ -77,6 +77,10 @@ const LidwordenForm = () => {
           <input type="phone" name="telefoon" required />
         </label>
         <label>
+          <span>promo code</span>
+          <input type="text" name="promo-code" />
+        </label>
+        <label>
           <span>Facturatieadres (indien anders dan postadres)</span>
           <input type="text" name="facturatie-adres" />
         </label>
