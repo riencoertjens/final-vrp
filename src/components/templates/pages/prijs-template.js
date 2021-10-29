@@ -33,7 +33,7 @@ const PrijsPageTemplate = ({
       title={title}
       pathname={`prijsuitreiking/${slug}/`}
       description={excerpt}
-      image={featured_img && featured_img.SEOImage.childImageSharp.SEO.src}
+      image={featured_img && featured_img.SEOImage.childImageSharp.SEO && featured_img.SEOImage.childImageSharp.src}
     />
     {featured_img && (
       <AspectRatioImage ratio={1200 / 630} image={featured_img} />
