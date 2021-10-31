@@ -39,9 +39,9 @@ module.exports = {
     `gatsby-plugin-sharp`,
     {
       resolve: "gatsby-plugin-svgr",
-      // options: {
-      //   include: `src/images/svg`,
-      // },
+      options: {
+        failOnError: false,
+      },
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-emotion`,

@@ -58,8 +58,6 @@ class ActivityForm extends Component {
     let formStatus = false
     let formLoaded = false
 
-    // console.log(close_date)
-
     if (!close_date || close_date > now) {
       if (places === false) {
         formStatus = "loading"
