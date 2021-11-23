@@ -225,7 +225,7 @@ const Footer = () => (
             </ul>
             <ul>
               <li>
-                <GatsbyLink to={`/startvrp`}>start@vrp</GatsbyLink>
+                <GatsbyLink to={`/nieuwe-ruimtemakers`}>De Nieuwe Ruimtemakers</GatsbyLink>
               </li>
             </ul>
           </div>

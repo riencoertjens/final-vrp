@@ -230,8 +230,8 @@ class Header extends React.Component {
           const activiteitenCategories = activiteiten.edges.slice(0)
           activiteitenCategories.push({
             node: {
-              name: "Start@vrp",
-              slug: "/startvrp",
+              name: "De Nieuwe Ruimtemakers",
+              slug: "/nieuwe-ruimtemakers",
             },
           })
           activiteitenCategories.push({

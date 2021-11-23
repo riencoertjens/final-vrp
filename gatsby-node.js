@@ -143,7 +143,7 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-          startVrp: allTermsJson(filter: { slug: { eq: "startvrp" } }) {
+          startVrp: allTermsJson(filter: { slug: { eq: "nieuwe-ruimtemakers" } }) {
             edges {
               node {
                 name
