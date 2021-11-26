@@ -7,17 +7,6 @@ const LidwordenForm = () => {
   return (
     <>
       <h2>registratieformulier</h2>
-      <ul>
-        <li>
-          Prijs lidmaatschap (inclusief abonnement): € 115 (België) | € 155
-          (buitenland) | € 65 (student)
-        </li>
-        <li>
-          Prijs jaarabonnement (zonder lidmaatschap): € 95 (België) | € 135
-          (buitenland).
-        </li>
-        <li>Een los nummer van Ruimte kunt u via deze link bestellen</li>
-      </ul>
       <form
         name="lid-worden-form"
         method="POST"
@@ -103,7 +92,16 @@ const LidwordenForm = () => {
             name="lidmaatschap-type"
             required
           />
-          <span>Ik wil lid worden (inclusief abonnement)</span>
+          <span>Ik wil lid worden (€ 125)</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="lid-worden"
+            name="lidmaatschap-type"
+            required
+          />
+          <span>Ik wil lid worden - buitenland (€ 175)</span>
         </label>
         <label>
           <input
@@ -113,24 +111,59 @@ const LidwordenForm = () => {
             required
           />
           <span>
-            Ik wil lid worden als student. (Studentenkaart →{" "}
+            Ik wil lid worden en ben student (€ 45) -&gt; scan studentenkaart
+            naar{" "}
             <Obfuscate
               email="info@vrp.be"
               headers={{
                 subject: `studentenkaart lidmaatschap`,
               }}
             />
-            )
           </span>
         </label>
         <label>
           <input
             type="radio"
-            value="abonnement-ruimte"
+            value="65plus"
             name="lidmaatschap-type"
             required
           />
-          <span>Ik wil enkel een abonnement op Ruimte.</span>
+          <span>
+            Ik wil lid worden en ben 65-plusser (€ 75) -&gt; scan paspoort naar{" "}
+            <Obfuscate
+              email="info@vrp.be"
+              headers={{
+                subject: `65-plus lidmaatschap`,
+              }}
+            />
+          </span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="gecoro"
+            name="lidmaatschap-type"
+            required
+          />
+          <span>Ik wil lid worden en ben lid van een Gecoro (€ 75)</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="ruimte-binnenland"
+            name="lidmaatschap-type"
+            required
+          />
+          <span>Ik wil een binnenlands abonnement op Ruimte (€ 105)</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="ruimte-buitenland"
+            name="lidmaatschap-type"
+            required
+          />
+          <span>Ik wil een buitenlands abonnement op Ruimte (€ 155)</span>
         </label>
         <Button>verzenden</Button>
       </form>
