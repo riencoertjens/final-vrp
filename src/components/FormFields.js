@@ -69,7 +69,7 @@ const RadioField = props => {
   )
 }
 const CheckboxField = props => {
-  const { label, required, id, choices, formId } = props
+  const { label, required = false, id, choices, formId } = props
   return (
     <>
       <label>{label}</label>
@@ -81,7 +81,7 @@ const CheckboxField = props => {
               type="checkbox"
               name={`${formId}_${id}_${i + 1}`}
               value="1"
-              // required={required}
+              required={required}
             />{" "}
             {choice.label}
           </label>
@@ -111,7 +111,7 @@ const FormFields = props => {
           <CheckboxField {...field} formId={formId} />
         )}
         {field.type === "gdpr-checkbox" && (
-          <CheckboxField {...field} formId={formId} />
+          <CheckboxField {...field} formId={formId} required={true} />
         )}
         {field.type === "number" && <NumberField {...field} formId={formId} />}
       </p>
