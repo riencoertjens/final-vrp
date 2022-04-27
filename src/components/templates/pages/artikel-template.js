@@ -146,7 +146,7 @@ export const query = graphql`
 `
 
 const PDFImage = ({ pdf, pdf_thumb }) => {
-  if (!pdf_thumb || !pdf) return null
+  if (!pdf_thumb || !pdf || !pdf_thumb.localFile) return null
 
   const {
     localFile: {
