@@ -24,9 +24,9 @@ const WpPageTemplate = ({
       title={title}
       pathname={pathname}
       description={excerpt}
-      image={featured_img && featured_img.SEOImage.childImageSharp.SEO.src}
+      image={featured_img && featured_img.SEOImage && featured_img.SEOImage.childImageSharp.SEO.src}
     />
-    {featured_img && (
+    {featured_img && featured_img.SEOImage && (
       <AspectRatioImage ratio={1200 / 630} image={featured_img} />
     )}
     <section>
